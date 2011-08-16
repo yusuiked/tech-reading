@@ -10,3 +10,5 @@ then
 else
 	echo 'not equal'
 fi
+
+if test $VAR1 -eq $VAR2 ; then echo 'equal' ; else echo 'not equal' ; fi ;
