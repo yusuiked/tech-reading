@@ -5,10 +5,10 @@ read VAR
 echo $VAR
 
 case $VAR in
-	[Yy][Ee][Ss])
+	[Yy][Ee][Ss]|[Yy])
 		echo '----- yes -----'
 		;;
-	[Nn][Oo])
+	[Nn][Oo]|[Nn])
 		echo '----- no -----'
 		;;
 	*)
