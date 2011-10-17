@@ -6,6 +6,13 @@ a = 1       // バインディング変数
  */
 def b = 2   // ローカル変数
 
+/* クロージャからは参照できる */
+def bar = {
+    println a   // => 1
+    println b   // => 2
+}
+bar()
+
 def foo() {
     println a   // => 1
     println b   // => 実行時エラー（MissingPropertyException）
