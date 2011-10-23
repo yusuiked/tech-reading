@@ -1,4 +1,5 @@
 class MyClass {
-    def toString() { "MyClass" }
+    String toString() { "MyClass" }
 }
-println new MyClass()   // エラーとなる
+println new MyClass()
+// ==>MyClassが表示される
