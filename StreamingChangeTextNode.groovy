@@ -9,7 +9,7 @@ g.item.eachWithIndex { item, i ->
     g.item[i] = 'luxury ' + item
 }
 
-def supplies = root.category.findAll {it.@type == 'supplies' }
+def supplies = root.category.findAll { it.@type == 'supplies' }
 def pens = supplies[0].item.findAll { it.text() == 'pen' }
 pens.each { p ->
     p.@quantity = (p.@quantity.toInteger() + 2).toString()
