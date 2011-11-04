@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <shopping>
   <category type='groceries'>
-    <item>luxury chocolate</item> <!-- テキストノード変更 -->
-    <item>luxury coffee</item> <!-- テキストノード変更 -->
+    <item>chocolate</item>
+    <item>coffee</item>
   </category>
   <category type='supplies'>
     <item>paper</item>
-    <item when="urgent" quantity='6'>pen</item> <!-- 属性の追加/変更 -->
+    <item quantity='4'>pen</item>
   </category>
   <category type='present'>
-    <item>mother's birthday</item>
-    <item when='Oct 15'>Monica's birthday</item>
+    <item when='Aug 10'>Gina's birthday</item>
   </category>
 </shopping>
