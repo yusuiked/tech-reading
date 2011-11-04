@@ -1,6 +1,7 @@
 import groovy.swing.SwingBuilder
 
 import java.awt.BorderLayout as BL
+import java.awt.FlowLayout as FL
 
 import javax.swing.WindowConstants as WC
 
@@ -29,11 +30,38 @@ table = swing.table() {
 frame = swing.frame(title:'TODOリスト',
 		layout: new BL(),
 		defaultCloseOperation:WC.EXIT_ON_CLOSE) {
-			panel(constraints: BL.NORTH) { label(text:'期限までにやること!!') }
+			// Buttonを追加し，Buttonが押された時に実行するクロージャをactionPerformedに設定
+			panel(constraints: BL.NORTH) {
+				button(text:'レコード追加', actionPerformed: { event ->
+					dialog.show()
+				})
+			}
 			panel(constraints: BL.CENTER) {
 				scrollPane { widget(table) }
 			}
 		}
+
+// データ追加用Dialog
+dialog = swing.dialog(size: [350, 250], layout:new FL()) {
+	panel { label 'ID'; textField(id:'id', columns:20) }
+	panel { label '項目'; textField(id:'item', columns:20) }
+	panel { label '優先度'; comboBox(id:'prio', items:[1, 2, 3]) }
+	panel { label '期限'; textField(id:'due', columns:20) }
+	panel {
+		button(text:'登録', actionPerformed: { event ->
+			data << [
+						'id':swing.id.text,
+						'item':swing.item.text,
+						'prio':swing.prio.selectedItem,
+						'due':swing.due.text]
+			table.model.fireTableDataChanged()
+			dialog.hide()
+		})
+		button(text:'閉じる', actionPerformed: { event ->
+			dialog.hide()
+		})
+	}
+}
 
 frame.pack()
 frame.show()
