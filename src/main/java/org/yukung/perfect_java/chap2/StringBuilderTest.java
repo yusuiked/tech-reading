@@ -24,8 +24,6 @@ public class StringBuilderTest {
 		System.out.println(substring);
 		sb.reverse();
 		System.out.println(sb.toString());
-		CharSequence subSequence = sb.subSequence(0, 2);
-		System.out.println(subSequence);
 	}
 	
 }
