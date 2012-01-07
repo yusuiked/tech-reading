@@ -15,7 +15,7 @@ public class StringBuilderTest {
 	 * += の結合時にStrigBuilderが都度生成され、さらにappend()が2度呼ばれる。
 	 * sのStringオブジェクトをappend,resultのStringオブジェクトをappend。
 	 *
-	 * time: 64093ms
+	 * 実測結果 time: 64093ms
 	 */
 	public static String concat(String[] array) {
 		String result = "";
@@ -29,7 +29,7 @@ public class StringBuilderTest {
 	 * StringBuilder#append()を使った例。
 	 * StringBuilderが一度だけ生成され、append()も一度しか呼ばれない。
 	 *
-	 * time: 9ms
+	 * 実測結果 time: 9ms
 	 */
 	public static String effectiveConcat(String[] array) {
 		StringBuilder result = new StringBuilder();
