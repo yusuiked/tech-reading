@@ -1,8 +1,13 @@
 package org.yukung.perfect_java.chap2;
 
+import com.google.common.base.Stopwatch;
+
 import org.apache.commons.lang3.time.StopWatch;
 
 public class StringBuilderTest {
+	
+	private static final int LOOP_COUNT = 100000;
+	
 	
 	/*
 	 * 無駄が多い文字列結合。
@@ -66,17 +71,17 @@ public class StringBuilderTest {
 	}
 	
 	private static void measureConcatenate() {
-		String[] data = new String[100000];
-		for (int i = 0; i < 100000; i++) {
+		String[] data = new String[LOOP_COUNT];
+		for (int i = 0; i < LOOP_COUNT; i++) {
 			data[i] = Integer.toString(i);
 		}
 		
-		long start = System.currentTimeMillis();
+		Stopwatch stopwatch = new Stopwatch().start();
 		
 		concat(data);
 		
-		long end = System.currentTimeMillis();
-		System.out.printf("time: %sms%n", end - start);
+		stopwatch.stop();
+		System.out.printf("time: %sms%n", stopwatch.elapsedMillis());
 		
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
