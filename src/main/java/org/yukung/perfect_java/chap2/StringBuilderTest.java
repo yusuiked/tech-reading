@@ -44,6 +44,8 @@ public class StringBuilderTest {
 		
 		measureConcatenate();
 		
+		sameAndEqual();
+		
 	}
 	
 	private static void lookAtBehavior() {
@@ -91,5 +93,21 @@ public class StringBuilderTest {
 		stopWatch.stop();
 		
 		System.out.printf("time: %sms%n", stopWatch.getTime());
+	}
+	
+	/*
+	 * 文字列リテラル同士の結合は同一のStringオブジェクトを参照する。
+	 */
+	private static void sameAndEqual() {
+		String s1 = "012";
+		String s2 = "012";
+		String s3 = "0" + "1" + "2";
+		String s4 = "0" + "1" + 2;
+		
+		System.out.println(s1 == s2); // true
+		System.out.println(s2 == s3); // true
+		System.out.println(s3 == s4); // true
+		System.out.println(s4 == s1); // true
+		System.out.println(s1 == "012"); // true
 	}
 }
