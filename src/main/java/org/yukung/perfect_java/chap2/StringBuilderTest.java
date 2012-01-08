@@ -6,7 +6,7 @@ import org.apache.commons.lang3.time.StopWatch;
 
 public class StringBuilderTest {
 	
-	private static final int LOOP_COUNT = 100000;
+	private static final int LOOP_COUNT = 10000;
 	
 	
 	/*
@@ -46,6 +46,19 @@ public class StringBuilderTest {
 		
 		sameAndEqual();
 		
+		contentsEquals();
+		
+	}
+	
+	/*
+	 * StringBuilderの同値比較
+	 */
+	private static void contentsEquals() {
+		StringBuilder sb1 = new StringBuilder("012");
+		StringBuilder sb2 = new StringBuilder("012");
+		System.out.println(sb1 == sb2); // false
+		System.out.println(sb1.equals(sb2)); // false
+		System.out.println(sb1.toString().contentEquals(sb2)); // true
 	}
 	
 	private static void lookAtBehavior() {
@@ -70,6 +83,7 @@ public class StringBuilderTest {
 		System.out.println(substring);
 		sb.reverse();
 		System.out.println(sb.toString());
+		
 	}
 	
 	private static void measureConcatenate() {
