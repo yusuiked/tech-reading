@@ -1,5 +1,7 @@
 package org.yukung.perfect_java.chap2;
 
+import java.io.UnsupportedEncodingException;
+
 import org.apache.commons.lang3.time.StopWatch;
 
 public class ConvertExample {
@@ -8,11 +10,35 @@ public class ConvertExample {
 	
 	
 	public static void main(String[] args) {
-		measureValueOf();
-		measureWrapperClass();
-		int2str();
-		measureNumValueOf();
-		measureNumParse();
+//		measureValueOf();
+//		measureWrapperClass();
+//		int2str();
+//		measureNumValueOf();
+//		measureNumParse();
+		encode();
+	}
+	
+	private static void encode() {
+		byte[] bytes = new byte[] {
+			(byte) 0xe3,
+			(byte) 0x81,
+			(byte) 0x82,
+			(byte) 0xe3,
+			(byte) 0x81,
+			(byte) 0x84
+		};
+		try {
+			String s = new String(bytes, "UTF-8");
+			System.out.println(s.length());
+			System.out.println(s.getBytes("UTF-8").length);
+			System.out.println(s);
+			byte[] bytes2 = s.getBytes("UTF-8");
+			for (byte b : bytes2) {
+				System.out.println(b);
+			}
+		} catch (UnsupportedEncodingException e) {
+		}
+		
 	}
 	
 	private static void int2str() {
