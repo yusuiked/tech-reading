@@ -8,9 +8,9 @@ public class ConvertExample {
 	
 	
 	public static void main(String[] args) {
-//		measureValueOf();
-//		measureWrapperClass();
-//		int2str();
+		measureValueOf();
+		measureWrapperClass();
+		int2str();
 		measureNumValueOf();
 		measureNumParse();
 	}
@@ -21,6 +21,9 @@ public class ConvertExample {
 		System.out.printf("%s, %s", s1, s2);
 	}
 	
+	/*
+	 * time: 200ms
+	 */
 	private static void measureNumParse() {
 		String[] array = new String[LOOP_COUNT];
 		for (int i = 0; i < LOOP_COUNT; i++) {
@@ -35,6 +38,9 @@ public class ConvertExample {
 		System.out.printf("Integer#parseInt() time: %sms%n", stopWatch.getTime());
 	}
 	
+	/*
+	 * time: 60ms
+	 */
 	private static void measureNumValueOf() {
 		String[] array = new String[LOOP_COUNT];
 		for (int i = 0; i < LOOP_COUNT; i++) {
