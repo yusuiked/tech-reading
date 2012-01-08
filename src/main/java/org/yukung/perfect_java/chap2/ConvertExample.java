@@ -8,15 +8,45 @@ public class ConvertExample {
 	
 	
 	public static void main(String[] args) {
-		measureValueOf();
-		measureWrapperClass();
-		int2str();
+//		measureValueOf();
+//		measureWrapperClass();
+//		int2str();
+		measureNumValueOf();
+		measureNumParse();
 	}
 	
 	private static void int2str() {
 		String s1 = Integer.toHexString(-1);
 		String s2 = Integer.toBinaryString(-1);
 		System.out.printf("%s, %s", s1, s2);
+	}
+	
+	private static void measureNumParse() {
+		String[] array = new String[LOOP_COUNT];
+		for (int i = 0; i < LOOP_COUNT; i++) {
+			array[i] = String.valueOf(i);
+		}
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+		for (String string : array) {
+			Integer.parseInt(string);
+		}
+		stopWatch.stop();
+		System.out.printf("Integer#parseInt() time: %sms%n", stopWatch.getTime());
+	}
+	
+	private static void measureNumValueOf() {
+		String[] array = new String[LOOP_COUNT];
+		for (int i = 0; i < LOOP_COUNT; i++) {
+			array[i] = String.valueOf(i);
+		}
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+		for (String string : array) {
+			Integer.valueOf(string);
+		}
+		stopWatch.stop();
+		System.out.printf("Integer#valueOf() time: %sms%n", stopWatch.getTime());
 	}
 	
 	/*
