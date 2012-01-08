@@ -18,6 +18,9 @@ public class ConvertExample {
 		encode();
 	}
 	
+	/*
+	 * UTF-8エンコードのサンプル
+	 */
 	private static void encode() {
 		byte[] bytes = new byte[] {
 			(byte) 0xe3,
