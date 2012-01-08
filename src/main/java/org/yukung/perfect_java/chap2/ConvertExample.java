@@ -1,4 +1,5 @@
 package org.yukung.perfect_java.chap2;
+
 import org.apache.commons.lang3.time.StopWatch;
 
 public class ConvertExample {
@@ -9,6 +10,13 @@ public class ConvertExample {
 	public static void main(String[] args) {
 		measureValueOf();
 		measureWrapperClass();
+		int2str();
+	}
+	
+	private static void int2str() {
+		String s1 = Integer.toHexString(-1);
+		String s2 = Integer.toBinaryString(-1);
+		System.out.printf("%s, %s", s1, s2);
 	}
 	
 	/*
