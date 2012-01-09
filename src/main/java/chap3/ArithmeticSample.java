@@ -40,6 +40,16 @@ public class ArithmeticSample {
 		System.out.println(-2147483648 - 1L);
 		System.out.println(-2147483648L - 1L);
 		
+		/*
+		 * 符号反転
+		 * 符号の境界値に対して反転すると、想定しない結果を返す。
+		 * 2の補数の意味を考えると理解できる。
+		 */
+		n = 10;
+		System.out.println(-n); // -10 を出力
+		
+		n = -2147483648;
+		System.out.println(-n); // -2147483648 を出力
 	}
 	
 }
