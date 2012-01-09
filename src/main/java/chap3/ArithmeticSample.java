@@ -50,6 +50,12 @@ public class ArithmeticSample {
 		
 		n = -2147483648;
 		System.out.println(-n); // -2147483648 を出力
+		
+		int i = 32768;
+		short s = (short) i;
+		System.out.println(s); //-32768
+		System.out.println(Integer.toBinaryString(i)); // 1000000000000000
+		System.out.println(Integer.toBinaryString(s)); // 11111111111111111000000000000000
 	}
 	
 }
