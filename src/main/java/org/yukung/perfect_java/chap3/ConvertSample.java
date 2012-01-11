@@ -1,4 +1,4 @@
-package chap3;
+package org.yukung.perfect_java.chap3;
 
 public class ConvertSample {
 	
