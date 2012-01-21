@@ -21,5 +21,12 @@ public class StringParseTest {
 		 *	ff
 		 *	ff
 		 */
+		
+		String value = String.copyValueOf(new char[] {
+			'a',
+			'b',
+			'c'
+		});
+		System.out.println(value);
 	}
 }
