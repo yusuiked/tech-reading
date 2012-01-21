@@ -1,8 +1,33 @@
 package org.yukung.perfect_java.chap2;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 public class StringParseTest {
+	
+	@Test
+	public void testByte2String() throws Exception {
+		byte[] bytes1 = new byte[] {
+			0x61,
+			0x62,
+			0x63
+		};
+		String s = new String(bytes1);
+		assertThat("abc", is(s));
+		
+		byte[] bytes2 = new byte[] {
+			(byte) 0xe3,
+			(byte) 0x81,
+			(byte) 0x82,
+			(byte) 0xe3,
+			(byte) 0x81,
+			(byte) 0x84
+		};
+		String str = new String(bytes2, "UTF-8"); // "あい"を出力
+		assertThat("あい", is(str));
+	}
 	
 	@Test
 	public void testParseString() {
@@ -28,5 +53,14 @@ public class StringParseTest {
 			'c'
 		});
 		System.out.println(value);
+	}
+	
+	@Test
+	public void testString2Byte() throws Exception {
+		String s = "abc";
+		byte[] bytes = s.getBytes();
+		for (byte b : bytes) {
+			System.out.println(b);
+		}
 	}
 }
