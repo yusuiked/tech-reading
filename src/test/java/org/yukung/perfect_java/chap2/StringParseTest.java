@@ -62,5 +62,11 @@ public class StringParseTest {
 		for (byte b : bytes) {
 			System.out.println(b);
 		}
+		
+		String str = "あい";
+		byte[] bytes2 = str.getBytes("UTF-8");
+		for (byte b : bytes2) {
+			System.out.println(b);
+		}
 	}
 }
