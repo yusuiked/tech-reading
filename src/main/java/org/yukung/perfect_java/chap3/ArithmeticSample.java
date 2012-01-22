@@ -71,6 +71,9 @@ public class ArithmeticSample {
 		
 		char c4 = 0;
 		short si2 = (short) c;
+		
+		byte b3 = -128;
+		char c5 = (char) b; //=> 65408
 	}
 	
 }
