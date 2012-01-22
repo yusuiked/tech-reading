@@ -56,6 +56,21 @@ public class ArithmeticSample {
 		System.out.println(s); //-32768
 		System.out.println(Integer.toBinaryString(i)); // 1000000000000000
 		System.out.println(Integer.toBinaryString(s)); // 11111111111111111000000000000000
+		
+		/*
+		 * char型との型変換
+		 */
+		byte b = 0;
+		char c = (char) b;
+		
+		char c2 = 0;
+		byte b2 = (byte) c2;
+		
+		short si = 0;
+		char c3 = (char) si;
+		
+		char c4 = 0;
+		short si2 = (short) c;
 	}
 	
 }
