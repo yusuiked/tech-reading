@@ -74,6 +74,13 @@ public class ArithmeticSample {
 		
 		byte b3 = -128;
 		char c5 = (char) b; //=> 65408
+		
+		/*
+		 * 整数の昇格
+		 */
+		short s1 = 1; // intリテラル
+		short s2 = 2; // intリテラル
+		short sum = (short) (s1 + s2); // キャストしないとコンパイルエラー
 	}
 	
 }
