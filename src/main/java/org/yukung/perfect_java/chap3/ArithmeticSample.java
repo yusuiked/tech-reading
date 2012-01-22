@@ -81,6 +81,18 @@ public class ArithmeticSample {
 		short s1 = 1; // intリテラル
 		short s2 = 2; // intリテラル
 		short sum = (short) (s1 + s2); // キャストしないとコンパイルエラー
+		
+		char c6 = 0;
+		char c7 = (char) (c + 1); // 代入の右辺がint型。char型へのキャストが必要。
+		
+		// 昇格により正しい値が得られる例
+		char c8 = 65535;
+		int i1 = c8 + 1; //=> 65536
+		
+		// 昇格により正しい値が得られる例
+		byte b4 = 127;
+		int i2 = b4 + 1; //=> 128
+		
 	}
 	
 }
