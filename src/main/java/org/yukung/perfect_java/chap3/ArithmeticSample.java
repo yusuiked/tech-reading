@@ -110,6 +110,7 @@ public class ArithmeticSample {
 //		char cc2 = 65535L;
 		
 		// 代入先の型が扱える範囲を越える場合もコンパイルエラー
+		// キャストしてもビットが切り捨てられているのでそもそも使わない。
 //		byte bb3 = 128;
 //		short ss3 = 32768;
 //		char cc3 = 65536;
