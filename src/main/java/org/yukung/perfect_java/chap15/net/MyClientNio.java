@@ -70,6 +70,7 @@ public class MyClientNio {
 					break;
 				case RECV_RESPONSE:
 					channel.register(selector, SelectionKey.OP_READ);
+					break;
 				default:
 					assert (false);
 			}
