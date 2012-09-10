@@ -28,8 +28,8 @@ public class MyRun2 {
 		
 		@Override
 		public void run() {
-			for (int i = 0; i < LOOP_NUM; i++) {
-				synchronized (MyRun2.this) {
+			synchronized (MyRun2.this) {
+				for (int i = 0; i < LOOP_NUM; i++) {
 					count++;
 				}
 			}
