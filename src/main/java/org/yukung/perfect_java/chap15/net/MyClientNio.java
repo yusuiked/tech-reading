@@ -71,6 +71,7 @@ public class MyClientNio {
 				case RECV_RESPONSE:
 					channel.register(selector, SelectionKey.OP_READ);
 				default:
+					assert (false);
 			}
 			if (selector.select(POLL_TIMEOUT) > 0) {
 				for (SelectionKey sock : selector.selectedKeys()) {
