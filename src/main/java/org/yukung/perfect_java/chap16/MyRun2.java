@@ -1,8 +1,10 @@
 package org.yukung.perfect_java.chap16;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class MyRun2 {
 	
-	private int count;
+	private AtomicInteger count = new AtomicInteger();
 	
 	private static final int LOOP_NUM = 10000000;
 	
@@ -30,7 +32,7 @@ public class MyRun2 {
 		public void run() {
 			synchronized (MyRun2.this) {
 				for (int i = 0; i < LOOP_NUM; i++) {
-					count++;
+					count.getAndIncrement();
 				}
 			}
 		}
