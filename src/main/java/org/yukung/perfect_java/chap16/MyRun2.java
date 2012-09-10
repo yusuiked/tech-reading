@@ -30,10 +30,8 @@ public class MyRun2 {
 		
 		@Override
 		public void run() {
-			synchronized (MyRun2.this) {
-				for (int i = 0; i < LOOP_NUM; i++) {
-					count.getAndIncrement();
-				}
+			for (int i = 0; i < LOOP_NUM; i++) {
+				count.getAndIncrement();
 			}
 		}
 	}
