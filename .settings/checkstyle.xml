@@ -8,7 +8,6 @@
 <module name="Checker">
   <property name="severity" value="warning"/>
   <module name="TreeWalker">
-    <property name="charset" value="UTF-8"/>
     <module name="FileContentsHolder"/>
     <module name="JavadocMethod">
       <property name="severity" value="ignore"/>
