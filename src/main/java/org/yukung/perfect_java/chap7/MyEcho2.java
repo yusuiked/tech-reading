@@ -9,6 +9,7 @@ import java.util.List;
 public class MyEcho2 {
 	
 	public static void main(String[] args) {
+		// 文字列に対する編集処理を MyFilter インタフェースを介してクラスを分散。
 		MyEcho2 echo = new MyEcho2(Arrays.asList(new MyFilter[] {
 			new ReplaceImpl("he", "she"),
 			new CapitalizeImpl()
