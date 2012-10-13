@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yukung.practice.chap3.KeyType;
 import org.yukung.practice.chap3.StrongBox;
+import org.yukung.practice.chap3.StrongBox.KeyType;
 
 public class StrongBoxTest {
 
