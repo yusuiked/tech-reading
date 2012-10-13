@@ -13,7 +13,7 @@ public class SystemPropertySample {
 		System.out.println("System Propertiy list...");
 		while (iterator.hasNext()) {
 			String key = iterator.next();
-System.out.printf("%s : %s%n", key, System.getProperty(key));
+			System.out.printf("%s : %s%n", key, System.getProperty(key));
 		}
 	}
 }
