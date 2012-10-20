@@ -9,7 +9,7 @@ import org.junit.Test;
 public class URLTest {
 
 	@Test
-	public void testWget() throws Exception {
+	public void testGetWebPageWithURL() throws Exception {
 		URL url = new URL("http://dokojava.jp");
 		InputStream in = url.openStream();
 		InputStreamReader isr = new InputStreamReader(in);
