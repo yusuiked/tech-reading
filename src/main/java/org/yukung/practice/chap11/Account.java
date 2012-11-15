@@ -12,8 +12,8 @@ public class Account {
 	 * @param balance
 	 */
 	public Account(String owner, int balance) {
-		owner = owner;
-		balance = balance;
+		this.owner = owner;
+		this.balance = balance;
 	}
 
 	/**
