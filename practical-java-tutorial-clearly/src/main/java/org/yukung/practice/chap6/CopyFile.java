@@ -11,31 +11,48 @@ import java.util.zip.GZIPOutputStream;
 
 public class CopyFile {
 
-	public void copy(File from, File to) {
-		BufferedInputStream in = null;
-		GZIPOutputStream out = null;
-		try {
-			in = new BufferedInputStream(new FileInputStream(from)) ;
-			out = new GZIPOutputStream(new BufferedOutputStream(new FileOutputStream(to))) ;
+    public void copy(File from, File to) {
+        BufferedInputStream in = null;
+        GZIPOutputStream out = null;
+        try {
+            in = new BufferedInputStream(new FileInputStream(from));
+            out = new GZIPOutputStream(new BufferedOutputStream(new FileOutputStream(to)));
 
-			int b;
-			while ((b = in.read()) != -1) {
-				out.write(b);
-			}
-			out.flush();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				in.close();
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+            int b;
+            while ((b = in.read()) != -1) {
+                out.write(b);
+            }
+            out.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                in.close();
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-	}
+    }
 
+    public void copy7(File from, File to) {
+        try (BufferedInputStream in = new BufferedInputStream(new FileInputStream(from));
+                GZIPOutputStream out =
+                        new GZIPOutputStream(new BufferedOutputStream(new FileOutputStream(to)))) {
+            int b;
+            while ((b = in.read()) != -1) {
+                out.write(b);
+            }
+            out.flush();
+        } catch (Exception e) {
+        }
+    }
+
+    public static void main(String[] args) {
+        CopyFile file = new CopyFile();
+        file.copy7(new File("pom.xml"), new File("pom.gzip"));
+    }
 }
