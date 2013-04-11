@@ -50,9 +50,4 @@ public class CopyFile {
         } catch (Exception e) {
         }
     }
-
-    public static void main(String[] args) {
-        CopyFile file = new CopyFile();
-        file.copy7(new File("pom.xml"), new File("pom.gzip"));
-    }
 }
