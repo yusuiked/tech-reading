@@ -1,9 +1,12 @@
 package org.yukung.practice.chap6;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +31,26 @@ public class CsvAccessor {
 		return list;
 	}
 
+	public void write(File file, List<List<String>> data) {
+		List<String> lines = new ArrayList<>();
+		for (List<String> row : data) {
+			StringBuilder sb = new StringBuilder();
+			for (String column : row) {
+				sb.append(column);
+				sb.append(",");
+			}
+			sb.setCharAt(sb.lastIndexOf(","), System.lineSeparator().charAt(0));
+			lines.add(sb.toString());
+		}
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+			for (String line : lines) {
+				bw.write(line);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args) {
 		CsvAccessor accessor = new CsvAccessor();
 		List<Map<String,String>> list = accessor.read(new File("sample1.csv"));
@@ -37,6 +60,13 @@ public class CsvAccessor {
 			}
 			System.out.println("----------------------------");
 		}
+
+		List<List<String>> data = new ArrayList<>();
+		List<String> lines = Arrays.asList("abc", "ほげふが", "foobar");
+		for (int i = 0; i < 10; i++) {
+			data.add(lines);
+		}
+		accessor.write(new File("sample2.csv"), data);
 	}
 
 }
