@@ -28,8 +28,10 @@ public class DownloaderTest {
 		assertThat(file,is(notNullValue()));
 		assertThat(file.exists(),is(true));
 		assertThat(file.isFile(),is(true));
-		assertThat(file.getAbsolutePath(),is("/Users/yukung/Documents/workspace/tech-reading/practical-java-tutorial-clearly/dj.ico"));
-		assertThat(file.getCanonicalPath(),is("/Users/yukung/Documents/workspace/tech-reading/practical-java-tutorial-clearly/dj.ico"));
+		assertThat(file.getAbsolutePath(),is("/Users/yukung/Documents/tech-reading/practical-java-tutorial-clearly/dj.ico"));
+		assertThat(file.getCanonicalPath(),is("/Users/yukung/Documents/tech-reading/practical-java-tutorial-clearly/dj.ico"));
+		assertThat(file.getName(),is("dj.ico"));
+		assertThat(file.length(),is(22638L));
 	}
 
 }
