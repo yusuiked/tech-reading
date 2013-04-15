@@ -1,4 +1,4 @@
-package org.yukung.practice.chap6;
+package org.yukung.practice.chap7;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
