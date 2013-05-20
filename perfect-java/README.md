@@ -4872,9 +4872,9 @@ public @interface Deprecated {}
 
 以下、コード例。
 
-<<changeset 028f8b3>>
-<<changeset b38909e>>
-<<changeset 233664f>>
+[コード例](../commits/028f8b3cbce9fde0e9f4662045c793c97f50c03d)
+[コード例](../commits/b38909e1ddaccf3808733b1719665dd56dfd10b6)
+[コード例](../commits/233664f925c7afef7bd309b149ecce9411373029)
 
 ### アノテーションとPOJO
 
