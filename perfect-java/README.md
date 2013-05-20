@@ -184,7 +184,7 @@ if (Character.isDigit(c) || Character.isLetter(c)) {
     ; // through
 } else {
     System.out.println("any simbol?");
-    
+
 }
 ```
 
@@ -259,8 +259,8 @@ class My {
 	private My {}
 	static My getInstance() {
 		My my = new My();
-		return my;	
-	}	
+		return my;
+	}
 }
 // 呼び出し側
 My my = My.getInstance();
@@ -296,7 +296,7 @@ static修飾子をつけるのは、本質的に処理に状態を持つ必要�
 |final|継承による拡張を禁止|
 |abstract|抽象クラス|
 |strictfp|クラス内に記述した浮動小数点演算を厳密に評価|
-|アノテーション|定義したアノテーションで共同を制御する|
+|アノテーション|定義したアノテーションで挙動を制御する|
 
 ### フィールド
 
@@ -398,7 +398,7 @@ void doit(int i, String... messages, int i) // コンパイルエラー
 
 指定できる修飾子は以下。
 
-* public 
+* public
 * protected
 * private
 
@@ -466,7 +466,7 @@ class My {
 	My(int num) {
 		this.num = num;
 	}
-	
+
 }
 
 // 別の場所にある new My() の呼び出し箇所がコンパイルエラーもしくは実行時エラーになる
@@ -1160,7 +1160,7 @@ Stringクラス自身が持つ比較基準でソートする。文字列オブ�
 
 // Comparatorによるソート
 private static class StringLengthComparator<T extends String> implements Comparator<T> {
-	
+
 	@Override
 	public int compare(String o1, String o2) {
 		return o1.length() - o2.length();
@@ -1191,7 +1191,7 @@ public static void main(String[] args) {
 #!java
 
 // Comparatorによるソート（無名クラス版）
-List<String> list = new ArrayList<String>() {	
+List<String> list = new ArrayList<String>() {
 	{
 		add("foo");
 		add("bar");
@@ -2615,7 +2615,7 @@ enum Gender {
 	MAN("man"),
 	WOMAN("woman"),
 	OTHER("other");
-	
+
 	private String val;
 	private Gender(String val) {
 		this.val = val;
@@ -2632,7 +2632,7 @@ enum Gender {
 	MAN("man", 0),
 	WOMAN("woman", 1),
 	OTHER("other", 2);
-	
+
 	private String name4disp;
 	private int val4db;
 	private Genger(String name4disp, int val4db) {
@@ -2790,7 +2790,7 @@ try {
 import java.io.IOException;
 
 public class My {
-	
+
 	public static void main(String[] args) {
 		try {
 			try {
@@ -2807,7 +2807,7 @@ public class My {
 			System.out.println("finally2");
 		}
 	}
-	
+
 }
 ```
 
@@ -2946,7 +2946,7 @@ assert文が構文として用意されている意味は、絶対に成立す�
 class User {
 	private String name;
 	private int birthYear;
-	
+
 	User(String name, int birthYear) {
 		assert birthYear > 0;
 		// 省略
@@ -2968,7 +2968,7 @@ assert文を実行する保証がないため、assert文の式に副作用を�
 public class User {
 	private String name;
 	private int birthYear;
-	
+
 	public User(String name, int birthYear) {
 		if (name == null || name.isEmpty() || birthYear <= 0) {
 			throw new IllegalArgumentException();
@@ -3110,7 +3110,7 @@ List<E> のEに相当するものを *型変数* 、List<String> のStringに相
 public class Owner<E> {
 	private E element;
 	public E get() {
-		return element;	
+		return element;
 	}
 	public void put(E element) {
 		this.element = element;
@@ -3179,7 +3179,7 @@ public class Owner<E> {
 public class Owner<E> { // <E extends Object> と等価
 	private E element;
 	public E get() {
-		return element;	
+		return element;
 	}
 	public void put(E element) {
 		this.element = element;
@@ -3199,7 +3199,7 @@ public class Owner<E> { // <E extends Object> と等価
 public class Owner<E extends CharSequence> { // 境界はCharSequenceインタフェースとした
 	private E element;
 	public E get() {
-		return element;	
+		return element;
 	}
 	public void put(E element) {
 		this.element = element;
@@ -3264,7 +3264,7 @@ List<? extends Number> nlist = new ArrayList<Integer>();
 <T> List<T> arrayToList(T[] array) {
 	List<T> list = new ArrayList<T>();
 	for (T elem : array) {
-		list.add(elem);	
+		list.add(elem);
 	}
 	return list;
 }
@@ -3284,7 +3284,7 @@ List<? extends Number> nlist = new ArrayList<Integer>();
 	List<T> list = new ArrayList<T>();
 	for (T elem : array) {
 		elem += ".";
-		list.add(elem);	
+		list.add(elem);
 	}
 		return list;
 }
@@ -3299,8 +3299,8 @@ List<? extends Number> nlist = new ArrayList<Integer>();
 // ジェネリックメソッドの例
 class <T> Foo {
 	static <T> T f(T t) { // クラス宣言の<T>とメソッド宣言の<T>は別物
-		return t;	
-	}	
+		return t;
+	}
 }
 ```
 
@@ -3324,7 +3324,7 @@ maxメソッドの中では要素同士の比較が必要となるため、イ�
 
 // 比較用インタフェース
 interface MyComparable {
-	int compareTo(Object o);	
+	int compareTo(Object o);
 }
 // max関数の実装
 static Object max(MyComparble[] array) {
@@ -4024,7 +4024,7 @@ class MyWorker implements Runnable {
 				counter.increment();
 			}
 		}
-	}	
+	}
 }
 ```
 
@@ -4522,11 +4522,11 @@ class MyBean {
 
 class StringList {
 	private List<String> list;
-	
+
 	public StringList(List<String> list) {
 		this.list = list;
 	}
-	
+
 	public void append(String s) {
 		list.add(s);
 	}
