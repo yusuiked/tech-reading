@@ -147,8 +147,10 @@ public class My {
 引数名（仮引数名）はシグネチャに含まれない。
 
 ## 再帰呼び出し
-
-* [コード例](../../commits/26d9803d2ffcd51fe533e2383b27d42a0311ad99)
+https://bitbucket.org/yukung/tech-reading/src/bf0d2b793e6212c9c8a1adc47f47ba5c8a7b32e2/perfect-java/commits/26d9803d2ffcd51fe533e2383b27d42a0311ad99
+https://bitbucket.org/yukung/tech-reading/commits/26d9803d2ffcd51fe533e2383b27d42a0311ad99?at=master
+* [コード例](../../../../commits/26d9803d2ffcd51fe533e2383b27d42a0311ad99)
+* 26d9803d2ffcd51fe533e2383b27d42a0311ad99
 
 再帰呼び出しとループ処理はどちらも本質的に繰り返し処理。
 再帰処理は、入力値を列とみなして、先頭の要素と残りの要素に分けて考える。再帰メソッドは先頭要素があるかをチェックする。先頭要素がなければ何もしない。先頭要素があれば処理をする。残りの要素列（入力値から処理済み先頭要素を取り除いた列）を実引数として自分自身のメソッドを呼ぶ。
