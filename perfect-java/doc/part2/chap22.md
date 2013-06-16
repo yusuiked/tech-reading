@@ -172,6 +172,7 @@ ${empty nonEmptyList}    // false
 
 ```
 ${empty val or val == 0}
+```
 
 ### 論理演算子と3項演算子
 
