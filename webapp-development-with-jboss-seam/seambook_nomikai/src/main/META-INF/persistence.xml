@@ -8,6 +8,9 @@
    <persistence-unit name="seambook_nomikai" transaction-type="JTA">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <jta-data-source>java:/seambook_nomikaiDatasource</jta-data-source>
+      <class>entity.Nomikai</class>
+      <class>entity.Nomikaimember</class>
+      <class>entity.User</class>
       <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
          <property name="hibernate.hbm2ddl.auto" value="validate"/>
