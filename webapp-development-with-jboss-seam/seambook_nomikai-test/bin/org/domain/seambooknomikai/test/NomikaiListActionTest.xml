@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+
+<suite name="NomikaiListAction Tests" verbose="2" parallel="false">
+   <test name="NomikaiListAction Test">
+     <classes>
+       <class name="org.domain.seambooknomikai.test.NomikaiListActionTest"/>       
+     </classes>
+   </test>	
+</suite>

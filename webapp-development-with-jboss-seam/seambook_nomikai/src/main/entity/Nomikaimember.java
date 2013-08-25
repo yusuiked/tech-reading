@@ -1,7 +1,9 @@
 package entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -9,6 +11,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Nomikaimember implements Serializable {
 	@Id
+	@GeneratedValue
 	private long nomikaimemberid;
 
 	private boolean attend;
@@ -16,11 +19,11 @@ public class Nomikaimember implements Serializable {
 	private boolean steward;
 
 	@ManyToOne
-	@JoinColumn(name="NOMIKAIID")
+	@JoinColumn(name = "NOMIKAIID")
 	private Nomikai nomikaiid;
 
 	@ManyToOne
-	@JoinColumn(name="USERID")
+	@JoinColumn(name = "USERID")
 	private User userid;
 
 	private static final long serialVersionUID = 1L;
