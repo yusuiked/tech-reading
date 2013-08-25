@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram model-entity="SeamPagesDiagram">
+ <item ID="#user_list.xhtml" NAME="#xuser_list.xhtml"
+  PATH="/user_list.xhtml" SHAPE="472,17,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/user_detail.xhtml" NAME="output"
+   PATH="/user_detail.xhtml" SHAPE="-1,16" TARGET="#xuser_detail.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/user_create.xhtml" NAME="output1"
+   PATH="/user_create.xhtml" SHAPE="-1,24" TARGET="#xuser_create.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="#user_detail.xhtml" NAME="#xuser_detail.xhtml"
+  PATH="/user_detail.xhtml" SHAPE="24,17,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/user_list.xhtml" NAME="output" PATH="/user_list.xhtml"
+   SHAPE="-1,24" TARGET="#xuser_list.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/user_list.xhtml" NAME="output1" PATH="/user_list.xhtml"
+   SHAPE="-1,24" SHORTCUT="yes" TARGET="#xuser_list.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/user_list.xhtml" NAME="output2" PATH="/user_list.xhtml"
+   SHAPE="-1,24" SHORTCUT="yes" TARGET="#xuser_list.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="#user_create.xhtml" NAME="#xuser_create.xhtml"
+  PATH="/user_create.xhtml" SHAPE="24,169,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/user_list.xhtml" NAME="output" PATH="/user_list.xhtml"
+   SHAPE="-1,24" TARGET="#xuser_list.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/user_list.xhtml" NAME="output1" PATH="/user_list.xhtml"
+   SHAPE="-1,24" SHORTCUT="yes" TARGET="#xuser_list.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+</diagram>

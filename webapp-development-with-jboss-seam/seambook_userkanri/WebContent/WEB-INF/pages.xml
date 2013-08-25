@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+	<page action="#{userListAction.searchUser}" view-id="/user_list.xhtml">
+		<begin-conversation join="true" />
+		<navigation from-action="#{userListAction.showDetail}">
+			<rule if-outcome="detail">
+				<redirect view-id="/user_detail.xhtml" />
+			</rule>
+		</navigation>
+		<navigation>
+			<rule if-outcome="create">
+				<redirect view-id="/user_create.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+	<page view-id="/user_detail.xhtml">
+		<navigation from-action="#{userDetailAction.updateUser}">
+			<rule if-outcome="update_success">
+				<end-conversation before-redirect="true" />
+				<redirect view-id="/user_list.xhtml" />
+			</rule>
+		</navigation>
+		<navigation from-action="#{userDetailAction.deleteUser}">
+			<rule if-outcome="delete_success">
+				<end-conversation before-redirect="true" />
+				<redirect view-id="/user_list.xhtml" />
+			</rule>
+		</navigation>
+		<navigation>
+			<rule if-outcome="cancel">
+				<end-conversation before-redirect="true" />
+				<redirect view-id="/user_list.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+	<page view-id="/user_create.xhtml">
+		<navigation from-action="#{userCreateAction.createUser}">
+			<rule if-outcome="create_success">
+				<end-conversation before-redirect="true" />
+				<redirect view-id="/user_list.xhtml" />
+			</rule>
+		</navigation>
+		<navigation>
+			<rule if-outcome="cancel">
+				<end-conversation before-redirect="true" />
+				<redirect view-id="/user_list.xhtml" />
+			</rule>
+		</navigation>
+	</page>
+</pages>

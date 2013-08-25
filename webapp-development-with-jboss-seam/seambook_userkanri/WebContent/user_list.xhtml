@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:s="http://jboss.com/products/seam/taglib">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>ユーザー一覧</title>
+		<a4j:loadStyle src="/stylesheet/theme.css" />
+	</head>
+	
+	<body>
+		<h:form>
+		<rich:panel>
+		
+		<f:facet name="header">ユーザー一覧</f:facet>
+	
+		<h:dataTable value="#{users}" var="usr">
+			<h:column>
+				<f:facet name="header">社員番号</f:facet>
+				<h:commandLink action="#{userListAction.showDetail}" value="#{usr.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">氏名</f:facet>
+				#{usr.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header">役職</f:facet>
+				#{usr.yakushoku}
+			</h:column>
+		</h:dataTable>
+		
+		</rich:panel>
+		
+		<h:commandButton action="create" value="ユーザー作成" />
+		
+		</h:form>
+	</body>
+
+</html>

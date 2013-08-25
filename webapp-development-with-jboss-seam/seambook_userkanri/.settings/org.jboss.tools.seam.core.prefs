@@ -1,0 +1,15 @@
+#Fri Aug 23 15:50:37 JST 2013
+action.package=org.domain.seambookuserkanri.session
+action.sources=/seambook_userkanri/src/hot
+eclipse.preferences.version=1
+model.package=org.domain.seambookuserkanri.entity
+model.sources=/seambook_userkanri/src/main
+seam.project.connection.profile=HSQLDB server mode
+seam.project.deployment.type=war
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/seambook_userkanri/WebContent
+seam.runtime.name=seam21
+seam.test.creating=true
+seam.test.project=seambook_userkanri-test
+test.package=org.domain.seambookuserkanri.test
+test.sources=/seambook_userkanri-test/test-src
