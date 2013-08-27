@@ -1,59 +1,41 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://jboss.com/products/seam/taglib"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:rich="http://richfaces.org/rich"
-    xmlns:a="http://richfaces.org/a4j">
+    xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
     
-    <head>
-    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    	<title>飲み会一覧</title>
-    	<a:loadStyle src="/stylesheet/theme.css" />
-    </head>
-    <body>
-    
-    	<rich:toolBar>
-    		<rich:toolBarGroup>
-    			<h:outputText value="seam book" />
-    		</rich:toolBarGroup>
-    	</rich:toolBar>
-    	
-    	<div class="body">
+    <ui:define name="body">
     	<rich:panel>
-    	
-    		<rich:dataTable value="#{nomikais}" var="nomikai">
+   			<f:facet name="header">飲み会一覧</f:facet>
+    		<rich:dataTable value="#{nomikais}" var="p">
     			<f:facet name="header">
-    				<rich:columnGroup>
-    					<h:column>
-    						<h:outputText value="Id" styleClass="headerText" />
-    					</h:column>
-    					<h:column>
-    						<h:outputText value="飲み会名称" styleClass="headerText" />
-    					</h:column>
-    					<h:column>
-    						<h:outputText value="日付" styleClass="headerText" />
-    					</h:column>
-    				</rich:columnGroup>
-    			</f:facet>
+	   				<rich:columnGroup>
+	   					<h:column>
+	   						<h:outputText value="Id" styleClass="headerText" />
+	   					</h:column>
+	   					<h:column>
+	   						<h:outputText value="飲み会名称" styleClass="headerText" />
+	   					</h:column>
+	   					<h:column>
+	   						<h:outputText value="日付" styleClass="headerText" />
+	   					</h:column>
+	   				</rich:columnGroup>
+   				</f:facet>
 	    		<h:column>
-	    			<h:outputText value="#{nomikai.nomikaiid}" />
+	    			<h:outputText value="#{p.nomikaiid}" />
 	    		</h:column>
 	    		<h:column>
-	    			<h:outputText value="#{nomikai.name}" />
+	    			<h:outputText value="#{p.name}" />
 	    		</h:column>
 	    		<h:column>
-	    			<h:outputText value="#{nomikai.date}">
+	    			<h:outputText value="#{p.date}">
 	    				<f:convertDateTime pattern="yyyy/MM/dd" />
 	    			</h:outputText>
 	    		</h:column>
     		</rich:dataTable>
     	</rich:panel>
-    	</div>
-    	
-    	<div class="footer">Seam Book Sample Application</div>
-    </body>
-
-</html>
+    </ui:define>
+</ui:composition>
