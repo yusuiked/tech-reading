@@ -1,24 +1,27 @@
 package entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Nomikai implements Serializable {
 	@Id
+	@GeneratedValue
 	private long nomikaiid;
 
-	private Timestamp date;
+	private Date date;
 
 	private String detail;
 
 	private String name;
 
-	@OneToMany(mappedBy="nomikaiid")
+	@OneToMany(mappedBy = "nomikaiid")
 	private Set<Nomikaimember> nomikaimemberCollection;
 
 	private static final long serialVersionUID = 1L;
@@ -35,11 +38,11 @@ public class Nomikai implements Serializable {
 		this.nomikaiid = nomikaiid;
 	}
 
-	public Timestamp getDate() {
+	public Date getDate() {
 		return this.date;
 	}
 
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -63,7 +66,8 @@ public class Nomikai implements Serializable {
 		return this.nomikaimemberCollection;
 	}
 
-	public void setNomikaimemberCollection(Set<Nomikaimember> nomikaimemberCollection) {
+	public void setNomikaimemberCollection(
+			Set<Nomikaimember> nomikaimemberCollection) {
 		this.nomikaimemberCollection = nomikaimemberCollection;
 	}
 
