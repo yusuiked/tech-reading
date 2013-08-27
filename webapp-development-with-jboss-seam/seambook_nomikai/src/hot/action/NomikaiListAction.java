@@ -1,5 +1,6 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.seam.annotations.Name;
@@ -14,5 +15,6 @@ public class NomikaiListAction {
 
 	public void page() {
 		// implement your business logic here
+		nomikais = new ArrayList<Nomikai>();
 	}
 }

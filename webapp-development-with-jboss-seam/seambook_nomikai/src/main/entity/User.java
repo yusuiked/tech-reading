@@ -2,7 +2,6 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,7 +15,7 @@ public class User implements Serializable {
 
 	private String yakushoku;
 
-	@OneToMany(mappedBy = "userid")
+	@OneToMany(mappedBy="userid")
 	private Set<Nomikaimember> nomikaimemberCollection;
 
 	private static final long serialVersionUID = 1L;
@@ -53,8 +52,7 @@ public class User implements Serializable {
 		return this.nomikaimemberCollection;
 	}
 
-	public void setNomikaimemberCollection(
-			Set<Nomikaimember> nomikaimemberCollection) {
+	public void setNomikaimemberCollection(Set<Nomikaimember> nomikaimemberCollection) {
 		this.nomikaimemberCollection = nomikaimemberCollection;
 	}
 

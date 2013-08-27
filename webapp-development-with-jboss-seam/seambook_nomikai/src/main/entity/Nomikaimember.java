@@ -2,8 +2,8 @@ package entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,11 +11,12 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Nomikaimember implements Serializable {
 	@Id
-	@GeneratedValue
 	private long nomikaimemberid;
 
+	@Column(name = "attend", columnDefinition = "boolean")
 	private boolean attend;
 
+	@Column(name = "steward", columnDefinition = "boolean")
 	private boolean steward;
 
 	@ManyToOne

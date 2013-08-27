@@ -1,31 +1,24 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-@NamedQueries(@NamedQuery(name = "findById", query = "select t from Nomikai t where t.nomikaiid = :nomikaiid"))
 @Entity
 public class Nomikai implements Serializable {
 	@Id
-	@GeneratedValue
 	private long nomikaiid;
 
-	private Date date;
+	private Timestamp date;
 
 	private String detail;
 
 	private String name;
 
-	@OneToMany(mappedBy = "nomikaiid", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="nomikaiid")
 	private Set<Nomikaimember> nomikaimemberCollection;
 
 	private static final long serialVersionUID = 1L;
@@ -42,11 +35,11 @@ public class Nomikai implements Serializable {
 		this.nomikaiid = nomikaiid;
 	}
 
-	public Date getDate() {
+	public Timestamp getDate() {
 		return this.date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 
@@ -70,8 +63,7 @@ public class Nomikai implements Serializable {
 		return this.nomikaimemberCollection;
 	}
 
-	public void setNomikaimemberCollection(
-			Set<Nomikaimember> nomikaimemberCollection) {
+	public void setNomikaimemberCollection(Set<Nomikaimember> nomikaimemberCollection) {
 		this.nomikaimemberCollection = nomikaimemberCollection;
 	}
 
