@@ -38,18 +38,18 @@
     					</h:column>
     				</rich:columnGroup>
     			</f:facet>
+	    		<h:column>
+	    			<h:outputText value="#{nomikai.nomikaiid}" />
+	    		</h:column>
+	    		<h:column>
+	    			<h:outputText value="#{nomikai.name}" />
+	    		</h:column>
+	    		<h:column>
+	    			<h:outputText value="#{nomikai.date}">
+	    				<f:convertDateTime pattern="yyyy/MM/dd" />
+	    			</h:outputText>
+	    		</h:column>
     		</rich:dataTable>
-    		<h:column>
-    			<h:outputText value="#{nomikai.nomikaiid}" />
-    		</h:column>
-    		<h:column>
-    			<h:outputText value="#{nomikai.name}" />
-    		</h:column>
-    		<h:column>
-    			<h:outputText value="#{nomikai.date}">
-    				<f:convertDateTime pattern="yyyy/MM/dd" />
-    			</h:outputText>
-    		</h:column>
     	</rich:panel>
     	</div>
     	

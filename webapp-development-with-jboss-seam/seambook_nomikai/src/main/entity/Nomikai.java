@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+@NamedQueries(@NamedQuery(name = "findById", query = "select t from Nomikai t where t.nomikaiid = :nomikaiid"))
 @Entity
 public class Nomikai implements Serializable {
 	@Id
@@ -21,7 +25,7 @@ public class Nomikai implements Serializable {
 
 	private String name;
 
-	@OneToMany(mappedBy = "nomikaiid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "nomikaiid")
 	private Set<Nomikaimember> nomikaimemberCollection;
 
 	private static final long serialVersionUID = 1L;
