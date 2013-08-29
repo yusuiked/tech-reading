@@ -28,7 +28,9 @@
 	    			<h:outputText value="#{p.nomikaiid}" />
 	    		</h:column>
 	    		<h:column>
-	    			<h:outputText value="#{p.name}" />
+    				<s:link view="/nomikaiDetail.xhtml" value="#{p.name}" propagation="false">
+    					<f:param name="nomikaiid" value="#{p.nomikaiid}" />
+	    			</s:link>
 	    		</h:column>
 	    		<h:column>
 	    			<h:outputText value="#{p.date}">
