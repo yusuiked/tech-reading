@@ -1,0 +1,69 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
+    
+    <ui:define name="body">
+    	<rich:panel>
+   			<f:facet name="header">飲み会詳細</f:facet>
+   			<table border="1">
+   				<tbody>
+   					<tr>
+   						<td>飲み会名称</td>
+   						<td>#{nomikai.name}</td>
+   					</tr>
+   					<tr>
+   						<td>日付</td>
+   						<td>
+   							<h:outputText value="#{nomikai.date}">
+   								<f:convertDateTime pattern="yyyy/MM/dd" />
+   							</h:outputText>
+   						</td>
+   					</tr>
+   					<tr>
+   						<td>詳細</td>
+   						<td>
+   							<h:inputTextarea value="#{nomikai.detail}" readonly="true" cols="40" rows="10" />
+   						</td>
+   					</tr>
+   				</tbody>
+   			</table>
+   		</rich:panel>
+
+      <rich:panel>
+        <h:form>
+          <f:facet name="header">参加者一覧</f:facet>
+          <rich:dataTable value="#{nomikaimembers}" var="nm">
+            <h:column>
+              <f:facet name="header">
+                <h:outputText styleClass="headerText" value="参加者名" />
+              </f:facet>
+              #{nm.userid.name}
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText styleClass="headerText" value="参加" />
+              </f:facet>
+              #{nm.attend ? '○' : ''}
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText styleClass="headerText" value="幹事" />
+              </f:facet>
+              #{nm.steward ? '○' : ''}
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText styleClass="headerText" value="アクション" />
+              </f:facet>
+              <h:commandButton value="#{!nm.attend ? '参加' : 'キャンセル' }" action="#{nomikaiDetailAction.confirm}" />              
+            </h:column>
+          </rich:dataTable>
+        </h:form>
+      </rich:panel>
+    </ui:define>
+</ui:composition>

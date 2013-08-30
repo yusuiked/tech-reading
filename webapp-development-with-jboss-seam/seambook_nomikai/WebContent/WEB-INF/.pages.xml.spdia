@@ -2,4 +2,11 @@
 <diagram model-entity="SeamPagesDiagram">
  <item ID="#nomikaiList.xhtml" NAME="#xnomikaiList.xhtml"
   PATH="/nomikaiList.xhtml" SHAPE="24,17,0,0" TYPE="page" model-entity="SeamPagesDiagramItem"/>
+ <item ID="#nomikaiDetail.xhtml" NAME="#xnomikaiDetail.xhtml"
+  PATH="/nomikaiDetail.xhtml" SHAPE="344,17,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/nomikaiConfirm.xhtml" NAME="output"
+   PATH="/nomikaiConfirm.xhtml" TARGET="#xnomikaiConfirm.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item NAME="#xnomikaiConfirm.xhtml" PATH="/nomikaiConfirm.xhtml"
+  SHAPE="664,17,0,0" TYPE="page" model-entity="SeamPagesDiagramItem"/>
 </diagram>

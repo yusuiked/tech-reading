@@ -5,5 +5,14 @@
     <page view-id="/nomikaiList.xhtml">
     	<action execute="#{nomikaiListAction.page}" />
     </page>
-    
+    <page view-id="/nomikaiDetail.xhtml">
+    	<begin-conversation />
+    	<action execute="#{nomikaiDetailAction.page}" />
+    	<param name="nomikaiid" value="#{nomikaiDetailDto.nomikaiid}" />
+    	<navigation from-action="#{nomikaiDetailAction.confirm}">
+    		<rule if-outcome="confirm">
+    			<redirect view-id="/nomikaiConfirm.xhtml" />
+    		</rule>    	
+    	</navigation>
+    </page>
 </pages>
