@@ -20,6 +20,12 @@
 <rich:toolBar>
 	<rich:toolBarGroup>
 		<h:outputText value="seambook-sample" />
+		<s:link action="#{templateAction.home}" value="飲み会一覧" propagation="end" />
+	</rich:toolBarGroup>
+
+	<rich:toolBarGroup location="right">
+		<s:link value="新規作成" action="#{templateAction.create}" propagation="end" />
+		<s:link action="#{templateAction.update}" value="更新削除" propagation="end" />
 	</rich:toolBarGroup>
 </rich:toolBar>
 

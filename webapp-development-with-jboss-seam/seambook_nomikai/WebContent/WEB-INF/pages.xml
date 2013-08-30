@@ -2,6 +2,24 @@
 <pages xmlns="http://jboss.com/products/seam/pages"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">    
+    <page view-id="*">
+    	<navigation>
+    		<rule if-outcome="home">
+    			<end-conversation before-redirect="true" />
+    			<redirect view-id="/nomikaiList.xhtml" />
+    		</rule>
+    		<rule>
+    			<end-conversation before-redirect="true" />
+    			<redirect view-id="/nomikai.xhtml" />
+    		</rule>
+    		<rule if-outcome="update">
+    			<end-conversation before-redirect="true" />
+    			<redirect view-id="/nomikaiList.xhtml">
+    				<param name="update" value="true" />
+    			</redirect>
+    		</rule>
+    	</navigation>
+    </page>
     <page view-id="/nomikaiList.xhtml">
     	<action execute="#{nomikaiListAction.page}" />
     </page>

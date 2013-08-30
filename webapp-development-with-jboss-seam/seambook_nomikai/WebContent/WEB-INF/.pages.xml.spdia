@@ -14,4 +14,14 @@
   <output ID="/nomikaiDetail.xhtml" NAME="output1"
    PATH="/nomikaiDetail.xhtml" TARGET="#xnomikaiDetail.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
  </item>
+ <item ID="*" NAME="*" PATH="*" SHAPE="24,145,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/nomikaiList.xhtml" NAME="output"
+   PATH="/nomikaiList.xhtml" TARGET="#xnomikaiList.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/nomikai.xhtml" NAME="output1" PATH="/nomikai.xhtml"
+   TARGET="#xnomikai.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/nomikaiList.xhtml" NAME="output2"
+   PATH="/nomikaiList.xhtml" TARGET="#xnomikaiList.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item NAME="#xnomikai.xhtml" PATH="/nomikai.xhtml" SHAPE="376,145,0,0"
+  TYPE="page" model-entity="SeamPagesDiagramItem"/>
 </diagram>
