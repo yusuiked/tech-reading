@@ -7,6 +7,11 @@
   <output ID="/nomikaiConfirm.xhtml" NAME="output"
    PATH="/nomikaiConfirm.xhtml" TARGET="#xnomikaiConfirm.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
  </item>
- <item NAME="#xnomikaiConfirm.xhtml" PATH="/nomikaiConfirm.xhtml"
-  SHAPE="664,17,0,0" TYPE="page" model-entity="SeamPagesDiagramItem"/>
+ <item ID="#nomikaiConfirm.xhtml" NAME="#xnomikaiConfirm.xhtml"
+  PATH="/nomikaiConfirm.xhtml" SHAPE="664,17,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/nomikaiDetail.xhtml" NAME="output"
+   PATH="/nomikaiDetail.xhtml" TARGET="#xnomikaiDetail.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/nomikaiDetail.xhtml" NAME="output1"
+   PATH="/nomikaiDetail.xhtml" TARGET="#xnomikaiDetail.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
 </diagram>

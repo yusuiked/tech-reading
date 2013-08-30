@@ -15,4 +15,19 @@
     		</rule>    	
     	</navigation>
     </page>
+    <page view-id="/nomikaiConfirm.xhtml">
+    	<action execute="#{nomikaiConfirmAction.page}" />
+    	<navigation from-action="#{nomikaiConfirmAction.invoke}">
+    		<end-conversation />
+    		<redirect view-id="/nomikaiDetail.xhtml">
+    			<param name="nomikaiid" value="#{nomikaimember.nomikaiid.nomikaiid}" />
+    		</redirect>
+    	</navigation>
+    	<navigation from-action="#{nomikaiConfirmAction.reset}">
+    		<end-conversation />
+    		<redirect view-id="/nomikaiDetail.xhtml">
+    			<param name="nomikaiid" value="#{nomikaimember.nomikaiid.nomikaiid}" />
+    		</redirect>
+    	</navigation>
+    </page>
 </pages>
