@@ -22,6 +22,9 @@
   <output ID="/nomikaiList.xhtml" NAME="output2"
    PATH="/nomikaiList.xhtml" TARGET="#xnomikaiList.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
  </item>
- <item NAME="#xnomikai.xhtml" PATH="/nomikai.xhtml" SHAPE="376,145,0,0"
-  TYPE="page" model-entity="SeamPagesDiagramItem"/>
+ <item ID="#nomikai.xhtml" NAME="#xnomikai.xhtml" PATH="/nomikai.xhtml"
+  SHAPE="376,145,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/nomikaiList.xhtml" NAME="output"
+   PATH="/nomikaiList.xhtml" TARGET="#xnomikaiList.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
 </diagram>

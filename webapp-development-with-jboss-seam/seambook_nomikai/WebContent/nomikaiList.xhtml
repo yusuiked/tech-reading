@@ -22,6 +22,9 @@
 	   					<h:column>
 	   						<h:outputText value="日付" styleClass="headerText" />
 	   					</h:column>
+	   					<h:column rendered="#{param['update']}">
+	   						<h:outputText value="アクション" styleClass="headerText" />
+						</h:column>
 	   				</rich:columnGroup>
    				</f:facet>
 	    		<h:column>
@@ -36,6 +39,11 @@
 	    			<h:outputText value="#{p.date}">
 	    				<f:convertDateTime pattern="yyyy/MM/dd" />
 	    			</h:outputText>
+	    		</h:column>
+	    		<h:column rendered="#{param['update']}">
+	    			<s:link view="/nomikai.xhtml" value="編集画面へ" propagation="begin">
+	    				<f:param name="nomikaiid" value="#{p.nomikaiid}" />
+	    			</s:link>
 	    		</h:column>
     		</rich:dataTable>
     	</rich:panel>

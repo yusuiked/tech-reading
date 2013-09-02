@@ -1,0 +1,58 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
+    
+    <ui:define name="body">
+    	<rich:panel>
+   			<f:facet name="header">飲み会の追加</f:facet>
+   			<h:form>
+          <table>
+            <tbody>
+              <tr>
+                <td>飲み会名称</td>
+                <td><h:inputText value="#{nomikai.name}" /></td>
+              </tr>
+              <tr>
+                <td>日付</td>
+                <td><rich:calendar value="#{nomikai.date}" locale="ja" /></td>
+              </tr>
+              <tr>
+                <td>詳細</td>
+                <td><h:inputTextarea value="#{nomikai.detail}" cols="40" rows="10" /></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <rich:dataTable value="#{candidates}" var="candidate">
+            <h:column>
+              <f:facet name="header">
+                <h:outputText styleClass="headerText" value="ユーザ名" />
+              </f:facet>
+              <h:outputText value="${candidate.nomikaimember.userid.name}" />
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText styleClass="headerText" value="参加者候補" />
+              </f:facet>
+              <h:selectBooleanCheckbox value="#{candidate.register}" />
+            </h:column>
+            <h:column>
+              <f:facet name="header">
+                <h:outputText styleClass="headerText" value="幹事" />
+              </f:facet>
+              <h:selectBooleanCheckbox value="${candidate.nomikaimember.steward}" />
+            </h:column>
+          </rich:dataTable>
+
+          <h:commandButton action="#{nomikaiAction.create}" value="作成" rendered="#{nomikaiDto.nomikaiid == null}" />
+          <h:commandButton action="#{nomikaiAction.update}" value="更新" rendered="${nomikaiDto.nomikaiid != null}" />
+          <h:commandButton action="#{nomikaiAction.delete}" value="削除" rendered="${nomikaiDto.nomikaiid != null}" />
+        </h:form>
+      </rich:panel>
+    </ui:define>
+</ui:composition>

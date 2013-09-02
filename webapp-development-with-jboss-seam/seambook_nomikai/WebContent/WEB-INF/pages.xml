@@ -8,7 +8,7 @@
     			<end-conversation before-redirect="true" />
     			<redirect view-id="/nomikaiList.xhtml" />
     		</rule>
-    		<rule>
+    		<rule if-outcome="create">
     			<end-conversation before-redirect="true" />
     			<redirect view-id="/nomikai.xhtml" />
     		</rule>
@@ -47,5 +47,17 @@
     			<param name="nomikaiid" value="#{nomikaimember.nomikaiid.nomikaiid}" />
     		</redirect>
     	</navigation>
+    </page>
+    <page view-id="/nomikai.xhtml">
+    	<begin-conversation join="true" />
+    	<param name="nomikaiid" value="#{nomikaiDto.nomikaiid}" />
+    	<action execute="#{nomikaiAction.page}" />
+    	<navigation from-action="#{nomikaiAction.delete}">
+    		<redirect view-id="/nomikaiList.xhtml">
+    			<param name="update" value="true" />
+    		</redirect>
+    		<end-conversation />    	
+    	</navigation>
+    	<!-- 作成・更新のときは記述しないことで、自画面遷移となる -->
     </page>
 </pages>
