@@ -8,14 +8,36 @@
     xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
     
     <ui:define name="body">
+    <script type="text/javascript">
+    <!--
+    var marker;
+    function createMarkerAndAddEventListener() {
+      var point = new GLatLng(#{nomikai.lat},#{nomikai.lon});
+      marker = new GMarker(point);
+      map.addOverlay(marker);
+      GEvent.addListener(map, "click", copyPointAndZoom);
+    }
+
+    function copyPointAndZoom(overlay, point) {
+      document.getElementById("nomikaiForm:lat").value = point.lat();
+      document.getElementById("nomikaiForm:lng").value = point.lng();
+      document.getElementById("noikaiForm:zoom").value = map.getZoom();
+      if(marker != null) {
+        map.removeOverlay(marker);
+      }
+      marker = new GMarker(point);
+      map.addOverlay(marker);
+    }
+    -->
+    </script>
     	<rich:panel>
    			<f:facet name="header">飲み会の追加</f:facet>
-   			<h:form>
+   			<h:form id="nomikaiForm">
           <table>
             <tbody>
               <tr>
                 <td>飲み会名称</td>
-                <td><h:inputText value="#{nomikai.name}" /></td>
+                <td><h:inputText value="#{nomikai.name}" required="true" /></td>
               </tr>
               <tr>
                 <td>日付</td>
@@ -24,6 +46,28 @@
               <tr>
                 <td>詳細</td>
                 <td><h:inputTextarea value="#{nomikai.detail}" cols="40" rows="10" /></td>
+              </tr>
+              <tr>
+                <td>Map</td>
+                <td>
+                  <rich:gmap gmapVar="map" zoom="#{nomikai.zoom}" mapType="G_NORMAL_MAP" lng="#{nomikai.lon}" lat="#{noikai.lat}" style="width:400px;height:400px" oninit="createMarkerAndAddEventListener()" />
+                </td>
+                <td>
+                  <table>
+                    <tr>
+                      <td>経度</td>
+                      <td><h:inputText id="lng" value="#{nomikai.lon}" /></td>
+                    </tr>
+                    <tr>
+                      <td>緯度</td>
+                      <td><h:inputText id="lat" value="#{nomikai.lat}" /></td>
+                    </tr>
+                    <tr>
+                      <td>倍率</td>
+                      <td><h:inputText id="zoom" value="#{nomikai.zoom}" /></td>
+                    </tr>
+                  </table>
+                </td>
               </tr>
             </tbody>
           </table>

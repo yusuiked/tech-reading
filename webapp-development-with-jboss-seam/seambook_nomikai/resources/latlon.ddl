@@ -1,0 +1,3 @@
+ALTER TABLE nomikai ADD lon VARCHAR(255);
+ALTER TABLE nomikai ADD lat VARCHAR(255);
+ALTER TABLE nomikai ADD zoom VARCHAR(255);

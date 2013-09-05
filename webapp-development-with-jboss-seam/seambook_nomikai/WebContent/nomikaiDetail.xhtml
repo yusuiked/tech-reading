@@ -8,6 +8,15 @@
     xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
     
     <ui:define name="body">
+    <script type="text/javascript">
+    <!--
+    function createMarker() {
+      var point = new GLatLng(#{nomikai.lat},#{nomikai.lon});
+      var marker = new GMarker(point);
+      map.addOverlay(marker);
+    }
+    -->
+    </script>
     	<rich:panel>
    			<f:facet name="header">飲み会詳細</f:facet>
    			<table border="1">
@@ -30,6 +39,12 @@
    							<h:inputTextarea value="#{nomikai.detail}" readonly="true" cols="40" rows="10" />
    						</td>
    					</tr>
+            <tr>
+              <td>Map</td>
+              <td>
+                <rich:gmap gmapVar="map" zoom="#{nomikai.zoom}" lng="#{nomikai.lon}" lat="#{nomikai.lat}" oninit="createMarker()" mapType="G_NORMAL_MAP" style="width:400px;height:400px" id="gmap" />
+              </td>
+            </tr>
    				</tbody>
    			</table>
    		</rich:panel>

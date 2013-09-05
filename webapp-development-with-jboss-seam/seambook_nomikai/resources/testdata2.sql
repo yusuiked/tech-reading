@@ -1,0 +1,2 @@
+UPDATE nomikai SET lon='139.62298035621643', lat='35.466253842292964',zoom='17' WHERE nomikaiid=1
+UPDATE nomikai SET lon='139.62298035621643', lat='35.466253842292964',zoom='17' WHERE nomikaiid=2

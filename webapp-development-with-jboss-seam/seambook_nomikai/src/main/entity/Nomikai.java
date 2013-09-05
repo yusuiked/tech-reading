@@ -25,6 +25,12 @@ public class Nomikai implements Serializable {
 
 	private String name;
 
+	private String lat = "35.466253842292964";
+
+	private String lon = "139.622980000035555555555621643";
+
+	private String zoom = "17";
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "nomikaiid")
 	private Set<Nomikaimember> nomikaimemberCollection;
 
@@ -64,6 +70,30 @@ public class Nomikai implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLon() {
+		return lon;
+	}
+
+	public void setLon(String lon) {
+		this.lon = lon;
+	}
+
+	public String getZoom() {
+		return zoom;
+	}
+
+	public void setZoom(String zoom) {
+		this.zoom = zoom;
 	}
 
 	public Set<Nomikaimember> getNomikaimemberCollection() {
