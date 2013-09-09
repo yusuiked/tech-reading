@@ -57,7 +57,7 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/0/1</td>
 </tr><tr>
-<td>Started on:</td><td>Mon Sep 09 23:59:54 JST 2013</td>
+<td>Started on:</td><td>Tue Sep 10 00:05:49 JST 2013</td>
 </tr>
 <tr><td>Total time:</td><td>0 seconds (16 ms)</td>
 </tr><tr>
@@ -80,30 +80,74 @@ function toggleAllBoxes() {
 
 *** CONTEXTS MISSING DEPENDENCIES: Name -&gt; Dependency{Required State:Actual State}
 
-UserTransactionBinding
- -&gt; UserTransaction{Configured:**ERROR**}
+jboss.messaging.connectionfactory:service=ClusterPullConnectionFactory
+ -&gt; jboss.messaging:service=PostOffice{Create:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Start:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
 
-UserTransactionBinding2
- -&gt; UserTransaction{Configured:**ERROR**}
+jboss.messaging.connectionfactory:service=ClusteredConnectionFactory
+ -&gt; jboss.messaging:service=PostOffice{Create:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Start:Configured}
+
+jboss.messaging.connectionfactory:service=ConnectionFactory
+ -&gt; jboss.messaging:service=PostOffice{Create:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Start:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+
+jboss.messaging.destination:name=DLQ,service=Queue
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Create:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Start:Configured}
+
+jboss.messaging.destination:name=ExpiryQueue,service=Queue
+ -&gt; jboss.messaging:service=PostOffice{Start:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Create:Configured}
+
+jboss.messaging:service=JMSUserManager
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Create:** NOT FOUND **}
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Start:** NOT FOUND **}
+
+jboss.messaging:service=PersistenceManager
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Create:** NOT FOUND **}
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Start:** NOT FOUND **}
+
+jboss.messaging:service=PostOffice
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Create:** NOT FOUND **}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Start:** NOT FOUND **}
+
+jboss.messaging:service=ServerPeer
+ -&gt; jboss.messaging:service=PersistenceManager{Start:Configured}
+ -&gt; jboss.messaging:service=PersistenceManager{Create:Configured}
+ -&gt; jboss.messaging:service=JMSUserManager{Start:Configured}
+ -&gt; jboss.messaging:service=JMSUserManager{Create:Configured}
+
+jboss.mq:service=DestinationManager
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
 
 
 *** CONTEXTS IN ERROR: Name -&gt; Error
 
-SARDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+vfsfile:/C:/Documents%20and%20Settings/yukung/tech-reading/webapp-development-with-jboss-seam/seambook_nomikai-test/bootstrap/deploy/hsqldb-ds.xml -&gt; java.lang.IllegalStateException: No ConnectorMetaData found for mdf rarName: jboss-local-jdbc.rar
 
-ServiceDeploymentDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+jboss.jca:name=DefaultDS,service=DataSourceBinding -&gt; ** NOT FOUND **
 
-ServiceClassLoaderDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+vfsfile:/C:/Documents%20and%20Settings/yukung/tech-reading/webapp-development-with-jboss-seam/seambook_nomikai-test/bootstrap/deploy/jms-ra.rar -&gt; java.io.FileNotFoundException: File does not exist: C:\Documents%20and%20Settings
 
-BeanDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+vfsfile:/C:/Documents%20and%20Settings/yukung/tech-reading/webapp-development-with-jboss-seam/seambook_nomikai-test/bootstrap/deploy/messaging/jms-ds.xml -&gt; java.lang.IllegalStateException: No ConnectorMetaData found for mdf rarName: jms-ra.rar
 
-ServiceDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+vfsfile:/C:/Documents%20and%20Settings/yukung/tech-reading/webapp-development-with-jboss-seam/seambook_nomikai-test/bootstrap/deploy/jboss-xa-jdbc.rar -&gt; java.io.FileNotFoundException: File does not exist: C:\Documents%20and%20Settings
 
-BeanMetaDataDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
-
-UserTransaction -&gt; java.lang.RuntimeException: Unable to locate the transaction manager
-
-KernelDeploymentDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+vfsfile:/C:/Documents%20and%20Settings/yukung/tech-reading/webapp-development-with-jboss-seam/seambook_nomikai-test/bootstrap/deploy/jboss-local-jdbc.rar -&gt; java.io.FileNotFoundException: File does not exist: C:\Documents%20and%20Settings
 
 
 	at org.jboss.deployers.plugins.deployers.DeployersImpl.checkComplete(DeployersImpl.java:576)
@@ -115,35 +159,79 @@ KernelDeploymentDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Cla
 	at org.jboss.seam.mock.AbstractSeamTest.startJbossEmbeddedIfNecessary(AbstractSeamTest.java:1024)
 	at org.jboss.seam.mock.AbstractSeamTest.startSeam(AbstractSeamTest.java:915)
 	at org.jboss.seam.mock.SeamTest.startSeam(SeamTest.java:58)
-... Removed 15 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace23472778", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace23472778'><pre>org.jboss.deployers.client.spi.IncompleteDeploymentException: Summary of incomplete deployments (SEE PREVIOUS ERRORS FOR DETAILS):
+... Removed 15 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace22903544", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace22903544'><pre>org.jboss.deployers.client.spi.IncompleteDeploymentException: Summary of incomplete deployments (SEE PREVIOUS ERRORS FOR DETAILS):
 
 *** CONTEXTS MISSING DEPENDENCIES: Name -&gt; Dependency{Required State:Actual State}
 
-UserTransactionBinding
- -&gt; UserTransaction{Configured:**ERROR**}
+jboss.messaging.connectionfactory:service=ClusterPullConnectionFactory
+ -&gt; jboss.messaging:service=PostOffice{Create:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Start:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
 
-UserTransactionBinding2
- -&gt; UserTransaction{Configured:**ERROR**}
+jboss.messaging.connectionfactory:service=ClusteredConnectionFactory
+ -&gt; jboss.messaging:service=PostOffice{Create:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Start:Configured}
+
+jboss.messaging.connectionfactory:service=ConnectionFactory
+ -&gt; jboss.messaging:service=PostOffice{Create:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Start:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+
+jboss.messaging.destination:name=DLQ,service=Queue
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Create:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Start:Configured}
+
+jboss.messaging.destination:name=ExpiryQueue,service=Queue
+ -&gt; jboss.messaging:service=PostOffice{Start:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+ -&gt; jboss.messaging:service=PostOffice{Create:Configured}
+
+jboss.messaging:service=JMSUserManager
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Create:** NOT FOUND **}
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Start:** NOT FOUND **}
+
+jboss.messaging:service=PersistenceManager
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Create:** NOT FOUND **}
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Start:** NOT FOUND **}
+
+jboss.messaging:service=PostOffice
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Create:** NOT FOUND **}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
+ -&gt; jboss.jca:name=DefaultDS,service=DataSourceBinding{Start:** NOT FOUND **}
+
+jboss.messaging:service=ServerPeer
+ -&gt; jboss.messaging:service=PersistenceManager{Start:Configured}
+ -&gt; jboss.messaging:service=PersistenceManager{Create:Configured}
+ -&gt; jboss.messaging:service=JMSUserManager{Start:Configured}
+ -&gt; jboss.messaging:service=JMSUserManager{Create:Configured}
+
+jboss.mq:service=DestinationManager
+ -&gt; jboss.messaging:service=ServerPeer{Create:Configured}
+ -&gt; jboss.messaging:service=ServerPeer{Start:Configured}
 
 
 *** CONTEXTS IN ERROR: Name -&gt; Error
 
-SARDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+vfsfile:/C:/Documents%20and%20Settings/yukung/tech-reading/webapp-development-with-jboss-seam/seambook_nomikai-test/bootstrap/deploy/hsqldb-ds.xml -&gt; java.lang.IllegalStateException: No ConnectorMetaData found for mdf rarName: jboss-local-jdbc.rar
 
-ServiceDeploymentDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+jboss.jca:name=DefaultDS,service=DataSourceBinding -&gt; ** NOT FOUND **
 
-ServiceClassLoaderDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+vfsfile:/C:/Documents%20and%20Settings/yukung/tech-reading/webapp-development-with-jboss-seam/seambook_nomikai-test/bootstrap/deploy/jms-ra.rar -&gt; java.io.FileNotFoundException: File does not exist: C:\Documents%20and%20Settings
 
-BeanDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+vfsfile:/C:/Documents%20and%20Settings/yukung/tech-reading/webapp-development-with-jboss-seam/seambook_nomikai-test/bootstrap/deploy/messaging/jms-ds.xml -&gt; java.lang.IllegalStateException: No ConnectorMetaData found for mdf rarName: jms-ra.rar
 
-ServiceDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+vfsfile:/C:/Documents%20and%20Settings/yukung/tech-reading/webapp-development-with-jboss-seam/seambook_nomikai-test/bootstrap/deploy/jboss-xa-jdbc.rar -&gt; java.io.FileNotFoundException: File does not exist: C:\Documents%20and%20Settings
 
-BeanMetaDataDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
-
-UserTransaction -&gt; java.lang.RuntimeException: Unable to locate the transaction manager
-
-KernelDeploymentDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+vfsfile:/C:/Documents%20and%20Settings/yukung/tech-reading/webapp-development-with-jboss-seam/seambook_nomikai-test/bootstrap/deploy/jboss-local-jdbc.rar -&gt; java.io.FileNotFoundException: File does not exist: C:\Documents%20and%20Settings
 
 
 	at org.jboss.deployers.plugins.deployers.DeployersImpl.checkComplete(DeployersImpl.java:576)
