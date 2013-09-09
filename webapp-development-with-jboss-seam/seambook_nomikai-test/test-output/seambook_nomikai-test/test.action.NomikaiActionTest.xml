@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test.action.NomikaiActionTest" failures="0" tests="1" time="0.016" errors="0">
+  <properties/>
+  <testcase name="@BeforeSuite startSeam" time="0.0" classname="test.action.NomikaiActionTest">
+    <failure type="org.jboss.deployers.client.spi.IncompleteDeploymentException" message="Summary of incomplete deployments (SEE PREVIOUS ERRORS FOR DETAILS):
+
+*** CONTEXTS MISSING DEPENDENCIES: Name -&gt; Dependency{Required State:Actual State}
+
+UserTransactionBinding
+ -&gt; UserTransaction{Configured:**ERROR**}
+
+UserTransactionBinding2
+ -&gt; UserTransaction{Configured:**ERROR**}
+
+
+*** CONTEXTS IN ERROR: Name -&gt; Error
+
+SARDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceDeploymentDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceClassLoaderDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+BeanDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+BeanMetaDataDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+UserTransaction -&gt; java.lang.RuntimeException: Unable to locate the transaction manager
+
+KernelDeploymentDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+">
+      <![CDATA[org.jboss.deployers.client.spi.IncompleteDeploymentException: Summary of incomplete deployments (SEE PREVIOUS ERRORS FOR DETAILS):
+
+*** CONTEXTS MISSING DEPENDENCIES: Name -> Dependency{Required State:Actual State}
+
+UserTransactionBinding
+ -> UserTransaction{Configured:**ERROR**}
+
+UserTransactionBinding2
+ -> UserTransaction{Configured:**ERROR**}
+
+
+*** CONTEXTS IN ERROR: Name -> Error
+
+SARDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceDeploymentDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceClassLoaderDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+BeanDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+BeanMetaDataDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+UserTransaction -> java.lang.RuntimeException: Unable to locate the transaction manager
+
+KernelDeploymentDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+
+	at org.jboss.deployers.plugins.deployers.DeployersImpl.checkComplete(DeployersImpl.java:576)
+	at org.jboss.deployers.plugins.main.MainDeployerImpl.checkComplete(MainDeployerImpl.java:559)
+	at org.jboss.embedded.Bootstrap.bootstrapURL(Bootstrap.java:149)
+	at org.jboss.embedded.Bootstrap.bootstrap(Bootstrap.java:183)
+	at org.jboss.embedded.Bootstrap.bootstrap(Bootstrap.java:195)
+	at org.jboss.seam.mock.EmbeddedBootstrap.startAndDeployResources(EmbeddedBootstrap.java:11)
+	at org.jboss.seam.mock.AbstractSeamTest.startJbossEmbeddedIfNecessary(AbstractSeamTest.java:1024)
+	at org.jboss.seam.mock.AbstractSeamTest.startSeam(AbstractSeamTest.java:915)
+	at org.jboss.seam.mock.SeamTest.startSeam(SeamTest.java:58)
+... Removed 15 stack frames]]>
+    </failure>
+  </testcase>
+  <testcase name="@BeforeClass setupClass" time="0.0" classname="test.action.NomikaiActionTest">
+    <skipped/>
+  </testcase>
+  <testcase name="@BeforeMethod begin" time="0.0" classname="test.action.NomikaiActionTest">
+    <skipped/>
+  </testcase>
+  <testcase name="@AfterMethod end" time="0.0" classname="test.action.NomikaiActionTest">
+    <skipped/>
+  </testcase>
+  <testcase name="@AfterClass cleanupClass" time="0.0" classname="test.action.NomikaiActionTest">
+    <skipped/>
+  </testcase>
+  <testcase name="testNomikaiAction" time="0.0" classname="test.action.NomikaiActionTest">
+    <skipped/>
+  </testcase>
+</testsuite>

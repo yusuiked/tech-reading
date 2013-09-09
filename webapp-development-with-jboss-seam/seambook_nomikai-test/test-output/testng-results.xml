@@ -1,0 +1,117 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="seambook_nomikai-test">
+    <groups>
+    </groups>
+    <test name="test.action.NomikaiActionTest">
+      <class name="test.action.NomikaiActionTest">
+        <test-method status="FAIL" signature="startSeam()" name="startSeam" is-config="true" duration-ms="0" started-at="2013-09-09T23:59:53Z" finished-at="2013-09-09T23:59:53Z">
+          <exception class="org.jboss.deployers.client.spi.IncompleteDeploymentException">
+            <message>
+              <![CDATA[Summary of incomplete deployments (SEE PREVIOUS ERRORS FOR DETAILS):
+
+*** CONTEXTS MISSING DEPENDENCIES: Name -> Dependency{Required State:Actual State}
+
+UserTransactionBinding
+ -> UserTransaction{Configured:**ERROR**}
+
+UserTransactionBinding2
+ -> UserTransaction{Configured:**ERROR**}
+
+
+*** CONTEXTS IN ERROR: Name -> Error
+
+SARDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceDeploymentDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceClassLoaderDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+BeanDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+BeanMetaDataDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+UserTransaction -> java.lang.RuntimeException: Unable to locate the transaction manager
+
+KernelDeploymentDeployer -> java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.jboss.deployers.client.spi.IncompleteDeploymentException: Summary of incomplete deployments (SEE PREVIOUS ERRORS FOR DETAILS):
+
+*** CONTEXTS MISSING DEPENDENCIES: Name -&gt; Dependency{Required State:Actual State}
+
+UserTransactionBinding
+ -&gt; UserTransaction{Configured:**ERROR**}
+
+UserTransactionBinding2
+ -&gt; UserTransaction{Configured:**ERROR**}
+
+
+*** CONTEXTS IN ERROR: Name -&gt; Error
+
+SARDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceDeploymentDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceClassLoaderDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+BeanDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+ServiceDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+BeanMetaDataDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+UserTransaction -&gt; java.lang.RuntimeException: Unable to locate the transaction manager
+
+KernelDeploymentDeployer -&gt; java.lang.ClassNotFoundException: [Ljava.lang.Class;
+
+
+	at org.jboss.deployers.plugins.deployers.DeployersImpl.checkComplete(DeployersImpl.java:576)
+	at org.jboss.deployers.plugins.main.MainDeployerImpl.checkComplete(MainDeployerImpl.java:559)
+	at org.jboss.embedded.Bootstrap.bootstrapURL(Bootstrap.java:149)
+	at org.jboss.embedded.Bootstrap.bootstrap(Bootstrap.java:183)
+	at org.jboss.embedded.Bootstrap.bootstrap(Bootstrap.java:195)
+	at org.jboss.seam.mock.EmbeddedBootstrap.startAndDeployResources(EmbeddedBootstrap.java:11)
+	at org.jboss.seam.mock.AbstractSeamTest.startJbossEmbeddedIfNecessary(AbstractSeamTest.java:1024)
+	at org.jboss.seam.mock.AbstractSeamTest.startSeam(AbstractSeamTest.java:915)
+	at org.jboss.seam.mock.SeamTest.startSeam(SeamTest.java:58)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.testng.internal.MethodHelper.invokeMethod(MethodHelper.java:580)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:398)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:145)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:82)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:278)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:198)
+	at org.testng.TestNG.createAndRunSuiteRunners(TestNG.java:823)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:790)
+	at org.testng.TestNG.run(TestNG.java:708)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:73)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:124)
+]]>
+            </full-stacktrace>
+          </exception>
+        </test-method>
+        <test-method status="SKIP" signature="testNomikaiAction()" name="testNomikaiAction" duration-ms="0" started-at="2013-09-09T23:59:54Z" finished-at="2013-09-09T23:59:54Z">
+        </test-method>
+        <test-method status="SKIP" signature="cleanupClass()" name="cleanupClass" is-config="true" duration-ms="0" started-at="2013-09-09T23:59:54Z" finished-at="2013-09-09T23:59:54Z">
+        </test-method>
+        <test-method status="SKIP" signature="stopSeam()" name="stopSeam" is-config="true" duration-ms="0" started-at="2013-09-09T23:59:54Z" finished-at="2013-09-09T23:59:54Z">
+        </test-method>
+        <test-method status="SKIP" signature="end()" name="end" is-config="true" duration-ms="0" started-at="2013-09-09T23:59:54Z" finished-at="2013-09-09T23:59:54Z">
+        </test-method>
+        <test-method status="SKIP" signature="begin()" name="begin" is-config="true" duration-ms="0" started-at="2013-09-09T23:59:54Z" finished-at="2013-09-09T23:59:54Z">
+        </test-method>
+        <test-method status="SKIP" signature="setupClass()" name="setupClass" is-config="true" duration-ms="0" started-at="2013-09-09T23:59:54Z" finished-at="2013-09-09T23:59:54Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

@@ -106,7 +106,7 @@ public class NomikaiAction {
 		}
 	}
 
-	private Nomikai findOrNewNomikai(Long nomikaiid) {
+	public Nomikai findOrNewNomikai(Long nomikaiid) {
 		if (nomikaiid != null) {
 			return (Nomikai) entityManager.createNamedQuery("findById")
 					.setParameter("nomikaiid", nomikaiid).getSingleResult();

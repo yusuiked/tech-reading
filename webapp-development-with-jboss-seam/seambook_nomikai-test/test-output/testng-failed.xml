@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="5" skipfailedinvocationCounts="false" verbose="1" name="Failed suite [seambook_nomikai-test]" junit="false" annotations="JDK">
+  <test name="test.action.NomikaiActionTest(failed)" junit="false" annotations="JDK">
+    <classes>
+      <class name="test.action.NomikaiActionTest">
+        <methods>
+          <include name="startSeam"/>
+          <include name="testNomikaiAction"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>
