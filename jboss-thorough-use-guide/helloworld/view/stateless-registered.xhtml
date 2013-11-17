@@ -1,0 +1,31 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+<head>
+<title>Hello World</title>
+</head>
+<body bgcolor="white">
+  <f:view>
+    <h3>HelloWorldに登録されました。(Stateless)</h3>
+    <h:dataTable var="message" value="#{helloMessages}" border="1" rendered="#{helloMessages ne null}">
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="お名前"/>
+        </f:facet>
+        <h:outputText value="#{message.name}"/>
+      </h:column>
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="メッセージ"/>
+        </f:facet>
+        <h:outputText value="#{message.message}"/>
+      </h:column>
+    </h:dataTable>
+    <h:outputLink value="stateless-register.seam">戻る</h:outputLink>
+  </f:view>
+</body>
+</html>
