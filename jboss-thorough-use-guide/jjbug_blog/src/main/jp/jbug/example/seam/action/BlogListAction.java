@@ -41,16 +41,6 @@ public class BlogListAction implements Serializable, IBlogList {
 	@Out(required = false)
 	private BlogEntry blogEntry;
 
-	@Factory
-	@Observer("blogUpdated")
-	@Override
-	public String getBlogEntries() {
-		blogEntries = em.createQuery(
-				"select b from BlogEntry b order by b.blogDate DESC")
-				.getResultList();
-		return "/BlogEntryList.xhtml";
-	}
-
 	@Override
 	public String deleteBlogEntry() {
 		BlogEntry cancelBlogEntry = em.find(BlogEntry.class,
@@ -64,11 +54,35 @@ public class BlogListAction implements Serializable, IBlogList {
 		return "/BlogEntryList.xhtml";
 	}
 
+	@Override
+	public String deleteComment(BlogEntry entry) {
+		int removeCount = em
+				.createQuery("delete Comment where blogEntryId = :entryid")
+				.setParameter("entryid", entry.getBlogEntryId())
+				.executeUpdate();
+		if (removeCount > 0) {
+			FacesMessages.instance().add("コメントを削除しました。");
+		}
+		log.info("コメントを削除しました　（" + removeCount + "）");
+		getBlogEntries();
+		return "/BlogEntryList.xhtml";
+	}
+
 	@Remove
 	@Destroy
 	@Override
 	public void destroy() {
 		log.info(this + " は破棄されました。");
+	}
+
+	@Factory
+	@Observer("blogUpdated")
+	@Override
+	public String getBlogEntries() {
+		blogEntries = em.createQuery(
+				"select b from BlogEntry b order by b.blogDate DESC")
+				.getResultList();
+		return "/BlogEntryList.xhtml";
 	}
 
 }

@@ -24,7 +24,24 @@
 							action="#{blogEntryAction.init(entry)}" />] 
 						[<s:link id="delBlogEntry" value="削除"
 							action="#{blogListAction.deleteBlogEntry}" />]
+						[<s:link id="commentadd" value="コメント登録"
+							action="#{commentAction.init(entry)}" />] 
+						[<s:link id="delComment" value="コメント削除"
+							action="#{blogListAction.deleteComment(entry)}" />]
 					</h:panelGroup>
+				</h:panelGrid>
+				<h:panelGrid columns="1" border="1" width="400">
+					<h:dataTable value="#{entry.comments}" var="comment"
+						rendered="#{not empty entry.comments}">
+						<h:column>
+							<h:panelGroup>
+								<h:outputText value="●" />
+								<h:outputText value="#{comment.commentater}" />
+								<h:outputText value="さん ： " />
+								<h:outputText value="#{comment.comment}" />
+							</h:panelGroup>
+						</h:column>
+					</h:dataTable>
 				</h:panelGrid>
 			</h:column>
 		</h:dataTable>

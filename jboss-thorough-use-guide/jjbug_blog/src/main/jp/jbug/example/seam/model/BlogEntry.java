@@ -1,12 +1,17 @@
 package jp.jbug.example.seam.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.jboss.seam.annotations.Name;
 
@@ -23,6 +28,8 @@ public class BlogEntry implements Serializable {
 	private String category;
 	@Column(nullable = false)
 	private String blogEntry;
+	@OneToMany(mappedBy = "blogEntry", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Comment> comments = new ArrayList<Comment>(0);
 
 	public Date getBlogDate() {
 		return blogDate;
@@ -54,6 +61,14 @@ public class BlogEntry implements Serializable {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 }

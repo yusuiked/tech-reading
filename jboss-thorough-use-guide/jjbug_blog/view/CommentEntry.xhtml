@@ -1,0 +1,27 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="template.xhtml">
+	<ui:define name="body">
+		<h:messages globalOnly="false" id="globalMessages" />
+		<h:form>
+			<h:panelGrid columns="2" border="1">
+				<f:facet name="header">
+					<h:outputText value="コメント登録" />
+				</f:facet>
+				<h:outputText value="お名前" />
+				<h:inputText required="true" size="20" maxlength="20"
+					value="#{comment.commentater}" />
+				<h:outputText value="コメント" />
+				<h:inputTextarea id="blogEntry" cols="50" rows="3" required="true"
+					maxlength="100" value="#{comment.comment}" />
+			</h:panelGrid>
+			<h:commandButton id="save" value="登録" action="#{commentAction.save}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
