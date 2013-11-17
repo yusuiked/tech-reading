@@ -20,15 +20,26 @@
 				</dictionary>
 			</arguments>
 		</buildCommand>
-      <buildCommand>
-         <name>org.jboss.tools.seam.core.seambuilder</name>
-         <arguments>
-         </arguments>
-      </buildCommand>
+		<buildCommand>
+			<name>org.jboss.tools.seam.core.seambuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.jboss.tools.jst.web.kb.kbbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.wst.validation.validationbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.hibernate.eclipse.console.hibernateNature</nature>
 		<nature>org.jboss.tools.seam.core.seamnature</nature>
+		<nature>org.jboss.tools.jst.web.kb.kbnature</nature>
 	</natures>
 </projectDescription>
