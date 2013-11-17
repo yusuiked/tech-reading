@@ -1,0 +1,46 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<head>
+<title>Hello World</title>
+</head>
+<body bgcolor="white">
+<f:view>
+	<h3>HelloWorldに登録しましょう!?(Conversation)</h3>
+	<h:form>
+		<h:panelGrid columns="2" border="1">
+        お名前
+        <h:inputText value="#{conversationHelloMessage.name}" />
+        メッセージ
+        <h:inputText value="#{conversationHelloMessage.message}" />
+		</h:panelGrid>
+		<h:commandButton type="submit" value="登録"
+			action="#{conversationHelloAction.register()}" />
+		
+		<h3>WorkSpace</h3>
+		<h:dataTable value="#{conversationList}" var="entry" border="1">
+			<h:column>
+				<h:commandLink action="#{entry.select}" value="#{entry.description}" />
+	                &#160;
+	                <h:outputText value="[current]"
+					rendered="#{entry.current}" />
+			</h:column>
+			<h:column>
+				<h:outputText value="#{entry.startDatetime}">
+					<s:convertDateTime type="time" pattern="hh:mm" />
+				</h:outputText>
+	                -
+	                <h:outputText value="#{entry.lastDatetime}">
+					<s:convertDateTime type="time" pattern="hh:mm" />
+				</h:outputText>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</f:view>
+</body>
+</html>

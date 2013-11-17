@@ -13,6 +13,9 @@
             </rule>
         </navigation>
     </page>
+    
+    <page view-id="/conversation-register.xhtml">User Name - #{conversationLoginUser.name}</page>
+    <page view-id="/conversation-registered.xhtml">User Name - #{conversationLoginUser.name}</page>
 
     <exception class="org.jboss.seam.framework.EntityNotFoundException">
         <redirect view-id="/error.xhtml">
