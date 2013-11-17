@@ -13,21 +13,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.Length;
 import org.jboss.seam.annotations.Name;
 
 @Entity
 @Name("blogEntry")
 public class BlogEntry implements Serializable {
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private Long blogEntryId;
+
 	@Column(name = "BLOGDATE", nullable = false)
 	private Date blogDate;
+
+	@Length(min = 1, max = 20, message = "カテゴリは20文字以内で入力してください。")
 	@Column(nullable = false, length = 20)
 	private String category;
+
+	@Length(min = 1, max = 255, message = "ブログは255文字以内で入力してください。")
 	@Column(nullable = false)
 	private String blogEntry;
+
 	@OneToMany(mappedBy = "blogEntry", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Comment> comments = new ArrayList<Comment>(0);
 
