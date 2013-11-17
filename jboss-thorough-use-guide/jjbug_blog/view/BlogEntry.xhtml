@@ -4,6 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
 	template="template.xhtml">
 	<ui:define name="body">
@@ -24,22 +25,32 @@
 					<h:outputText value="ブログ登録" />
 				</f:facet>
 				<h:outputText value="日付" />
-				<s:decorate>
-					<rich:calendar id="blogDate"
-					 	value="#{blogEntry.blogDate}"
-				 		event="onblur"
-						datePattern="yyyy/MM/dd"
-						required="true" />
-				</s:decorate>
+				<a:outputPanel id="blogDateInput">
+					<s:decorate>
+						<rich:calendar id="blogDate"
+						 	value="#{blogEntry.blogDate}"
+					 		event="onblur"
+							datePattern="yyyy/MM/dd"
+							required="true" />
+					</s:decorate>
+				</a:outputPanel>
 				<h:outputText value="カテゴリ" />
-				<s:decorate>
-					<h:inputText id="category" value="#{blogEntry.category}" required="true" />
-				</s:decorate>
+				<a:outputPanel id="categoryInput">
+					<s:decorate>
+						<h:inputText id="category" value="#{blogEntry.category}" required="true">
+							<a:support event="onblur" reRender="categoryInput" />
+						</h:inputText>
+					</s:decorate>
+				</a:outputPanel>
 				<h:outputText value="内容" />
-				<s:decorate>
-					<h:inputTextarea id="blogEntry" cols="50" rows="3" required="true"
-						maxlength="100" value="#{blogEntry.blogEntry}" />
-				</s:decorate>
+				<a:outputPanel id="blogEntryInput">
+					<s:decorate>
+						<h:inputTextarea id="blogEntry" cols="50" rows="3" required="true"
+							maxlength="100" value="#{blogEntry.blogEntry}">
+							<a:support event="onblur" reRender="blogEntryInput" />
+						</h:inputTextarea>
+					</s:decorate>
+				</a:outputPanel>
 			</h:panelGrid>
 			<h:commandButton id="save" value="登録"
 				action="#{blogEntryAction.save}"
