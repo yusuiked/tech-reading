@@ -7,25 +7,39 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="template.xhtml">
 	<ui:define name="body">
-		<h:messages globalOnly="false" />
+		<h:messages globalOnly="true" />
 		<h:form id="blogEntryForm">
+		<f:facet name="beforeInvalidField">
+			<h:graphicImage styleClass="errorImg" value="img/error.gif" />
+		</f:facet>
+		<f:facet name="afterInvalidField">
+			<s:message styleClass="errorMsg" />
+		</f:facet>
+		<f:facet name="aroundInvalidField">
+			<s:div styleClass="error" />
+		</f:facet>
 		<s:validateAll>
 			<h:panelGrid columns="2" border="1">
 				<f:facet name="header">
 					<h:outputText value="ブログ登録" />
 				</f:facet>
 				<h:outputText value="日付" />
-				<rich:calendar id="blogDate"
-				 	value="#{blogEntry.blogDate}"
-			 		event="onblur"
-					datePattern="yyyy/MM/dd"
-					required="true" />
+				<s:decorate>
+					<rich:calendar id="blogDate"
+					 	value="#{blogEntry.blogDate}"
+				 		event="onblur"
+						datePattern="yyyy/MM/dd"
+						required="true" />
+				</s:decorate>
 				<h:outputText value="カテゴリ" />
-				<h:inputText id="category" value="#{blogEntry.category}" required="true">
-				</h:inputText>
+				<s:decorate>
+					<h:inputText id="category" value="#{blogEntry.category}" required="true" />
+				</s:decorate>
 				<h:outputText value="内容" />
-				<h:inputTextarea id="blogEntry" cols="50" rows="3" required="true"
-					maxlength="100" value="#{blogEntry.blogEntry}" />
+				<s:decorate>
+					<h:inputTextarea id="blogEntry" cols="50" rows="3" required="true"
+						maxlength="100" value="#{blogEntry.blogEntry}" />
+				</s:decorate>
 			</h:panelGrid>
 			<h:commandButton id="save" value="登録"
 				action="#{blogEntryAction.save}"
