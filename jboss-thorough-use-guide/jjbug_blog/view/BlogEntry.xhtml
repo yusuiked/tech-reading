@@ -53,7 +53,7 @@
 				</a:outputPanel>
 			</h:panelGrid>
 			<h:commandButton id="save" value="登録"
-				action="#{blogEntryAction.save}"
+				action="#{blogEntryAction.confirm}"
 				rendered="#{blogEntry.blogEntryId==null}" />
 			<h:commandButton id="update" value="更新"
 				action="#{blogEntryAction.update}"

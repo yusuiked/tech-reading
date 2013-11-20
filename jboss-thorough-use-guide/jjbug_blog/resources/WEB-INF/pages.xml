@@ -12,6 +12,39 @@
             </rule>
         </navigation>
     </page>
+    
+    <page view-id="/BlogEntry.xhtml">
+    	<navigation from-action="#{blogEntryAction.confirm}">
+    		<redirect view-id="/BlogPreview.xhtml" />
+    	</navigation>
+    </page>
+    
+    <page view-id="/BlogPreview.xhtml">
+    	<navigation from-action="#{blogEntryAction.save}">
+    		<redirect view-id="/BlogEntryList.xhtml" />
+    	</navigation>
+    	<navigation from-action="#{blogEntryAction.update}">
+    		<redirect view-id="/BlogEntryList.xhtml" />
+    	</navigation>
+    </page>
+    
+    <page view-id="/BlogEntryList.xhtml">
+    	<navigation from-action="#{blogEntryAction.init}">
+    		<redirect view-id="/BlogEntry.xhtml" />
+    	</navigation>
+    	<navigation from-action="#{blogEntryAction.init(entry)}">
+    		<redirect view-id="/BlogEntry.xhtml" />
+    	</navigation>
+    	<navigation from-action="#{commentAction.init(entry)}">
+    		<redirect view-id="/CommentEntry.xhtml" />
+    	</navigation>
+    </page>
+    
+    <page view-id="/commentEntry.xhtml">
+    	<navigation from-action="#{commentAction.save}">
+    		<redirect view-id="/BlogEntryList.xhtml" />
+    	</navigation>
+    </page>
 
     <exception class="org.jboss.seam.framework.EntityNotFoundException">
         <redirect view-id="/error.xhtml">

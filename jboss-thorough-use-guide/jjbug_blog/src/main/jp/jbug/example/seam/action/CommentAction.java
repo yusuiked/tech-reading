@@ -50,21 +50,19 @@ public class CommentAction implements Serializable, IComment {
 
 	@Begin(join = true)
 	@Override
-	public String init(BlogEntry entry) {
+	public void init(BlogEntry entry) {
 		comment = new Comment();
 		comment.setBlogEntry(entry);
 		log.info("コメント画面初期処理");
-		return "/CommentEntry.xhtml";
 	}
 
 	@End
 	@Override
-	public String save() {
+	public void save() {
 		em.persist(comment);
 		facesMessages.add("コメント登録しました。");
 		log.info("コメント登録しました。（#{comment.commentId}");
 		events.raiseTransactionSuccessEvent("blogUpdated");
-		return "/BlogEntryList.xhtml";
 	}
 
 	@Remove

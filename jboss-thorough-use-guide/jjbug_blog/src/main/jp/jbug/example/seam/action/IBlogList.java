@@ -7,11 +7,11 @@ import jp.jbug.example.seam.model.BlogEntry;
 @Local
 public interface IBlogList {
 
-	String getBlogEntries();
+	void getBlogEntries();
 
-	String deleteBlogEntry();
+	void deleteBlogEntry();
 
-	String deleteComment(BlogEntry entry);
+	void deleteComment(BlogEntry entry);
 
 	void destroy();
 }

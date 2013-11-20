@@ -42,7 +42,7 @@ public class BlogListAction implements Serializable, IBlogList {
 	private BlogEntry blogEntry;
 
 	@Override
-	public String deleteBlogEntry() {
+	public void deleteBlogEntry() {
 		BlogEntry cancelBlogEntry = em.find(BlogEntry.class,
 				blogEntry.getBlogEntryId());
 		if (cancelBlogEntry != null) {
@@ -51,11 +51,10 @@ public class BlogListAction implements Serializable, IBlogList {
 		getBlogEntries();
 		FacesMessages.instance().add("削除しました");
 		log.info("ブログエントリを削除しました。");
-		return "/BlogEntryList.xhtml";
 	}
 
 	@Override
-	public String deleteComment(BlogEntry entry) {
+	public void deleteComment(BlogEntry entry) {
 		int removeCount = em
 				.createQuery("delete Comment where blogEntryId = :entryid")
 				.setParameter("entryid", entry.getBlogEntryId())
@@ -65,7 +64,6 @@ public class BlogListAction implements Serializable, IBlogList {
 		}
 		log.info("コメントを削除しました　（" + removeCount + "）");
 		getBlogEntries();
-		return "/BlogEntryList.xhtml";
 	}
 
 	@Remove
@@ -78,11 +76,10 @@ public class BlogListAction implements Serializable, IBlogList {
 	@Factory
 	@Observer("blogUpdated")
 	@Override
-	public String getBlogEntries() {
+	public void getBlogEntries() {
 		blogEntries = em.createQuery(
 				"select b from BlogEntry b order by b.blogDate DESC")
 				.getResultList();
-		return "/BlogEntryList.xhtml";
 	}
 
 }

@@ -43,38 +43,10 @@ public class BlogEntryAction implements Serializable, IBlogEntry {
 	@Logger
 	private Log log;
 
-	@Begin
+	@Begin(join = true)
 	@Override
-	public String init() {
-		log.info("ブログ登録画面前処理");
-		return "/BlogEntry.xhtml";
-	}
-
-	@Begin
-	@Override
-	public String init(BlogEntry entry) {
-		log.info("ブログ変更画面前処理");
-		this.blogEntry = entry;
-		return "/BlogEntry.xhtml";
-	}
-
-	@End
-	@Override
-	public String save() {
-		em.persist(blogEntry);
-		facesMessages.add("登録しました。");
-		log.info("#{blogEntry.blogEntryId} 登録しました。");
-		events.raiseTransactionSuccessEvent("blogUpdated");
-		return "/BlogEntryList.xhtml";
-	}
-
-	@End
-	@Override
-	public String update() {
-		facesMessages.add("変更しました。");
-		log.info("#{blogEntry.blogEntryId} 変更しました。");
-		events.raiseTransactionSuccessEvent("blogUpdated");
-		return "/BlogEntryList.xhtml";
+	public void confirm() {
+		// no operation
 	}
 
 	@Remove
@@ -82,6 +54,36 @@ public class BlogEntryAction implements Serializable, IBlogEntry {
 	@Override
 	public void destroy() {
 		log.info(this + " は破棄されました。");
+	}
+
+	@Begin
+	@Override
+	public void init() {
+		log.info("ブログ登録画面前処理");
+	}
+
+	@Begin
+	@Override
+	public void init(BlogEntry entry) {
+		log.info("ブログ変更画面前処理");
+		this.blogEntry = entry;
+	}
+
+	@End
+	@Override
+	public void save() {
+		em.persist(blogEntry);
+		facesMessages.add("登録しました。");
+		log.info("#{blogEntry.blogEntryId} 登録しました。");
+		events.raiseTransactionSuccessEvent("blogUpdated");
+	}
+
+	@End
+	@Override
+	public void update() {
+		facesMessages.add("変更しました。");
+		log.info("#{blogEntry.blogEntryId} 変更しました。");
+		events.raiseTransactionSuccessEvent("blogUpdated");
 	}
 
 }

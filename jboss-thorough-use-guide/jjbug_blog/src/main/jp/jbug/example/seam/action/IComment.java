@@ -7,9 +7,9 @@ import jp.jbug.example.seam.model.BlogEntry;
 @Local
 public interface IComment {
 
-	String init(BlogEntry entry);
+	void init(BlogEntry entry);
 
-	String save();
+	void save();
 
 	void destroy();
 }

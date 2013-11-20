@@ -7,13 +7,15 @@ import jp.jbug.example.seam.model.BlogEntry;
 @Local
 public interface IBlogEntry {
 
-	String init();
+	void init();
 
-	String init(BlogEntry entry);
+	void init(BlogEntry entry);
 
-	String save();
+	void confirm();
 
-	String update();
+	void save();
+
+	void update();
 
 	void destroy();
 }

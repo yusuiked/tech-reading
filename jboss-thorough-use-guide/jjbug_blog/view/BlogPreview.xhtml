@@ -1,0 +1,40 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	template="template.xhtml">
+	<ui:define name="body">
+		<h:messages globalOnly="true" id="globalMessages" />
+		<h:form id="blogEntryForm">
+				<h:panelGrid columns="2" border="1">
+					<f:facet name="header">
+						<h:outputText value="ブログ確認" />
+					</f:facet>
+					<h:outputText value="日付" />
+					<h:panelGroup>
+							<h:outputText id="blogDate" value="#{blogEntry.blogDate}">
+								<f:convertDateTime pattern="yyyy/MM/dd" timeZone="GMT+9"/>
+							</h:outputText>
+					</h:panelGroup>
+					<h:outputText value="カテゴリ" />
+					<h:panelGroup>
+							<h:outputText id="category" value="#{blogEntry.category}"/>
+					</h:panelGroup>
+					<h:outputText value="内容" />
+					<h:panelGroup>
+							<h:inputTextarea id="blogEntry" cols="50" rows="3"
+								maxlength="100" value="#{blogEntry.blogEntry}" />
+					</h:panelGroup>
+				</h:panelGrid>
+				<h:commandButton id="save" value="登録"
+					action="#{blogEntryAction.save}"
+					rendered="#{blogEntry.blogEntryId==null}" />
+				<h:commandButton id="update" value="更新"
+					action="#{blogEntryAction.update}"
+					rendered="#{blogEntry.blogEntryId!=null}" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>
