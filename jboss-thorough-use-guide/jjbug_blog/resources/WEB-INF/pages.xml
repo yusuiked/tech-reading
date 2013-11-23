@@ -40,7 +40,7 @@
     	</navigation>
     </page>
     
-    <page view-id="/commentEntry.xhtml">
+    <page view-id="/CommentEntry.xhtml">
     	<navigation from-action="#{commentAction.save}">
     		<redirect view-id="/BlogEntryList.xhtml" />
     	</navigation>

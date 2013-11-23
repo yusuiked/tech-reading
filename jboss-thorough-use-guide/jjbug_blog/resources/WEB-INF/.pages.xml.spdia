@@ -88,10 +88,8 @@
   <output ID="/CommentEntry.xhtml" NAME="output2"
    PATH="/CommentEntry.xhtml" TARGET="#xCommentEntry.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
  </item>
- <item NAME="#xCommentEntry.xhtml" PATH="/CommentEntry.xhtml"
-  SHAPE="1112,953,0,0" TYPE="page" model-entity="SeamPagesDiagramItem"/>
- <item ID="#commentEntry.xhtml" NAME="#xcommentEntry.xhtml"
-  PATH="/commentEntry.xhtml" SHAPE="24,1105,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
+ <item ID="#CommentEntry.xhtml" NAME="#xCommentEntry.xhtml"
+  PATH="/CommentEntry.xhtml" SHAPE="24,1105,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
   <output ID="/BlogEntryList.xhtml" NAME="output"
    PATH="/BlogEntryList.xhtml" TARGET="#xBlogEntryList.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
  </item>
