@@ -11,7 +11,7 @@ public interface IBlogEntry {
 
 	void init(BlogEntry entry);
 
-	void confirm();
+	void confirm() throws BlogEntryAlreadyFoundException;
 
 	void save();
 

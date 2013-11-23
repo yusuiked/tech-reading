@@ -10,10 +10,11 @@
     <ui:param name="showGlobalMessages" value="false"/>
     <ui:define name="body">
 
-        <h1>Error</h1>
-        <p>Something bad happened :-(</p>
+        <h1>エラー</h1>
+        <p>システム異常終了</p>
 
-        <h:messages id="errorMessage" styleClass="message"/>
+        <h:messages globalOnly="true" styleClass="message"/>
+        <s:link view="/BlogEntryList.xhtml" value="トップ画面に戻る" />
 
     </ui:define>
 </ui:composition>

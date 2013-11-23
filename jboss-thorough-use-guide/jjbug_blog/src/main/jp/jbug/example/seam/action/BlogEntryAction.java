@@ -45,8 +45,14 @@ public class BlogEntryAction implements Serializable, IBlogEntry {
 
 	@Begin(join = true)
 	@Override
-	public void confirm() {
-		// no operation
+	public void confirm() throws BlogEntryAlreadyFoundException {
+		int count = em
+				.createQuery(
+						"from BlogEntry where blogDate = #{blogEntry.blogDate}")
+				.getResultList().size();
+		if (count > 0 && blogEntry.getBlogEntryId() == null) {
+			throw new BlogEntryAlreadyFoundException();
+		}
 	}
 
 	@Remove
