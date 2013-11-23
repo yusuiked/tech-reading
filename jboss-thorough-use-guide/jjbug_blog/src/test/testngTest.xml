@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="jjbug-blog">
+  <test verbose="2" name="jp.jbug.example.seam.BlogEntryActionTest" annotations="JDK">
+    <classes>
+      <class name="jp.jbug.example.seam.test.BlogEntryActionTest">
+        <methods>
+          <include name="testConfirm"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

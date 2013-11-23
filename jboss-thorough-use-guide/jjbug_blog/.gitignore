@@ -1,4 +1,6 @@
 classes/
 test-build/
+test-output/
+test-report/
 dist/
 exploded-archives/
