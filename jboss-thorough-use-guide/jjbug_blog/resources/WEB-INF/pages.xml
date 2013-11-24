@@ -13,6 +13,12 @@
         </navigation>
     </page>
     
+    <page view-id="/login.xhtml">
+    	<navigation from-action="#{identity.login}">
+    		<redirect view-id="/BlogEntryList.xhtml" />
+    	</navigation>
+    </page>
+    
     <page view-id="/BlogEntry.xhtml">
     	<navigation from-action="#{blogEntryAction.confirm}">
     		<redirect view-id="/BlogPreview.xhtml" />

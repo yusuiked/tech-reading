@@ -17,6 +17,7 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Out;
+import org.jboss.seam.annotations.security.Restrict;
 import org.jboss.seam.core.Events;
 import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.log.Log;
@@ -63,12 +64,14 @@ public class BlogEntryAction implements Serializable, IBlogEntry {
 	}
 
 	@Begin
+	@Restrict("#{s:hasRole('admin')}")
 	@Override
 	public void init() {
 		log.info("ブログ登録画面前処理");
 	}
 
 	@Begin
+	@Restrict("#{s:hasPermission('blogEntryAction', 'init', null)}")
 	@Override
 	public void init(BlogEntry entry) {
 		log.info("ブログ変更画面前処理");

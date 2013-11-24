@@ -8,4 +8,9 @@
 	<rich:toolBarGroup>
 		<h:outputText value="#{projectName}:" />
 	</rich:toolBarGroup>
+    <s:link id="login" value="ログイン" view="/login.xhtml" rendered="#{not identity.loggedIn}" />
+    <s:link id="logout" value="ログアウト" action="#{identity.logout}" rendered="#{identity.loggedIn}" />
+    <rich:toolBarGroup location="right">
+        <h:outputText value="ようこそ, #{identity.username}" rendered="#{identity.loggedIn}"/>
+    </rich:toolBarGroup>
 </rich:toolBar>

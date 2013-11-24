@@ -63,8 +63,6 @@
  </item>
  <item NAME="#xhome.xhtml" PATH="/home.xhtml" SHAPE="344,17,0,0"
   TYPE="page" model-entity="SeamPagesDiagramItem"/>
- <item NAME="#xlogin.xhtml" PATH="/login.xhtml" SHAPE="344,849,0,0"
-  TYPE="page" model-entity="SeamPagesDiagramItem"/>
  <item NAME="#xerror.xhtml" PATH="/error.xhtml" SHAPE="472,121,0,0"
   TYPE="page" model-entity="SeamPagesDiagramItem"/>
  <item ID="#BlogEntry.xhtml" NAME="#xBlogEntry.xhtml"
@@ -90,6 +88,11 @@
  </item>
  <item ID="#CommentEntry.xhtml" NAME="#xCommentEntry.xhtml"
   PATH="/CommentEntry.xhtml" SHAPE="24,1105,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
+  <output ID="/BlogEntryList.xhtml" NAME="output"
+   PATH="/BlogEntryList.xhtml" TARGET="#xBlogEntryList.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+ </item>
+ <item ID="#login.xhtml" NAME="#xlogin.xhtml" PATH="/login.xhtml"
+  SHAPE="24,1209,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
   <output ID="/BlogEntryList.xhtml" NAME="output"
    PATH="/BlogEntryList.xhtml" TARGET="#xBlogEntryList.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
  </item>
