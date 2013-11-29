@@ -1,0 +1,3 @@
+[submodule "introduction-to-git/mysite/hocus"]
+	path = introduction-to-git/mysite/hocus
+	url = git://github.com/tswicegood/hocus.git
