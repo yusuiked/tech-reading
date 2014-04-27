@@ -23,11 +23,21 @@ public class Member extends Model {
 
 	public String tel;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	public List<Message> messages = new ArrayList<Message>();
+
 	public static Finder<Long, Member> find = new Finder<Long, Member>(Long.class, Member.class);
 
 	@Override
 	public String toString() {
-		return ("[id:" + id + ", name:" + name + ", mail:" + mail + ", tel:" + tel + "]");
+		String ids = "{id:";
+		for (Message m : messages) {
+			ids += " " + m.id;
+		}
+		ids += "}";
+		return "[id:" + id + ", message:" + ids +
+			", name:" + name + ", mail:" + mail +
+			", tel:" + tel + "]";
 	}
 
 	public static Member findByName(String input) {

@@ -22,14 +22,16 @@ public class Message extends Model {
 	@CreatedTimestamp
 	public Date postdate;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Member member;
 
 	public static Finder<Long, Message> find = new Finder<Long, Message>(Long.class, Message.class);
 
 	@Override
 	public String toString() {
-		return ("[id:" + id + ", member:<" + member.name + "," + member.mail + ">, message:" + message + ", date:" + postdate + "]");
+		return ("[id:" + id + ", member:<" + member.name +
+			"," + member.mail + ">, message:" + message +
+			", date:" + postdate + "]");
 	}
 
 	public static Message findByName(String input) {
