@@ -1,0 +1,18 @@
+@(msg: String, form1: Form[models.Message])
+
+@main("Sample Page") {
+	
+	<h1>input ID Number</h1>
+	<p>@msg</p>
+	@helper.form(action = routes.Application.edit) {
+
+		@(helper.inputText (
+			field = form1("id")
+		))
+
+		<input type="hidden" value="dummy" name="name" />
+		<input type="hidden" value="dummy" name="message" />
+
+		<input type="submit">
+	}
+}
