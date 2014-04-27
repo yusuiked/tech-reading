@@ -1,13 +1,7 @@
-@(msg: String, form1: Form[Application.SampleForm])
+@(msg: String, data: List[Message])
 
 @main("Sample Page") {
 
     <h1>Hello!</h1>
     <p>@msg</p>
-    @helper.form(action = routes.Application.send) {
-	    @(helper.inputText (
-	    	field = form1("message")
-	    ))
-	    <input type="submit">
-	}
 }

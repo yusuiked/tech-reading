@@ -1,31 +1,19 @@
 package controllers;
 
+import java.util.List;
+
 import play.*;
 import play.data.*;
 import static play.data.Form.*;
 import play.mvc.*;
 
+import models.Message;
 import views.html.*;
 
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render("何か書いて。", new Form(SampleForm.class)));
+        List<Message> data = Message.find.all();
+        return ok(index.render("データベースのサンプル", data));
     }
-
-    public static Result send() {
-    	Form<SampleForm> f = form(SampleForm.class).bindFromRequest();
-    	if (!f.hasErrors()) {
-    		SampleForm data = f.get();
-    		String msg = "you typed: " + data.message;
-    		return ok(index.render(msg, f));
-    	} else {
-    		return badRequest(index.render("ERROR", form(SampleForm.class)));
-    	}
-    }
-
-    public static class SampleForm {
-    	public String message;
-    }
-
 }
