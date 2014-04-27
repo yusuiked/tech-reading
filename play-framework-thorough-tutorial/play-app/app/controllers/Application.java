@@ -100,9 +100,9 @@ public class Application extends Controller {
         if (!f.hasErrors()) {
             String input = f.get().input;
             String[] arr = input.split(",");
+            String q = "name like '%" + input + "%'";
             data = Message.find.where()
-                .like("name", "%" + input + "%").orderBy("name")
-                .findList();
+                .raw(q).findList();
         }
         return ok(find.render("投稿の検索", f, data));
     }
