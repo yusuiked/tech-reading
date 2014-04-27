@@ -21,14 +21,13 @@ import play.libs.F;
 public class Message extends Model {
 	@Id
 	public Long id;
+
 	@Required(message = "必須項目です。")
-	@Pattern(message = "半角英数字のみ受け付けます。", value = "[a-zA-Z]+")
 	public String name;
-	@Email(message = "妥当なメールアドレスの形式のみ受け付けます。")
-	public String mail;
+
 	@Required(message = "必須項目です。")
-	@ValidateWith(value = IsUrl.class, message = "URLで始まるメッセージを記述してください。")
 	public String message;
+
 	@CreatedTimestamp
 	public Date postdate;
 
@@ -36,18 +35,11 @@ public class Message extends Model {
 
 	@Override
 	public String toString() {
-		return ("[id:" + id + ", name:" + name + ", mail:" + mail + ", message:" + message + ", date:" + postdate + "]");
+		return ("[id:" + id + ", name:" + name + ", message:" + message + ", date:" + postdate + "]");
 	}
 
-	public static class IsUrl extends Validator<String> {
-		@Override
-		public boolean isValid(String s) {
-			return s.toLowerCase().startsWith("http://");
-		}
-
-		@Override
-		public F.Tuple<String, Object[]> getErrorMessageKey() {
-			return new F.Tuple<String, Object[]>("error.invalid", new String[]{});
-		}
+	public static Message findByName(String input) {
+		return Message.find.where()
+			.eq("name", input).findList().get(0);
 	}
 }

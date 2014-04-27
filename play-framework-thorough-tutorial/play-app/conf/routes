@@ -4,14 +4,10 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-GET     /add                        controllers.Application.add()
-POST    /create                     controllers.Application.create()
-GET     /item                       controllers.Application.setitem()
-POST    /edit                       controllers.Application.edit()
-POST    /update                     controllers.Application.update()
-GET     /delete                     controllers.Application.delete()
-POST    /remove                     controllers.Application.remove()
-GET     /find                       controllers.Application.find()
+GET     /addMessage                 controllers.Application.addMessage()
+POST    /createMessage              controllers.Application.createMessage()
+GET     /addMember                  controllers.Application.addMember()
+POST    /createMember               controllers.Application.createMember()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -1,109 +1,56 @@
 package controllers;
 
-import java.util.List;
+import com.avaje.ebean.ExpressionList;
 
 import play.*;
 import play.data.*;
 import play.data.validation.Constraints.Required;
-import static play.data.Form.*;
+import play.db.ebean.*;
 import play.mvc.*;
 
-import models.Message;
+import models.*;
 import views.html.*;
+
+import java.util.*;
 
 public class Application extends Controller {
 
-    public static class FindForm {
-        @Required
-        public String input;
-    }
-
     public static Result index() {
-        List<Message> data = Message.find.all();
-        return ok(index.render("データベースのサンプル", data));
+        List<Message> messages = Message.find.all();
+        List<Member> members = Member.find.all();
+        return ok(index.render("データベースのサンプル", messages, members));
     }
 
-    public static Result add() {
+    public static Result addMessage() {
         Form<Message> f = new Form(Message.class);
-        return ok(add.render("投稿フォーム", f));
+        return ok(addMessage.render("投稿フォーム", f));
     }
 
-    public static Result create() {
+    public static Result createMessage() {
         Form<Message> f = new Form(Message.class).bindFromRequest();
         if (!f.hasErrors()) {
-            Message data = f.get();
-            data.save();
+            Message message = f.get();
+            message.save();
             return redirect("/");
         } else {
-            return badRequest(add.render("ERROR", f));
+            return badRequest(addMessage.render("ERROR", f));
         }
     }
 
-    public static Result setitem() {
-        Form<Message> f = new Form(Message.class);
-        return ok(item.render("ID番号を入力。", f));
+    public static Result addMember() {
+        Form<Member> f = new Form(Member.class);
+        return ok(addMember.render("投稿フォーム", f));
     }
 
-    public static Result edit() {
-        Form<Message> f = new Form(Message.class).bindFromRequest();
+    public static Result createMember() {
+        Form<Member> f = new Form(Member.class).bindFromRequest();
         if (!f.hasErrors()) {
-            Message obj = f.get();
-            Long id = obj.id;
-            obj = Message.find.byId(id);
-            if (obj != null) {
-                f = new Form(Message.class).fill(obj);
-                return ok(edit.render("ID=" + id + "の投稿を編集。", f));
-            } else {
-                return ok(item.render("ERROR:IDの投稿が見つかりません。", f));
-            }
-        } else {
-            return ok(item.render("ERROR:入力に問題があります。", f));
-        }
-    }
-
-    public static Result update() {
-        Form<Message> f = new Form(Message.class).bindFromRequest();
-        if (!f.hasErrors()) {
-            Message data = f.get();
-            data.update();
+            Member member = f.get();
+            member.save();
             return redirect("/");
         } else {
-            return ok(edit.render("ERROR:再度入力してください。", f));
+            return badRequest(addMember.render("ERROR", f));
         }
     }
 
-    public static Result delete() {
-        Form<Message> f = new Form(Message.class);
-        return ok(delete.render("削除するID番号", f));
-    }
-
-    public static Result remove() {
-        Form<Message> f = new Form(Message.class).bindFromRequest();
-        if (!f.hasErrors()) {
-            Message obj = f.get();
-            Long id = obj.id;
-            obj = Message.find.byId(id);
-            if (obj != null) {
-                obj.delete();
-                return redirect("/");
-            } else {
-                return ok(delete.render("ERROR:そのID番号は見つかりません。", f));
-            }
-        } else {
-            return ok(delete.render("ERROR:入力にエラーが起こりました。", f));
-        }
-    }
-
-    public static Result find() {
-        Form<FindForm> f = new Form(FindForm.class).bindFromRequest();
-        List<Message> data = null;
-        if (!f.hasErrors()) {
-            String input = f.get().input;
-            String[] arr = input.split(",");
-            String q = "name like '%" + input + "%'";
-            data = Message.find.where(q)
-                .findList();
-        }
-        return ok(find.render("投稿の検索", f, data));
-    }
 }
