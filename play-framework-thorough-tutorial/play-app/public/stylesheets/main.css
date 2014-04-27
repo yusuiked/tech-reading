@@ -1,0 +1,11 @@
+body {
+    font-size: 12pt;
+    color: #006600;
+}
+h1 {
+    font-size: 18pt;
+    font-weight: bold;
+    background-color: #66aa66;
+    color: #ccffcc;
+    padding: 3px;
+}
