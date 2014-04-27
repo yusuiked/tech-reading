@@ -10,7 +10,12 @@ import com.avaje.ebean.annotation.*;
 
 import play.db.ebean.*;
 import play.data.validation.*;
-import play.data.validation.Constraints.*;
+import play.data.validation.Constraints.Email;
+import play.data.validation.Constraints.Pattern;
+import play.data.validation.Constraints.Required;
+import play.data.validation.Constraints.ValidateWith;
+import play.data.validation.Constraints.Validator;
+import play.libs.F;
 
 @Entity
 public class Message extends Model {
@@ -21,9 +26,8 @@ public class Message extends Model {
 	public String name;
 	@Email(message = "妥当なメールアドレスの形式のみ受け付けます。")
 	public String mail;
-	@Required
-	@MinLength(message = "最低10文字以上で入力してください。", value = 10)
-	@MaxLength(message = "最大200文字以下で入力してください。", value = 200)
+	@Required(message = "必須項目です。")
+	@ValidateWith(value = IsUrl.class, message = "URLで始まるメッセージを記述してください。")
 	public String message;
 	@CreatedTimestamp
 	public Date postdate;
@@ -33,5 +37,17 @@ public class Message extends Model {
 	@Override
 	public String toString() {
 		return ("[id:" + id + ", name:" + name + ", mail:" + mail + ", message:" + message + ", date:" + postdate + "]");
+	}
+
+	public static class IsUrl extends Validator<String> {
+		@Override
+		public boolean isValid(String s) {
+			return s.toLowerCase().startsWith("http://");
+		}
+
+		@Override
+		public F.Tuple<String, Object[]> getErrorMessageKey() {
+			return new F.Tuple<String, Object[]>("error.invalid", new String[]{});
+		}
 	}
 }
