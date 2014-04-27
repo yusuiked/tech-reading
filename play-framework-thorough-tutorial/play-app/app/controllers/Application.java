@@ -4,6 +4,7 @@ import java.util.List;
 
 import play.*;
 import play.data.*;
+import play.data.validation.Constraints.Required;
 import static play.data.Form.*;
 import play.mvc.*;
 
@@ -11,6 +12,11 @@ import models.Message;
 import views.html.*;
 
 public class Application extends Controller {
+
+    public static class FindForm {
+        @Required
+        public String input;
+    }
 
     public static Result index() {
         List<Message> data = Message.find.all();
@@ -86,5 +92,15 @@ public class Application extends Controller {
         } else {
             return ok(delete.render("ERROR:入力にエラーが起こりました。", f));
         }
+    }
+
+    public static Result find() {
+        Form<FindForm> f = new Form(FindForm.class).bindFromRequest();
+        List<Message> data = null;
+        if (!f.hasErrors()) {
+            String input = f.get().input;
+            data = Message.find.where().eq("name", input).findList();
+        }
+        return ok(find.render("投稿の検索", f, data));
     }
 }

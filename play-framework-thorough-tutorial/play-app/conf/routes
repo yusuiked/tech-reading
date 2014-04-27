@@ -11,6 +11,7 @@ POST    /edit                       controllers.Application.edit()
 POST    /update                     controllers.Application.update()
 GET     /delete                     controllers.Application.delete()
 POST    /remove                     controllers.Application.remove()
+GET     /find                       controllers.Application.find()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
