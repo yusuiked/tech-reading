@@ -1,7 +1,5 @@
 package models;
 
-import javax.persistence.*;
-
 import com.avaje.ebean.annotation.*;
 
 import play.data.validation.Constraints.*;
@@ -9,6 +7,7 @@ import play.db.ebean.*;
 import play.db.ebean.Model.Finder;
 
 import java.util.*;
+import javax.persistence.*;
 
 @Entity
 public class Member extends Model {

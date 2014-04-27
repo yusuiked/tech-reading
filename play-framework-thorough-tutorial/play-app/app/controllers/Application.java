@@ -30,6 +30,7 @@ public class Application extends Controller {
         Form<Message> f = new Form(Message.class).bindFromRequest();
         if (!f.hasErrors()) {
             Message message = f.get();
+            message.member = Member.findByName(message.name);
             message.save();
             return redirect("/");
         } else {
