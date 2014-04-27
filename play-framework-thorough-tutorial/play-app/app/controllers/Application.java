@@ -30,7 +30,12 @@ public class Application extends Controller {
         Form<Message> f = new Form(Message.class).bindFromRequest();
         if (!f.hasErrors()) {
             Message message = f.get();
-            message.member = Member.findByName(message.name);
+            String[] names = message.name.split(",");
+            for (String name : names) {
+                Member m = Member.findByName(name);
+                message.members.add(m);
+                m.messages.add(message);
+            }
             message.save();
             return redirect("/");
         } else {

@@ -23,7 +23,7 @@ public class Member extends Model {
 
 	public String tel;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	public List<Message> messages = new ArrayList<Message>();
 
 	public static Finder<Long, Member> find = new Finder<Long, Member>(Long.class, Member.class);
