@@ -99,7 +99,8 @@ public class Application extends Controller {
         List<Message> data = null;
         if (!f.hasErrors()) {
             String input = f.get().input;
-            data = Message.find.where().eq("name", input).findList();
+            data = Message.find.where().
+                ilike("name", "%" + input + "%").findList();
         }
         return ok(find.render("投稿の検索", f, data));
     }
