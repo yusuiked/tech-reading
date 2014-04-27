@@ -8,7 +8,7 @@ create table message (
   name                      varchar(255),
   mail                      varchar(255),
   message                   varchar(255),
-  postdate                  timestamp,
+  postdate                  timestamp not null,
   constraint pk_message primary key (id))
 ;
 
