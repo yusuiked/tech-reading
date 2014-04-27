@@ -16,10 +16,14 @@ import play.data.validation.Constraints.*;
 public class Message extends Model {
 	@Id
 	public Long id;
-	@Required
+	@Required(message = "必須項目です。")
+	@Pattern(message = "半角英数字のみ受け付けます。", value = "[a-zA-Z]+")
 	public String name;
+	@Email(message = "妥当なメールアドレスの形式のみ受け付けます。")
 	public String mail;
 	@Required
+	@MinLength(message = "最低10文字以上で入力してください。", value = 10)
+	@MaxLength(message = "最大200文字以下で入力してください。", value = 200)
 	public String message;
 	@CreatedTimestamp
 	public Date postdate;
