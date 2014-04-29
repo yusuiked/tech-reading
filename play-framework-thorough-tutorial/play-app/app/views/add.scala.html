@@ -1,0 +1,24 @@
+@(msg: String, form1: Form[models.Message], mems: List[models.Member])
+
+@main("Sample Page") {
+
+	<h1>ADD MESSAGE</h1>
+	<p>@msg</p>
+	@helper.form(action = routes.Application.create) {
+
+		<dl class=" " id="name_field">
+			<dt><label for="name">name</label></dt>
+			<dd>
+				<select id="name_field" name="name">
+					@for(mem <- mems){
+						<option>@mem.name</option>
+					}
+				</select>
+			</dd>
+		@(helper.textarea (
+			field = form1("message")
+		))
+
+		<input type="submit">
+	}
+}
