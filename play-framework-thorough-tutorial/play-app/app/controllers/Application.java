@@ -12,8 +12,14 @@ import java.util.*;
 public class Application extends Controller {
 
     public static Result index() {
-        return ok("<html><body><h1>Hello!</h1><p>This is test.</p></body></html>")
-            .as("text/html");
+        String method = request().method();
+        if ("GET".equals(method)) {
+            return ok(index.render("please type:"));
+        } else {
+            Map<String, String[]> form = request().body().asFormUrlEncoded();
+            String[] input = form.get("input");
+            return ok(index.render("posted:" + input[0]));
+        }
     }
 
 }
