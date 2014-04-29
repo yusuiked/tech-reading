@@ -8,6 +8,7 @@ import models.*;
 import views.html.*;
 
 import java.util.*;
+import scala.*;
 
 public class Application extends Controller {
 
@@ -20,7 +21,11 @@ public class Application extends Controller {
     public static Result add() {
         Form<Message> f = new Form(Message.class);
         List<Member> mems = Member.find.select("name").findList();
-        return ok(add.render("投稿フォーム" , f, mems));
+        List<Tuple2<String, String>> opts = new ArrayList<Tuple2<String, String>>();
+        for (Member mem : mems) {
+            opts.add(new Tuple2(mem.name, mem.name));
+        }
+        return ok(add.render("投稿フォーム" , f, opts));
     }
 
     public static Result create() {
