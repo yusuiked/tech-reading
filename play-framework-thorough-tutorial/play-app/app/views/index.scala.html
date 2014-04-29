@@ -10,6 +10,10 @@
 			field = form1("input"),
 			args = 'size->30
 		))
+		@(helper.inputText (
+			field = form1("num"),
+			args = 'type->"number", 'min->10, 'max->100
+		))
 		@(helper.inputPassword (
 			field = form1("pass"),
 			args = 'size->30

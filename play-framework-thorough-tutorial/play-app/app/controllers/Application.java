@@ -13,6 +13,7 @@ public class Application extends Controller {
 
     public static class SampleForm {
         public String input;
+        public int num;
         public String pass;
         public boolean check;
         public String radio;
@@ -37,6 +38,7 @@ public class Application extends Controller {
             SampleForm sf = f.get();
             String res = "value: ";
             res += "input=" + sf.input
+                + ", num=" + sf.num
                 + ", pass=" + sf.pass
                 + ", check=" + sf.check
                 + ", radio=" + sf.radio
