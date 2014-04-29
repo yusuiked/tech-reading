@@ -9,3 +9,15 @@ h1 {
     color: #ccffcc;
     padding: 3px;
 }
+th {
+	background-color: #66aa66;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	padding: 2px 10px 2px 10px;
+}
+td {
+	background-color: #ccffdd;
+	color: #003300;
+	padding: 2px;
+}

@@ -15,6 +15,7 @@ create table message (
   id                        bigint not null,
   name                      varchar(255),
   message                   varchar(255),
+  member_id                 bigint,
   postdate                  timestamp not null,
   constraint pk_message primary key (id))
 ;
@@ -29,6 +30,8 @@ create sequence member_seq;
 
 create sequence message_seq;
 
+alter table message add constraint fk_message_member_1 foreign key (member_id) references member (id) on delete restrict on update restrict;
+create index ix_message_member_1 on message (member_id);
 
 
 
