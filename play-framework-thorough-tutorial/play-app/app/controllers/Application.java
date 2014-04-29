@@ -12,7 +12,8 @@ import java.util.*;
 public class Application extends Controller {
 
     public static Result index() {
-        return ok("This is test.");
+        return ok("<html><body><h1>Hello!</h1><p>This is test.</p></body></html>")
+            .as("text/html");
     }
 
 }
