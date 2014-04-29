@@ -1,13 +1,13 @@
 body {
-    font-size: 12pt;
-    color: #006600;
+	font-size: 12pt;
+	color: #006600;
 }
 h1 {
-    font-size: 18pt;
-    font-weight: bold;
-    background-color: #66aa66;
-    color: #ccffcc;
-    padding: 3px;
+	font-size: 18pt;
+	font-weight: bold;
+	background-color: #66aa66;
+	color: #ccffcc;
+	padding: 3px;
 }
 th {
 	background-color: #66aa66;
@@ -25,6 +25,6 @@ td.a {
 	background-color: #dddddd;
 }
 td.b {
-	
 	background-color: #aaaaaa;
 }
+

@@ -1,47 +1,49 @@
 package models;
 
-import com.avaje.ebean.annotation.*;
-
-import play.data.validation.Constraints.*;
-import play.db.ebean.*;
-import play.db.ebean.Model.Finder;
-
 import java.util.*;
 import javax.persistence.*;
 
+import com.avaje.ebean.annotation.*;
+
+import play.db.ebean.*;
+import play.db.ebean.Model.Finder;
+import play.data.validation.Constraints.*;
+
 @Entity
 public class Member extends Model {
-
+	
 	@Id
 	public Long id;
-
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	public List<Message> messages = new ArrayList<Message>();
+	
 	@Required(message = "必須項目です。")
 	public String name;
 
-	@Email(message = "メールアドレスを記入してください。")
+	@Email(message = "メールアドレスを記入ください。")
 	public String mail;
 
 	public String tel;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	public List<Message> messages = new ArrayList<Message>();
-
-	public static Finder<Long, Member> find = new Finder<Long, Member>(Long.class, Member.class);
-
+	public static Finder<Long, Member> find = 
+		new Finder<Long, Member>(Long.class, Member.class);
+		
 	@Override
-	public String toString() {
+	public String toString(){
 		String ids = "{id:";
 		for (Message m : messages) {
 			ids += " " + m.id;
 		}
 		ids += "}";
-		return "[id:" + id + ", message:" + ids +
-			", name:" + name + ", mail:" + mail +
-			", tel:" + tel + "]";
+		return ("[id:" + id + ", message:" + ids +
+			", name:" + name + ", mail:" + 
+			mail + ", tel:" + tel + "]");
 	}
 
 	public static Member findByName(String input) {
 		return Member.find.where()
-			.eq("name", input).findList().get(0);
+				.eq("name", input ).findList().get(0);
 	}
+	
 }

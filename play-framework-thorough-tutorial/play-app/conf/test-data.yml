@@ -1,0 +1,21 @@
+messages:
+
+    - !!models.Message
+        name: aaa
+        message: this is test.
+
+    - !!models.Message
+        name: bbb
+        message: hello.
+
+members:
+
+    - !!models.Member
+        name: aaa
+        mail: dummy@sample.com
+        tel: 090-9999-9999
+
+    - !!models.Member
+        name: bbb
+        mail: dummy@test.com
+        tel: 080-8888-888

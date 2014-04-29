@@ -1,67 +1,62 @@
 package controllers;
 
-import play.*;
-import play.data.*;
-import play.libs.Json;
-import play.mvc.*;
-import play.mvc.Result;
-
 import models.*;
+
+import java.util.*;
+
+import play.data.Form;
+import play.mvc.*;
 import views.html.*;
 
-import java.io.*;
-import java.util.*;
-import org.w3c.dom.*;
-import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
-
 public class Application extends Controller {
+	
+	// ルートにアクセスした際のAction
+	public static Result index() {
+		List<Message> msgs = Message.find.all();
+		return ok(index.render("投稿メッセージ",msgs));
+	}
+	
+	// Message Action ====================
 
-    public static Result index() {
-        Member m = new Member();
-        m.name = "hoge";
-        m.mail = "hoge@hoge.com";
-        m.save();
-        List<Message> msgs = Message.find.all();
-        return ok(index.render("please set form.", msgs));
-    }
+	// 新規投稿フォームのAction
+	public static Result add(){
+		Form<Message> f = new Form(Message.class);
+		return ok(add.render("投稿フォーム",f));
+	}
+	
+	// /createにアクセスした際のAction
+	public static Result create(){
+		Form<Message> f = new Form(Message.class).
+				bindFromRequest();
+		if (!f.hasErrors()){
+			Message data = f.get();
+			data.member = Member.findByName(data.name);
+			data.save();
+			return redirect("/");
+		} else {
+			return ok(add.render("ERROR", f));
+		}
+	}
+	
+	// Member Action ====================
 
-    public static Result ajax() {
-        String input = request().body().asFormUrlEncoded().get("input")[0];
-        Member mem = Member.findByName(input);
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        String str = "<xml><root><err>ERROR!</err></root>";
-        Document doc = null;
-        try {
-            doc = factory.newDocumentBuilder().newDocument();
-            Element root = doc.createElement("data");
-            Element el = doc.createElement("name");
-            el.appendChild(doc.createTextNode(mem.name));
-            root.appendChild(el);
-            el = doc.createElement("mail");
-            el.appendChild(doc.createTextNode(mem.mail));
-            root.appendChild(el);
-            el = doc.createElement("tel");
-            el.appendChild(doc.createTextNode(mem.tel));
-            root.appendChild(el);
-            doc.appendChild(root);
-            TransformerFactory tfactory = TransformerFactory.newInstance();
-            StringWriter writer = new StringWriter();
-            StreamResult stream = new StreamResult(writer);
-            Transformer trans = tfactory.newTransformer();
-            trans.transform(new DOMSource(doc.getDocumentElement()), stream);
-            str = stream.getWriter().toString();
-        } catch (ParserConfigurationException | TransformerConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
-        if (doc == null) {
-            return badRequest(str);
-        } else {
-            return ok(str);
-        }
-    }
+	// メンバー作成フォームのAction
+	public static Result add2(){
+		Form<Member> f = new Form(Member.class);
+		return ok(add2.render("メンバー登録フォーム",f));
+	}
+	
+	// /create2にアクセスした際のAction
+	public static Result create2(){
+		Form<Member> f = new Form(Member.class)
+			.bindFromRequest();
+		if (!f.hasErrors()){
+			Member data = f.get();
+			data.save();
+			return redirect("/");
+		} else {
+			return ok(add2.render("ERROR", f));
+		}
+	}
+	
 }

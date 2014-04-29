@@ -1,7 +1,18 @@
-@(msg: String, form1: Form[models.Message], opts: List[Tuple2[String, String]])
+@(msg: String, form1: Form[models.Message])
 
 @main("Sample Page") {
-
+	
 	<h1>ADD MESSAGE</h1>
 	<p>@msg</p>
+	@helper.form(action = routes.Application.create){
+		
+		@(helper.inputText (
+			field = form1("name")
+		))
+		@(helper.textarea (
+			field = form1("message")
+		))
+		
+		<input type="submit">
+	}
 }

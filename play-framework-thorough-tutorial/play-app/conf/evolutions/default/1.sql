@@ -13,9 +13,9 @@ create table member (
 
 create table message (
   id                        bigint not null,
+  member_id                 bigint,
   name                      varchar(255),
   message                   varchar(255),
-  member_id                 bigint,
   postdate                  timestamp not null,
   constraint pk_message primary key (id))
 ;

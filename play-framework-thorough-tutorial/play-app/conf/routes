@@ -3,8 +3,12 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
-POST    /ajax                       controllers.Application.ajax()
+GET  /    controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+GET  /add     controllers.Application.add()
+POST /create  controllers.Application.create()
+GET  /add2    controllers.Application.add2()
+POST /create2 controllers.Application.create2()
