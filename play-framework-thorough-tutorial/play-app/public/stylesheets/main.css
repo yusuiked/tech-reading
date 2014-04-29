@@ -21,3 +21,9 @@ td {
 	color: #003300;
 	padding: 2px;
 }
+td.a {
+	background-color: #dddddd;
+}
+td.b {
+	background-color: #aaaaaa;
+}

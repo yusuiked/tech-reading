@@ -13,9 +13,15 @@
 		</tr>
 		@for(msg <- msgs) {
 			<tr>
-				<td>@msg.id</td>
-				<td>@msg.name</td>
-				<td>@msg.message</td>
+			@if(msg.id % 2 == 0) {
+				<td class="a">@msg.id</td>
+				<td class="a">@msg.name</td>
+				<td class="a">@msg.message</td>
+			} else {
+				<td class="b">@msg.id</td>
+				<td class="b">@msg.name</td>
+				<td class="b">@msg.message</td>
+			}
 			</tr>
 		}
 	</table>
