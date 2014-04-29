@@ -4,17 +4,4 @@
 
 	<h1>ADD MESSAGE</h1>
 	<p>@msg</p>
-	@helper.form(action = routes.Application.create) {
-
-		@(helper.select (
-			field = form1("message"),
-			options = opts
-		))
-
-		@(helper.textarea (
-			field = form1("message")
-		))
-
-		<input type="submit">
-	}
 }

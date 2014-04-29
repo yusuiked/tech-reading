@@ -1,7 +1,11 @@
 package controllers;
 
+// import org.codehaus.jackson.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import play.*;
 import play.data.*;
+import play.libs.Json;
 import play.mvc.*;
 
 import models.*;
@@ -13,23 +17,21 @@ import scala.*;
 public class Application extends Controller {
 
     public static Result index() {
-        // Form<SampleForm> form = new Form(SampleForm.class);
         List<Message> msgs = Message.find.all();
         return ok(index.render("please set form.", msgs));
     }
 
-    public static Result add() {
-        Form<Message> f = new Form(Message.class);
-        List<Member> mems = Member.find.select("name").findList();
-        List<Tuple2<String, String>> opts = new ArrayList<Tuple2<String, String>>();
-        for (Member mem : mems) {
-            opts.add(new Tuple2(mem.name, mem.name));
+    public static Result ajax() {
+        String input = request().body().asFormUrlEncoded().get("input")[0];
+        ObjectNode result = Json.newObject();
+        if (input == null) {
+            result.put("status", "BAD");
+            result.put("message", "Can't get sending data...");
+            return badRequest(result);
+        } else {
+            result.put("status", "OK");
+            result.put("message", input);
+            return ok(result);
         }
-        return ok(add.render("投稿フォーム" , f, opts));
     }
-
-    public static Result create() {
-        return redirect("/");
-    }
-
 }
