@@ -1,11 +1,41 @@
-@(msg: String)
+@(msg: String, form1: Form[Application.SampleForm])
 
 @main("Sample Page") {
 
 	<h1>Hello!</h1>
 	<p>@msg</p>
-	<form action="/" method="post">
-		<input type="text" name="input">
+
+	@helper.form(action = routes.Application.send) {
+		@(helper.inputText (
+			field = form1("input"),
+			args = 'size->30
+		))
+		@(helper.inputPassword (
+			field = form1("pass"),
+			args = 'size->30
+		))
+		@(helper.checkbox (
+			field = form1("check")
+		))
+		@(helper.inputRadioGroup (
+			field = form1("radio"),
+			options = Seq("windows"->"MS-Windows",
+				"mac"->"Mac OS X", "linux"->"Linux")
+		))
+		@(helper.select (
+			field = form1("sel"),
+			options = Seq("jp"->"日本",
+				"us"->"米国", "uk"->"英国"),
+			args = 'size->3
+		))
+		@(helper.textarea (
+			field = form1("area"),
+			args = 'cols->30, 'rows->3
+		))
+		@(helper.inputDate (
+			field = form1("date")
+		))
+
 		<input type="submit">
-	</form>
+	}
 }
