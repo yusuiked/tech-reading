@@ -1,0 +1,3 @@
+class MyClass {
+    String msg
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<project default="copy">
+    <target name="copy">
+        <copy todir="dest">
+            <fileset dir="source">
+                <include name="*.properties"/>
+            </fileset>
+        </copy>
+    </target>
+</project>
