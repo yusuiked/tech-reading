@@ -1,76 +1,51 @@
-window.onload = function() {
-
-	/*
-	 * 変数の定義
-	 */
-	// 画像のリストの定義
-	var photoList = [
-		{ src: '../img/spring.jpg', title: '春の桜' },
-		{ src: '../img/summer.jpg', title: '夏のひまわり' },
-		{ src: '../img/autumn.jpg', title: '秋の紅葉' },
-		{ src: '../img/winter.jpg', title: '冬の山' }
-	];
-	var photoLength = photoList.length;
-
+$(function() {
 	// 要素の取得
-	var photo = document.getElementById('photo');
-	var nextBtn = document.getElementById('nextBtn');
-	var title = document.getElementById('title');
+	// #sample-slideshow 要素以下のみ走査対象とする
+	var $container = $('#sample-slideshow');
+	var $title = $container.find('.title');
+	var $imgs = $container.find('.photo img');
+	var $nextBtn = $container.find('.nextBtn');
+	var $prevBtn = $container.find('.prevBtn');
 
-	// 現在のインデックスを保存するための変数
-	var currentIndex = 0;
-
-	/*
-	 * 関数の定義
-	 */
-	// 指定の画像に表示を切り替える関数
+	// 画像をアニメーションして表示するための関数
 	function showPhoto(index) {
-		// すべての画像を非表示
-		for (var i = 0; i < photoLength; i++) {
-			photoList[i].elem.style.display = 'none';
-		};
+		var $current = $imgs.filter(':visible');
 		// 表示する対象の要素を取得
-		var targetPhoto = photoList[index];
-		// タイトルの表示
+		var $target = $imgs.eq(index);
+		var title = $target.attr('alt');
 		var viewNumber = index + 1;
-		title.innerHTML = '[' + viewNumber + '] ' + targetPhoto.title;
+		// タイトルの表示
+		$title.text('[' + viewNumber + '] ' + title);
 		// 画像の表示
-		targetPhoto.elem.style.display = 'inline';
+		$current.fadeOut();
+		$target.fadeIn();
 	}
 
-	/*
-	 * イベントの設定
-	 */
-	// next ボタンを押した時の処理
-	nextBtn.onclick = function() {
+	// 画像の数の取得
+	var len = $imgs.length;
+	// インデックスの初期値
+	var currentIndex = 0;
+
+	// next ボタンを押した時の動作
+	$nextBtn.click(function() {
 		// 表示する画像のインデックスを計算
 		currentIndex++;
-		if (currentIndex === photoLength) {
+		if (currentIndex >= len) {
 			currentIndex = 0;
 		};
 		// 画像の切り替え
 		showPhoto(currentIndex);
-	}
+	});
 
-	/*
-	 * 初期化処理
-	 */
-	// img 要素を HTML に追加
-	var item, img;
-	for (var i = 0; i < photoLength; i++) {
-		item = photoList[i];
-		// img 要素の作成
-		img = document.createElement('img');
-		// 作成した img 要素に属性を設定
-		img.src = item.src;
-		img.alt = item.title;
-		// 作成した img 要素を HTML に追加
-		photo.appendChild(img);
-
-		// 取得した img 要素をキャッシング
-		item.elem = img;
-	};
+	// prev ボタンを押した時の動作
+	$prevBtn.click(function() {
+		currentIndex--;
+		if (currentIndex < 0) {
+			currentIndex = len - 1;
+		}
+		showPhoto(currentIndex);
+	});
 
 	// 初期表示
 	showPhoto(currentIndex);
-};
+});

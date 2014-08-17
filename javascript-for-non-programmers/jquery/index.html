@@ -2,18 +2,26 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<title>簡易スライドショー</title>
+	<title>簡易スライドショー（jQuery版）</title>
+	<link rel="stylesheet" href="style.css">
 	<script src="../lib/jquery-1.11.1.min.js"></script>
 	<script src="sample.js"></script>
 </head>
 <body>
-	<!-- next ボタン -->
-	<button id="nextBtn">next</button>
+	<div id="sample-slideshow">
+		<div>
+			<button class="prevBtn">prev</button>
+			<button class="nextBtn">next</button>
+		</div>
 
-	<!-- 画像タイトル -->
-	<h1 id="title"></h1>
+		<h1 class="title"></h1>
 
-	<!-- 画像要素を入れるためのボックス -->
-	<div id="photo"></div>	
+		<div class="photo">
+			<img src="../img/spring.jpg" alt="春の桜">
+			<img src="../img/summer.jpg" alt="夏のひまわり">
+			<img src="../img/autumn.jpg" alt="秋の紅葉">
+			<img src="../img/winter.jpg" alt="冬の山">
+		</div>	
+	</div>
 </body>
 </html>

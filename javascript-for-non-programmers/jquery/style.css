@@ -1,0 +1,4 @@
+#sample-slideshow .photo img {
+	display: none;
+	position: absolute;
+}
