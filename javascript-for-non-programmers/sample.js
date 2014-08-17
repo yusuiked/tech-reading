@@ -18,15 +18,21 @@ window.onload = function() {
 
 	// next ボタンを押した時の処理
 	nextBtn.onclick = function() {
-		console.log('clicked');
 		// 表示する画像のインデックスを計算
 		currentIndex++;
+		if (currentIndex === photoLength) {
+			currentIndex = 0;
+		};
+		// すべての画像を非表示
+		var imgs = photo.getElementsByTagName('img');
+		var imgLength = imgs.length;
+		for (var i = 0; i < imgLength; i++) {
+			imgs[i].style.display = 'none';
+		};
 		// タイトルの表示
 		var viewNumber = currentIndex + 1;
 		title.innerHTML = '[' + viewNumber + '] ' + photoList[currentIndex].title;
-
 		// 画像の表示
-		var imgs = photo.getElementsByTagName('img');
 		imgs[currentIndex].style.display = 'inline';
 	}
 
