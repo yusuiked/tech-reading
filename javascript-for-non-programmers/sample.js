@@ -19,16 +19,16 @@ window.onload = function() {
 	// 指定の画像に表示を切り替える関数
 	function showPhoto(index) {
 		// すべての画像を非表示
-		var imgs = photo.getElementsByTagName('img');
-		var imgLength = imgs.length;
-		for (var i = 0; i < imgLength; i++) {
-			imgs[i].style.display = 'none';
+		for (var i = 0; i < photoLength; i++) {
+			photoList[i].elem.style.display = 'none';
 		};
+		// 表示する対象の要素を取得
+		var targetPhoto = photoList[index];
 		// タイトルの表示
 		var viewNumber = index + 1;
-		title.innerHTML = '[' + viewNumber + '] ' + photoList[index].title;
+		title.innerHTML = '[' + viewNumber + '] ' + targetPhoto.title;
 		// 画像の表示
-		imgs[index].style.display = 'inline';
+		targetPhoto.elem.style.display = 'inline';
 	}
 
 	// next ボタンを押した時の処理
@@ -53,6 +53,9 @@ window.onload = function() {
 		img.alt = item.title;
 		// 作成した img 要素を HTML に追加
 		photo.appendChild(img);
+
+		// 取得した img 要素をキャッシング
+		item.elem = img;
 	};
 
 	// 初期表示
