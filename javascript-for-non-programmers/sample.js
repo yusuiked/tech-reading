@@ -1,4 +1,8 @@
 window.onload = function() {
+
+	/*
+	 * 変数の定義
+	 */
 	// 画像のリストの定義
 	var photoList = [
 		{ src: 'img/spring.jpg', title: '春の桜' },
@@ -16,6 +20,9 @@ window.onload = function() {
 	// 現在のインデックスを保存するための変数
 	var currentIndex = 0;
 
+	/*
+	 * 関数の定義
+	 */
 	// 指定の画像に表示を切り替える関数
 	function showPhoto(index) {
 		// すべての画像を非表示
@@ -31,6 +38,9 @@ window.onload = function() {
 		targetPhoto.elem.style.display = 'inline';
 	}
 
+	/*
+	 * イベントの設定
+	 */
 	// next ボタンを押した時の処理
 	nextBtn.onclick = function() {
 		// 表示する画像のインデックスを計算
@@ -42,6 +52,9 @@ window.onload = function() {
 		showPhoto(currentIndex);
 	}
 
+	/*
+	 * 初期化処理
+	 */
 	// img 要素を HTML に追加
 	var item, img;
 	for (var i = 0; i < photoLength; i++) {
