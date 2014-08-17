@@ -165,3 +165,57 @@ jQuery ではこの処理をクロスブラウザで行える書き方があり�
 
 # 第4章
 
+コード参照。
+
+# 第5章
+
+## jQuery 入門準備
+
+### $ - jQuery という関数の別名
+
+```lang-javascript
+$('.box').css('color', 'red');
+jQuery('.box').css('color', 'red');
+```
+### $(function() {}) - HTML の読み込みを待って処理をする
+
+```lang-javascript
+$(function() {
+	// ここに処理を記述});
+```
+
+このように記述すると、windows.onload と DOMContentLoaded のいいとこ取りをしたような次の挙動になる。
+
+* クロスブラウザで動作する
+* 画像のロードなどは待たずに、HTML の構築が終わった時点で処理を開始する
+* 複数の処理を設定できる
+
+## 基本的な機能と使い方
+
+### jQuery オブジェクト
+
+jQuery で取得したオブジェクトは、通常の `getElementById` などで取得できる `NodeList` とは違い、コンビニエンスメソッドが追加されている。
+
+```lang-javascript
+var div1 = $('div');
+div1.css('color', 'red');
+```
+
+また、`NodeList` ではすべての要素に処理を行う場合は for 文などでループして処理する必要があるが、jQuery オブジェクトの場合はその必要はない。
+
+jQuery オブジェクトは上記のように通常の手段で取得した DOM オブジェクトとは性質が異なるため、変数名も `var $variable` などのように `$` を付けて判別しやすくするイディオムがある。
+
+### メソッド
+
+jQuery が提供する機能を使うには、メソッドを呼び出す。jQuery のメソッドと、JavaScript の関数とは意味合いが異なる。
+
+jQuery のメソッドは、`jQuery.fn` オブジェクトにアタッチされ、`$('#element_id).method()` のように jQuery セレクタを受け取る形式で呼び出すのに対し、jQuery の関数は、`jQuery` オブジェクトにアタッチされ、`$.function()` のように直接 jQuery オブジェクトにアクセスする形式で呼び出す。
+
+### イベントの設定
+
+jQuery でイベント設定する場合は、以下のように書く。
+
+```
+jQueryオブジェクト.イベント名(function() {
+	// イベントが起きた時の処理});
+```
