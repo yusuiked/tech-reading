@@ -13,6 +13,23 @@ window.onload = function() {
 	var nextBtn = document.getElementById('nextBtn');
 	var title = document.getElementById('title');
 
+	// 現在のインデックスを保存するための変数
+	var currentIndex = 0;
+
+	// next ボタンを押した時の処理
+	nextBtn.onclick = function() {
+		console.log('clicked');
+		// 表示する画像のインデックスを計算
+		currentIndex++;
+		// タイトルの表示
+		var viewNumber = currentIndex + 1;
+		title.innerHTML = '[' + viewNumber + '] ' + photoList[currentIndex].title;
+
+		// 画像の表示
+		var imgs = photo.getElementsByTagName('img');
+		imgs[currentIndex].style.display = 'inline';
+	}
+
 	// img 要素を HTML に追加
 	var item, img;
 	for (var i = 0; i < photoLength; i++) {
