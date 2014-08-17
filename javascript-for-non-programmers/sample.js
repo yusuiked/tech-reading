@@ -16,13 +16,8 @@ window.onload = function() {
 	// 現在のインデックスを保存するための変数
 	var currentIndex = 0;
 
-	// next ボタンを押した時の処理
-	nextBtn.onclick = function() {
-		// 表示する画像のインデックスを計算
-		currentIndex++;
-		if (currentIndex === photoLength) {
-			currentIndex = 0;
-		};
+	// 指定の画像に表示を切り替える関数
+	function showPhoto(index) {
 		// すべての画像を非表示
 		var imgs = photo.getElementsByTagName('img');
 		var imgLength = imgs.length;
@@ -30,10 +25,21 @@ window.onload = function() {
 			imgs[i].style.display = 'none';
 		};
 		// タイトルの表示
-		var viewNumber = currentIndex + 1;
-		title.innerHTML = '[' + viewNumber + '] ' + photoList[currentIndex].title;
+		var viewNumber = index + 1;
+		title.innerHTML = '[' + viewNumber + '] ' + photoList[index].title;
 		// 画像の表示
-		imgs[currentIndex].style.display = 'inline';
+		imgs[index].style.display = 'inline';
+	}
+
+	// next ボタンを押した時の処理
+	nextBtn.onclick = function() {
+		// 表示する画像のインデックスを計算
+		currentIndex++;
+		if (currentIndex === photoLength) {
+			currentIndex = 0;
+		};
+		// 画像の切り替え
+		showPhoto(currentIndex);
 	}
 
 	// img 要素を HTML に追加
@@ -45,15 +51,10 @@ window.onload = function() {
 		// 作成した img 要素に属性を設定
 		img.src = item.src;
 		img.alt = item.title;
-		img.style.display = 'none';
 		// 作成した img 要素を HTML に追加
 		photo.appendChild(img);
 	};
 
-	// タイトルの初期表示
-	title.innerHTML = '[1] ' + photoList[0].title;
-
-	// 画像の初期表示
-	var imgs = photo.getElementsByTagName('img');
-	imgs[0].style.display = 'inline';
+	// 初期表示
+	showPhoto(currentIndex);
 };
