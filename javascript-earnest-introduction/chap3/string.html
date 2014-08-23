@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>String</title>
+</head>
+<body>
+	<script>
+		var str1 = 'にわにはにわにわとりがいる';
+		document.writeln(str1.indexOf('にわ'));	// 0
+		document.writeln(str1.lastIndexOf('にわ'));	// 6
+		document.writeln(str1.indexOf('にわ', 3));	// 4（4文字目から右方向検索）
+		document.writeln(str1.lastIndexOf('にわ', 5));	// 4（6文字目から左方向検索）
+		document.writeln(str1.indexOf('ガーデン'));	// -1
+
+		var str2 = 'Wingsプロジェクト';
+		document.writeln(str2.charAt(4));	// s
+		document.writeln(str2.slice(5, 8));	// プロジ（6 〜 8文字目を抽出）
+		document.writeln(str2.substring(5, 8));	// プロジ（6 〜 8文字目を抽出）
+		document.writeln(str2.substr(5, 3));	// プロジ（6文字目から3文字抽出）
+		document.writeln(str2.split('s'));	// Wing,プロジェクト
+		document.writeln(str1.split('わ', 3));	// に,にはに,に（3つに分割）
+
+		document.writeln('トップ'.anchor('top'));
+		document.writeln(str2.link('http://www.wings.msn.to/'));
+		document.writeln('10'.sub());
+		document.writeln('10'.sup());
+
+		document.writeln(str2.concat('有限会社'));
+		document.writeln(str2.length);
+	</script>
+</body>
+</html>
