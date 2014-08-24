@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Array</title>
+</head>
+<body>
+	<script>
+	var ary1 = ['Sato', 'Takae', 'Osada', 'Hio', 'Saitoh'];
+	var ary2 = ['Yabuki', 'Aoki', 'Moriyama', 'Yamada'];
+
+	console.log(ary1.concat(ary2));	// ["Sato", "Takae", "Osada", "Hio", "Saitoh", "Yabuki", "Aoki", "Moriyama", "Yamada"]
+	console.log(ary1.join('/'));	// Sato/Takae/Osada/Hio/Saitoh
+	console.log(ary1.slice(1));	// ["Takae", "Osada", "Hio", "Saitoh"]
+	console.log(ary1.slice(1, 2));	// ["Takae"]
+	console.log(ary1.splice(1, 2, 'Kakeya', 'Yamaguchi'));	// ["Takae", "Osada"]
+	console.log(ary1);	// ["Sato", "Kakeya", "Yamaguchi", "Hio", "Saitoh"]
+
+	console.log(ary1.pop());	// Saitoh
+	console.log(ary1);	// ["Sato", "Kakeya", "Yamaguchi", "Hio"]
+	console.log(ary1.push('Kondo'));	// 5
+	console.log(ary1);	// ["Sato", "Kakeya", "Yamaguchi", "Hio", "Kondo"]
+	console.log(ary1.shift());	// Sato
+	console.log(ary1);	// ["Kakeya", "Yamaguchi", "Hio", "Kondo"]
+	console.log(ary1.unshift('Ozawa', 'Kuge'));	// 6
+	console.log(ary1);	// ["Ozawa", "Kuge", "Kakeya", "Yamaguchi", "Hio", "Kondo"]
+	console.log(ary1.reverse());	// ["Kondo", "Hio", "Yamaguchi", "Kakeya", "Kuge", "Ozawa"]
+	console.log(ary1);	// ["Kondo", "Hio", "Yamaguchi", "Kakeya", "Kuge", "Ozawa"]
+	console.log(ary1.sort());	// ["Hio", "Kakeya", "Kondo", "Kuge", "Ozawa", "Yamaguchi"]
+	console.log(ary1);	// ["Hio", "Kakeya", "Kondo", "Kuge", "Ozawa", "Yamaguchi"]
+	console.log(ary1.length);	// 6
+	console.log(ary1.toString());	// Hio,Kakeya,Kondo,Kuge,Ozawa,Yamaguchi 
+	</script>
+</body>
+</html>
