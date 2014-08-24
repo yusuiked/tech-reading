@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Object</title>
+</head>
+<body>
+	<script>
+		var obj = new Object();
+		console.log(obj.toString());	// [object Object]
+		console.log(obj.valueOf());	// [object Object]
+
+		var dat = new Date();
+		console.log(dat.toString());	// Sun Aug 24 2014 15:00:34 GMT+0900 (JST)
+		console.log(dat.valueOf());	// 1408860051595
+
+		var ary = ['prototype.js', 'jQuery', 'Yahoo! UI'];
+		console.log(ary.toString());	// prototype.js,jQuery,Yahoo! UI
+		console.log(ary.valueOf());	// ["prototype.js", "jQuery", "Yahoo! UI"]
+
+		var num = 10;
+		console.log(num.toString());	// 10
+		console.log(num.valueOf());	// 10
+
+		var reg = /[0-9]{3}-[0-9]{4}/g;
+		console.log(reg.toString());	// /[0-9]{3}-[0-9]{4}/g
+		console.log(reg.valueOf());	// /[0-9]{3}-[0-9]{4}/g
+
+	</script>
+</body>
+</html>
