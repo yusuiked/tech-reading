@@ -227,3 +227,14 @@ document.writeln(str.slice(5, -2));	// プロジェ（6 〜 9文字目までを�
 
 > chap3/math.html
 
+#### with 命令
+
+```lang-javascript
+with(document) {
+	writeln(Math.abs(-15));
+	writeln(Math.max(10, 15));
+	writeln(Math.min(-10, 0));}
+```
+
+便利な半面、「ブロック内の処理速度が低下する」「そもそもコードが読みにくくなる」というデメリットがあるため、プロダクトコードでは使わないほうが良い。
+
