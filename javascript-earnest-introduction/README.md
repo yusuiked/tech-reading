@@ -219,3 +219,11 @@ document.writeln(str.substring(5, -2));	// WINGS（1 〜 5文字目を抽出）
 document.writeln(str.slice(5, -2));	// プロジェ（6 〜 9文字目までを抽出）
 ```
 
+### Number オブジェクト
+
+> chap3/number.html
+
+### Math オブジェクト
+
+> chap3/math.html
+
