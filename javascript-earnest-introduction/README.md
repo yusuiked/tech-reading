@@ -415,3 +415,75 @@ var obj = {};
 
 とも書きかえることができる。オブジェクトリテラルでオブジェクトを生成することは、匿名オブジェクトを定義することと同じ意味。
 
+## 基本機能を提供する - Global オブジェクト -
+
+### Global オブジェクトとそのメンバ
+
+Global オブジェクトは、これまでのオブジェクトとは異なり、
+
+```lang-javascript
+var g = new Global();
+Global.メソッド名();
+```
+
+のようにインスタンス化することも、配下のメソッドを呼ぶこともできない。
+
+Global オブジェクトは、グローバル変数やグローバル関数を管理するために、JavaScript が自動的に生成する「便宜的な」オブジェクト。
+
+JavaScript で利用可能なグローバル変数／関数を以下に列挙する。
+
+* NaN
+* Infinity
+* undefined
+* isFinite(num)
+* isNaN(num)
+* Boolean(val)
+* Number(val)
+* String(val)
+* parseFloat(str)
+* parseInt(str)
+* escape(str)
+* unescape(str)
+* encodeURI(str)
+* decodeURI(str)
+* encodeURIComponent(str)
+* decodeURIComponent(str)
+* eval(exp)
+
+### 数値へ明示的に変換する - `parseFloat/parseInt/Number` 関数 -
+
+JavaScript はコンテキスト（前後の関数や演算子）によって、適切な型へ変換しようとしてくれるが、これが直感的じゃない結果となりバグの温床になるようなケースも有る。
+そこで JavaScript では、明示的に変換するための方法を提供している。`parseFloat/parseInt/Number` 関数はそれを担っている。
+
+これらの変換は、例えば `123xxx` のような文字列混在の数値が渡された場合、`123` と解析できる部分を数値として取り込む。（先頭からの連続した数値のみ）。`Number` 関数は、解析できずに `NaN` を返す。
+
+Date オブジェクトが渡された場合は、parse系の関数はこれを解析できずに `NaN` を返すが、`Number` 関数は「Date オブジェクトを経過ミリ秒に換算した値」を数値として返す。
+
+> chap3/global.html
+
+#### Number 関数と Number オブジェクト
+
+Global オブジェクトが提供するグローバル関数 `Number` の正体は、組み込みオブジェクト `Number` でもある。同じように、`String/Boolean` 関数は、`String/Boolean` オブジェクトである。
+
+```lang-javascript
+console.log(new Number(d));
+var str = new String('123');
+var str = String('123');
+```
+
+### 算術演算子による文字列／数値への変換
+
+* `+` 演算子は、文字列連結演算子と加算演算子の2つの顔を持っている。オペランドの片方が文字列である場合、文字列連結演算子として振る舞う。
+* `-` 演算子は、与えられたオペランドのいずれかが数値だった場合、自動的に他方も数値として変換した上で減算する。
+
+### 動的に生成したスクリプトを実行する - `eval` 関数 -
+
+`eval` 関数は、与えられた文字列を JavaScript のコードとして評価／実行する。
+
+ただし、以下の様な作用もあるため、乱用はしない。
+
+* 第3者による任意のスクリプト実行が可能（セキュリティリスク）
+* 通常のコードを実行するよりも、解析処理が入るため処理速度が遅い（パフォーマンスの劣化）
+
+`eval` 関数の利用は JSON データを解析する場合に留めるのが無難。
+

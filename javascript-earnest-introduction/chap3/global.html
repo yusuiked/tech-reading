@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Global</title>
+</head>
+<body>
+	<script>
+		var n = '123xxx';
+		console.log(Number(n));	// NaN
+		console.log(parseFloat(n));	// 123
+		console.log(parseInt(n));	// 123
+
+		var d = new Date();
+		console.log(Number(d));	// 1408862796532
+		console.log(parseFloat(d));	//	NaN
+		console.log(parseInt(d));	// NaN
+
+		var h = 0777;
+		console.log(Number(h));	// 511
+		console.log(parseFloat(h));	// 511
+		console.log(parseInt(h));	// 511
+
+		var e = '1.01e+2';
+		console.log(Number(e));	// 101
+		console.log(parseFloat(e))	// 101
+		console.log(parseInt(e));	// 1
+	</script>
+</body>
+</html>
