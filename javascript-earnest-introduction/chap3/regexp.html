@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>RegExp</title>
+</head>
+<body>
+	<script>
+		var p = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/gi;
+		var str = 'サポートサイトはhttp://www.wings.msn.to/です。';
+		str += 'サンプル紹介サイトHTTP://www.web-deli.com/もよろしく！';
+		var result = str.match(p);
+		for (var i = 0; i < result.length; i++) {
+			console.log('match: ' + result[i]);
+		};
+
+		while((result = p.exec(str)) != null) {
+			console.log('exec: ' + result[0]);
+		}
+		var str2 = 'サポートサイト「サーバサイド技術の学び舎」をよろしく！';
+		console.log(p.test(str));	// true
+		console.log(p.test(str2));	// false
+
+		console.log(str.search(p));	// 8
+		console.log(str2.search(p));	// -1
+
+		var p1 = /(http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?)/gi;
+		document.writeln(str.replace(p1, '<a href="$1">$1</a>'));
+
+		var p = /[\/\.\-]/gi;
+		console.log('2010/12/04'.split(p).toString());
+		console.log('2010-12-04'.split(p).toString());
+		console.log('2010.12.04'.split(p).toString());
+	</script>
+</body>
+</html>
