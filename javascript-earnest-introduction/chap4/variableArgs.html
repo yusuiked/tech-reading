@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>variableArgs</title>
+</head>
+<body>
+	<script>
+		function sum() {
+			var result = 0;
+			for (var i = 0; i < arguments.length; i++) {
+				var tmp = arguments[i];
+				if (isNaN(tmp)) {
+					throw new Error('指定値が数値ではありません。：' + tmp);
+				}
+				result += tmp;
+			}
+			return result;
+		}
+		try {
+			console.log(sum(1, 3, 5, 7, 9));	// 25
+		} catch(e) {
+			window.alert(e.message);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>callee</title>
+</head>
+<body>
+	<script>
+		function factorial(n) {
+			if (n != 0) { return n * arguments.callee(n - 1); }
+			// if (n != 0) { return n * factorial(n - 1); } // こう書くこともできるが、関数名が変わった際に変更が必要
+			return 1;
+		}
+		console.log(factorial(5));	// 120
+		// また、匿名関数の場合は callee じゃないと関数名が指定できない
+	</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>higherOrder</title>
+</head>
+<body>
+	<script>
+		function arrayWalk(data, f) {
+			for (var key in data) {
+				f(key, data[key]);
+			}
+		}
+		function showElement(key, value) {
+			console.log(key + ':' + value);
+		}
+		var result = 0;
+		function sumAndShowElement(key, value) {
+			result += value;
+			console.log('合計値：' + result);
+		}
+		var ary = [1, 2, 4, 8, 16];
+		arrayWalk(ary, showElement);	// データと、出力する関数そのものを引数として渡す
+		arrayWalk(ary, sumAndShowElement)	// 高階関数を入れ替える
+	</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Scope</title>
+</head>
+<body>
+	<script>
+		var scope = 'Global';
+		// scope = 'Global';
+		function getValue() {
+			var scope = 'Local';
+			// scope = 'Local';
+			return scope;
+		}
+		console.log(getValue());	// Local
+		console.log(scope);	// Global
+		// console.log(scope);	// Local -> var 宣言なしだとグローバルスコープとみなされるため、Global -> Local へ書き換えたことと同義
+	</script>
+</body>
+</html>

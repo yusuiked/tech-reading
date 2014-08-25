@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>variableArgs</title>
+</head>
+<body>
+	<script>
+		function printf(format) {
+			for (var i = 0; i < arguments.length; i++) {
+				var pattern = new RegExp('\\{' + (i - 1) + '\\}', 'g');
+				format = format.replace(pattern, arguments[i]);
+			}
+			console.log(format);
+		}
+		printf('こんにちは、{0}さん。私は{1}です。', '掛谷', '山田');
+	</script>
+</body>
+</html>

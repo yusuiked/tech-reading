@@ -487,3 +487,281 @@ var str = String('123');
 
 `eval` 関数の利用は JSON データを解析する場合に留めるのが無難。
 
+# 第4章 繰り返し利用するコードを一箇所にまとめる
+
+## 関数とは
+
+### 関数を定義する三つの方法
+
+* function 命令で定義する
+* Function コンストラクタ経由で定義する
+* 関数リテラル表現で定義する
+
+この中で、あえて Function コンストラクタを利用するメリットはないが、一点だけ重要な特徴がある。それは「Function コンストラクタでは、引数や関数本体を文字列として定義できる」という点。
+
+```lang-javascript
+var param = 'height, width';
+var formula = 'return height * width /2;';
+var diamond = new Function(param, formula);
+
+console.log('ひし形の面積：' + diamond(5,2));	// 5
+```
+
+また、Function コンストラクタを利用する場合は、解析処理を含むため繰り返し処理や頻繁に呼び出される関数の中で利用するとパフォーマンスが劣化することに気をつける。
+
+関数リテラルと function キーワードでの関数定義の違いは、
+
+* function キーワード -> 関数 triangle を直接定義している
+* 関数リテラル -> 「function(base, height) {...}」と名前の無い関数を定義した上で、変数 triangle に格納している
+
+このような違いから、関数リテラルは匿名関数、無名関数と呼ばれることもある。
+
+## 関数定義における4つの注意点
+
+### return 命令は途中で改行しない
+
+JavaScript では文末にセミコロンをつけることは必須ではないため、`return` を挟んで改行してしまうと、直感的ではない挙動を取ることがあるため、避ける。
+
+```lang-javascript
+var triangle = function(base, height) {
+	return
+	base * height / 2;	// 実行されない};
+console.log('三角形の面積：' + triangle(5, 2));
+```
+
+同じ理由で、`break`/`continue` も途中で改行しないこと。
+
+### 関数はデータ型の一種
+
+```lang-javascript
+var triangle = function(base, height) {
+	return base * height / 2;};
+console.log(triangle(5,2));	// 5
+triangle = 0;	// 正しいコード
+console.log(triangle(5,2));	// 0
+```
+
+### function 命令は静的な構造を宣言する
+
+```lang-javascript
+console.log(triangle(5,2));
+function triangle(base, height) {
+	return base * height / 2;}
+```
+
+関数定義が変数定義である、という前提に基づくと、上記のコードはまだ定義されていない関数を呼び出しているためエラーになりそうだが、これはエラーにならない。
+
+function 命令は、静的な構造を宣言するためのキーワードであるため、コードを解析コンパイルするタイミングで関数を登録している。そのため、コードのどこからでも呼び出すことができる。
+
+### 関数リテラル／Function コンストラクタは実行時に評価される
+
+```lang-javascript
+console.log(triangle(5,2));
+var triangle = function(base, height) {
+	return base * height / 2;}
+```
+これは、実行時エラーになる。function 命令とは異なり、実行時（代入時）に評価されるため、`triangle` を呼び出すタイミングではまだ関数は定義されていないためエラーとなる。
+
+## 変数はどの場所から参照できるか - スコープ -
+
+JavaScript には、以下の2つのスコープがある。
+
+* グローバルスコープ
+* 定義された関数の中でのみ参照できるローカルスコープ
+
+```lang-javascript
+var scope = 'Global';
+function getValue() {
+	var scope = 'Local';
+	return scope;}
+console.log(getValue());	// Local
+console.log(scope);	// Global
+```
+
+### 変数宣言に var 命令は必須
+
+```lang-javascript
+scope = 'Global';
+function getValue() {
+	scope = 'Local';
+	return scope;}
+console.log(getValue());	// Local
+console.log(scope);	// Local
+```
+
+var 命令を使わずに宣言された変数はすべてグローバルスコープとみなされるため、たとえ関数の中であっても書き換えられてしまう。
+
+ローカル変数を定義するには、必ず var 命令を使用すること。かといって、グローバルとローカルで var をつけるつけないを区別するのは混乱のもとであるため、原則的には変数宣言は var を付けることを統一したほうが良い。
+
+### ローカル変数の有効範囲はどこまで？
+
+```lang-javascript
+var scope = 'Global';
+function getValue() {
+	console.log(scope);	// まだローカル変数 scope が定義されていないため、undefined でエラー
+	var scope = 'Local';
+	return scope;}
+console.log(getValue());	// Local
+console.log(scope);	// Global
+```
+
+これを防ぐために、**ローカル変数は関数の先頭で宣言する**ことを心がける。
+
+### 仮引数のスコープ
+
+仮引数のスコープは、基本型と参照型によって挙動が異なる。
+
+```lang-javascript
+var value = 10;
+function decrementValue(value) {
+	value--;
+	return value;}
+console.log(decrementValue(100));	// 99
+console.log(value);	// 10 でそのまま
+```
+
+```lang-javascript
+var value = [1, 2, 4, 8, 16];
+function deleteElement(value) {
+	value.pop();	// 末尾の要素を削除
+	return value;}
+console.log(deleteElement(value));	// 1, 2, 4, 8
+console.log(value);	// 1, 2, 4, 8 で元の value も書き換わっている（インスタンスの参照だから）
+```
+
+### ブロックレベルのスコープは存在しない
+
+JavaScript ではローカル変数は関数全体で有効なので、ブロックスコープという概念はない。if や for、ブロックのなかで変数宣言をしても、同じ関数の中であれば有効。
+
+以下 Java のブロックスコープの例。
+
+```lang-java
+if (true) {
+	int i = 5;	// ブロックスコープ}
+System.out.println(i);	// エラー
+```
+
+こちらは JavaScript の例。
+
+```lang-javascript
+if (true) {
+	var i = 5;	// あくまでも関数内ローカルスコープ}
+console.log(i);	// 5
+```
+
+#### 擬似的にブロックスコープを定義する
+
+With 命令を使うことで、擬似的にブロックスコープを表現することができるが、トリッキーなので勧めない。
+
+```lang-javascript
+with ({i:0}) {
+	if (true) {
+		i = 5;	}}
+console.log(i);	// スコープ外でエラー
+```
+
+これがエラーになる理由は、匿名オブジェクトのプロパティ `i` であり、`with` ブロックの中でのみ参照可能な変数となるため。
+
+### 関数リテラル／Function コンストラクタにおけるスコープの違い
+
+```lang-javascript
+var scope = 'Global';
+function checkScope() {
+	var scope = 'Local';
+	var f_literal = function() { return scope; };
+	console.log(f_literal());	// Local
+	var f_constructor = new Function('return scope;');
+	console.log(f_constructor());	// Global}
+checkScope();
+```
+
+これは ECMAScript の仕様にも明記されており、スコープチェーンの違いにより挙動が異なる。
+
+Function コンストラクタを原則利用しないようにすればこの違いが混乱を招くケースは少なくできるが、違いがあることは認識しておくこと。
+
+## 引数情報を管理する - arguments オブジェクト -
+
+### JavaScript は引数の数をチェックしない
+
+```lang-javascript
+function showMessage(value) {
+	console.log(value);}
+showMessage();	// undefined
+showMessage('山田');	// 山田
+showMessage('山田', '鈴木');	// 山田
+```
+
+上記のコードは全て正しく動作する。2つ目の引数は無視される。ただし、捨てているわけではなく、`arguments` オブジェクトに格納されており、このオブジェクト経由で利用することもできる。
+
+#### arguments と Arguments どちらが正しい？
+
+`arguments` オブジェクトの実体は、厳密には「`Arguments` オブジェクトを参照する `arguments` プロパティ」。`Arguments` オブジェクトはあくまで関数内部で暗黙的に生成されるもので、プログラマが意識することはない存在。`Arguments.length` と書くこともできない。
+
+#### 引数のデフォルト値を設定する
+
+引数の数をチェックしない、ということはすべての引数は省略可能であるということ。ただし、引数が省略されただけでは、正しく動作しないことがほとんど。
+
+そのため、デフォルト値を設定しておく。
+
+```lang-javascript
+function triangle(base, height) {
+	if (base == undefined) { base = 1; }
+	if (height == undefined) { height = 1; }
+	return base * height / 2;}
+console.log(triangle(5));	// 2.5
+```
+
+引数 `base` だけを省略することはできない。「省略できるのは、あくまで後ろの引数だけ」である。
+
+### 可変長引数の関数を定義する
+
+上記の内容は、「コンパイラがチェックすべきことで、アプリケーション側でチェックしなければならないのはデメリットでは？」という意見もある。
+
+しかし、`arguments` オブジェクトの用途は、引数チェックだけではなく、**可変長引数の関数**という重要な機能がある。
+
+可変長引数の関数を利用することで、柔軟に処理を記述することができる。例えば、以下は引数に与えられた数値を合計する `sum` 関数を定義する例。
+
+> chap4/variableArgs.html
+
+### 明示的に宣言された引数と可変長引数を混在させる
+
+> chap4/vairableArgs2.html
+
+明示的に宣言された引数と可変長引数は、`arguments` の中では一緒に格納されていることは誤解しないようにする。
+
+構文的には、すべての引数を可変長引数として記述できるが、インデックス番号で引数を指定するよりも、名前で管理する方が圧倒的に読みやすいため、明示できる引数についてはできるだけ名前をつけること。
+
+### 再帰呼び出しを定義する - `callee` プロパティ -
+
+`arguments` オブジェクトでもう一つ重要なのが、現在実行中の関数自身を参照するために用意されている `callee` プロパティ。これを使うことで、再帰処理が容易に書ける。
+
+> chap4/callee.html
+
+## 高度な関数のテーマ
+
+### 名前付き引数でコードを読みやすくする
+
+```lang-javascript
+	triangle({ base: 5, height: 4 })
+```
+
+名前付き引数を用いることで、以下の様なメリットがある。
+
+* 引数が多くなっても、コードの意味がわかりやすい
+* 省略可能な引数をスマートに表現できる
+* 引数の順番を自由に変更できる
+
+```lang-javascript
+	triangle({ height: 4 }) // 引数省略
+	triangle({ height: 4, base: 5 })	// 順番変更
+```
+
+これは、以下の様なケースで有効。
+
+* そもそも引数の数が多い
+* 省略可能な引数が多く、省略パターンにも様々な組合せがある
+
+名前付き引数と言っても難しいことはなく、引数を匿名オブジェクトで受け取っているだけ。
+
+### 関数の引数も関数 - 高階関数 -
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Arguments</title>
+</head>
+<body>
+	<script>
+		function showMessage (value) {
+			if (arguments.length != 1) {
+				throw new Error('引数の数が間違っている：' + arguments.length);
+			};
+			console.log(value);
+		}
+
+		try {
+			showMessage('山田', '鈴木');
+		} catch (e) {
+			window.alert(e.message);
+		}
+	</script>
+</body>
+</html>

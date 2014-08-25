@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Scope</title>
+</head>
+<body>
+	<script>
+		var scope = 'Global';
+		function checkScope() {
+			var scope = 'Local';
+			var f_literal = function() { return scope; };
+			console.log(f_literal());	// Local
+			var f_constructor = new Function('return scope;');
+			console.log(f_constructor());	// Global
+		}
+		checkScope();
+	</script>
+</body>
+</html>
