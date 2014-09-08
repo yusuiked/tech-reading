@@ -305,3 +305,154 @@ HTTP サーバを実装するには `http.Server` クラスを利用する。
 
 サンプルコードは `chap05` に格納した。
 
+# バイナリデータの操作とファイルの入出力
+
+## 文字列と `Buffer`
+
+* `Buffer` オブジェクトは `new` 演算子で生成する
+	* 配列や文字列を与えて初期化することもできる
+* `fill` メソッドで初期化できる
+* `String` クラスのように `length` や配列のインデックス指定で値を取ることができる
+* `String` クラスは immutable、`Buffer` クラスは mutable
+* `Buffer` クラスには `String` クラスに存在する `indexOf`, `search`, `replace`, `substring` などはないが、`slice` はある。
+* `Buffer` と `String` の相互変換には 以下のメソッドやクラスを使う
+* `toString` は文字列に変換する
+* `write` は既存の `Buffer` に文字列を書き込む
+* `StringDecoder` は Node.js のコアモジュールとして提供されており、Buffer が文字の単位として分割されていても、正しく文字列へと変換できる。`Buffer.concat` メソッドよりも実行効率が良い。
+* `Buffer` と数値の相互変換は、`read*`, `write*` メソッドを使う。型ごとにメソッドが多数用意されているが、使い方は一緒。
+* `Buffer` オブジェクトのコピーは、`copy` メソッドを使う
+* `Buffer` クラスの静的メソッドとして、以下のメソッドが提供されている
+* `Buffer.isBuffer`
+	* `Buffer` オブジェクトかどうかを調べる
+* `Buffer.byteLength`
+	* バイト長を取得
+* `Buffer.concat`
+	* バイト列を結合
+
+## ファイルやファイルシステムにアクセスする
+
+`fs` モジュールを使ってファイル入出力処理を行える。`fs` モジュールのメソッドには、大きく同期メソッドと非同期メソッドが提供されており、同期的なメソッドには sync と付いている。
+
+* ファイルからデータを読み出すには、`fs.readFile(filename, [encoding], [callback])` を使う。`Buffer` オブジェクトが処理結果として返る。`callback` 関数には `err`, `data` 引数が与えられる。
+* ファイルにデータを書き込むには、`fs.writeFile(filename, data, [encoding], [callback])` を使う。`writeFileSync` の場合は、戻り値は `undefined`。`callback` 関数には `err` 引数が与えられる。
+	* ファイルは上書きされる。
+* ファイルへのデータ追記は、`fs.appendFile(filename, data, [encoding], [callback])` を使う。
+
+## より柔軟なファイル操作を行う
+
+`fs.readFile` や `fs.writeFile` は、ファイルのオープンとデータの読み書き、クローズがまとめて実行される。
+個別に読み書きするには、以下の関数を使う。同じく Sync と付くメソッドは同期メソッド。
+
+* `fs.open(path, flags, [mode], [callback])`
+	* ファイルを開く
+	* `mode` 引数は、パーミッションを文字列か数値で指定。指定がない場合は `0666` が指定される。
+* `fs.close(fd)`
+	* ファイルを閉じる
+* `fs.write(fd, buffer, offset, length, position, [callback])`
+	* ファイルに書き込む
+* `fs.read(fd, buffer, offset, length, position, [callback])`
+	* ファイルの読み込み
+
+`mode` 引数の `rs`, `rs+` は、ローカルのファイルシステムキャッシュを使用しないため遅い。なので `fs.open` ではなく `fs.openSync` を使うべき。
+
+同期メソッド、非同期メソッドともに、コールバック関数の引数または戻り値にファイルディスクリプタが与えられる。そのため同期メソッドと非同期メソッドを組み合わせて利用することもできる。
+
+読み書き系のメソッドの `position` はファイルの位置、その他の `offset`, `length` は `buffer` に対する指定。
+
+また、非同期書き込みでコールバック関数を指定せずに `fs.write` 関数を実行することはできるが、同じファイルに対してコールバック関数の完了を待たずに連続して実行するのは非推奨。その場合は `fs.writeSync` か `fs.writeStream` を使うべき。
+
+```lang-javascript
+var fs = require('fs');
+fs.open('hoge.txt', 'w', function (err, fd) {
+	var but = new Buffer('apple-orange-grape-peach');
+	fs.write(fd, buf, 0, 6, 0);
+	fs.write(fd, buf, 6, 7, 6);
+	fs.write(fd, buf, 13, 6, 13);
+	fs.write(fd, but, 19, 5, 19, function (err, written, buffer) {
+		fs.close(fd);	});});
+```
+
+### その他の操作
+
+* ファイルの大きさを変更する
+	* `fs.truncate(fd, len, [callback]);`
+	* 指定したファイルが `len` よりも大きい場合は切り詰められ、`len` よりも小さい場合は0埋めされる
+* ファイルバッファをフラッシュする
+	* `fs.fsync(fd, [callback]);`
+* ファイルの情報を取得する
+	* `fs.stat(path, [callback]);`
+	* `fs.lstat(path,[callback]);`
+		* シンボリックリンクの場合は参照先を取得
+	* `fs.fstat(fd, [callback]);`
+		* ファイルディスクリプタで操作
+	* コールバック関数の引数には、`err`, `stats`(`fs.Stats` オブジェクト) が与えられる。
+* ファイルの存在を調べる
+	* `fs.exists(path, [callback])`
+* ファイルの所有者を変更する
+	* `fs.chown(path, uid, god, [callback])`
+	* `fs.lchown(path, uid, god, [callback])`
+	* `fs.fchown(fd, uid, god, [callback])`
+* ファイルのパーミッションを変更する
+	* `fs.chmod(path, mode, [callback])`
+	* `fs.fchmod(fd, mode, [callback])`
+	* `fs.lchmod(path, mode, [callback])`
+* ファイルのタイムスタンプを変更する
+	* `fs.utimes(path, atime, mtime, [callback])`
+	* `fs.futimes(fd, atime, mtime, [callback])`
+* シンボリックリンクが参照しているファイルのパスを取得する
+	* `fs.readlink(path, [callback])`
+* 正規化された絶対パスを取得する
+	* `fs.realpath(path, [callback])`
+* ファイルやディレクトリのリネーム
+	* `fs.rename(path1, path2, [callback])`
+* ハードリンクの作成
+	* `fs.link(srcpath, distpath, [callback])`
+* シンボリックリンクの作成
+	* `fs.symlink(link data, path, [type], [callback])`
+	* `type` 引数は windows のみ有効
+* ファイルの削除
+	* `fs.unlink(path, [callback])`
+* ディレクトリの削除
+	* `fs.rmdir(path, [callback])`
+* ディレクトリの作成
+	* `fs.mkdir(path, [mode], [callback])`
+	* `mode` 引数はパーミッション
+* ディレクトリ中のファイル一覧を取得
+	* `fs.readdir(path, [callback])`
+	* カレントディレクトリや親ディレクトリは含まれない
+* ファイルやディレクトリを監視する
+	* `fs.watch(filename, [options], [listener])`
+	* `options` 引数は、`{ persistent: true/false, interval: number}` のオブジェクトが指定できる
+	* `listener` 引数は、`change` イベントに対するイベントハンドラ
+
+## ストリームを使ったファイルアクセス
+
+ストリームは様々な入出力を抽象化して扱えることが特徴。Node.js のストリームは、イベント駆動でデータの読み書きを実行するため、大量のデータに対して効率的に読み書きできる。ストリームには、`Readable Stream` と `Writable Stream` の2種類がある。
+
+### Readable Stream のイベント
+
+* data
+* end
+* error
+* close
+
+### Writable Stream のイベント
+
+* drain
+* error
+* close
+* pipe
+
+`Writable Stream` の `write` メソッドは、書き込みバッファがいっぱいで書き込めなかったときでも、内部で Node.js のキューに格納され、OS側の書き込みバッファが空いたら自動的に転送されるので、再送は不要。
+
+書き込み終わったら、end メソッドで明示的に終了を宣言する。
+
+### 使い方
+
+```lang-javascript
+fs.createReadStream(path, [options]);
+// options は、flags, encoding, fd, mode, bufferSize, start, end
+fs.createWriteStream(path, [options]);
+// options は、flags, encoding, mode, start
+```
+
