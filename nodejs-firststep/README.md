@@ -456,3 +456,60 @@ fs.createWriteStream(path, [options]);
 // options は、flags, encoding, mode, start
 ```
 
+# Node.js アプリケーションのデバッグ方法
+
+## 標準モジュールに含まれるデバッグに有効な関数
+
+### console 関数
+
+* `%d`, `%s`, `%j` でそれぞれ format 出力できる。
+* ```console.log(数値だよ %d, 123);```
+* `console.log` と `console.info`、`console.error` と `console.warn` は同じ動作をする。
+* `console.trace` はスタックトレースを標準エラー出力に出力する。
+* `console.time(label)`, `console.timeEnd(label)` は実行時間を測定できる。
+
+### assert モジュール
+
+引数に与えた値を評価して、期待されたものと異なった場合に AssertionError を発生させる。
+どのようなAPIがあるかはリファレンス参照。
+
+## Node.js 組み込みのデバッガ
+
+```lang-bash
+$ node debug <スクリプト>
+```
+
+* `c`/`continue` で継続
+* `r`/`run` で実行再開
+* `n`/`next` でステップ実行
+* `s`/`stepin` でステップイン
+* `o`/`stepout` でステップアウト
+* `repl` コマンドで REPL を起動
+* `watch`(評価する式) でウォッチ
+* ロードされているスクリプト一覧は `scripts`
+* `sb`/`setBreakpoint(filename, line)` でブレークポイント設定
+* `cb`/`clearBreakpoint(filename, line)` でブレークポイント解除
+* ソースコード中に `debugger` と埋め込んでおくと、デバッガはこの箇所でプログラムの実行を停止する
+
+### 実行中の Node.js にデバッガを接続する
+
+1. `ps` コマンドでプロセスIDを調べる
+2. `kill` コマンドで `SIGUSR1` シグナルを送ると、デバッガエージェントが起動して待ち受ける
+3. `node debug --` コマンドでデバッガが起動する
+
+### node-inspector を使う
+
+Node.js の組み込みデバッガの機能をGUIで使えるようにするのが `node-inspector`。
+
+#### 使い方
+
+```lang-bash
+$ npm install -g node-inspector
+$ node --debug-brk hoge.js
+$ node-inspector
+ ```
+ 
+# Node.js からデータベースにアクセスする
+
+後回し
+
