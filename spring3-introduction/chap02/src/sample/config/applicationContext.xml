@@ -16,4 +16,6 @@
     <!--<bean id="messageService" class="sample.di.business.service.MessageServiceImpl">-->
         <!--<property name="message" value="#{msgProperties.message}"/>-->
     <!--</bean>-->
+    <!-- ApplicationContext が発生させるイベントを handle する -->
+    <bean id="customEventListener" class="sample.di.CustomEventListener"/>
 </beans>
