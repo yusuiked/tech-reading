@@ -11,6 +11,6 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
     @Override
     public Product findProduct() {
-        return null;
+        return productDao.findProduct();
     }
 }
