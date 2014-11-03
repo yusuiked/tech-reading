@@ -13,8 +13,8 @@ public class ProductSampleRun {
     }
 
     private void execute() {
-        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("/sample/config/applicationContext.xml");
-//        BeanFactory ctx = new ClassPathXmlApplicationContext("/sample/config/applicationContext.xml");
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+//        BeanFactory ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         ProductService productService = ctx.getBean(ProductService.class);
         Product product = productService.findProduct();
         System.out.println(product);

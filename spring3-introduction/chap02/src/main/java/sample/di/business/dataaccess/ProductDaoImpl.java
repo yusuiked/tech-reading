@@ -1,4 +1,4 @@
-package sample.di.dataaccess;
+package sample.di.business.dataaccess;
 
 import org.springframework.stereotype.Component;
 import sample.di.business.service.ProductDao;

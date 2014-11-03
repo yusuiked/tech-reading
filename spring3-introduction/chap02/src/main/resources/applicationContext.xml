@@ -12,7 +12,7 @@
     <!--<bean id="productService" class="sample.di.business.service.ProductServiceImpl" autowire="byType"/>-->
     <!--<bean id="produceDao" class="sample.di.dataaccess.ProductDaoImpl"/>-->
     <!-- プロパティファイルの利用 -->
-    <util:properties id="msgProperties" location="classpath:sample/config/message.properties"/>
+    <util:properties id="msgProperties" location="classpath:message.properties"/>
     <!--<bean id="messageService" class="sample.di.business.service.MessageServiceImpl">-->
         <!--<property name="message" value="#{msgProperties.message}"/>-->
     <!--</bean>-->

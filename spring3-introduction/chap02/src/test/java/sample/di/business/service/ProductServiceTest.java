@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:sample/config/applicationContext.xml")
+@ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class ProductServiceTest {
 
     @Autowired
