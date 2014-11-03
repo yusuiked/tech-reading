@@ -4,13 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import sample.di.business.valueobject.Product;
 
-@Component
+//@Component
 public class ProductServiceImpl implements ProductService {
-    @Autowired
+//    @Autowired
     private ProductDao productDao;
 
     @Override
     public Product findProduct() {
         return productDao.findProduct();
+    }
+
+    public void setProductDao(ProductDao productDao) {
+        this.productDao = productDao;
     }
 }
