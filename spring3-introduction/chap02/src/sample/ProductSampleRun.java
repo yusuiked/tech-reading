@@ -1,5 +1,6 @@
 package sample;
 
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import sample.di.business.service.ProductService;
 import sample.di.business.valueobject.Product;
@@ -12,6 +13,7 @@ public class ProductSampleRun {
 
     private void execute() {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("/sample/config/applicationContext.xml");
+//        BeanFactory ctx = new ClassPathXmlApplicationContext("/sample/config/applicationContext.xml");
         ProductService productService = ctx.getBean(ProductService.class);
         Product product = productService.findProduct();
         System.out.println(product);
