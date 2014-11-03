@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import sample.di.business.service.ProductDao;
 import sample.di.business.valueobject.Product;
 
-//@Component
+@Component
 public class ProductDaoImpl implements ProductDao {
     @Override
     public Product findProduct() {
