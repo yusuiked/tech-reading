@@ -4,15 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.yukung.sandbox</groupId>
-    <artifactId>spring3-introduction-chap04</artifactId>
-    <version>0.1-SNAPSHOT</version>
-
     <parent>
         <groupId>org.yukung.sandbox</groupId>
         <artifactId>spring3-introduction</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
+
+    <groupId>org.yukung.sandbox</groupId>
+    <artifactId>spring3-introduction-chap05</artifactId>
+    <version>0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -25,16 +25,25 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
+            <artifactId>spring-tx</artifactId>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.181</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
     </dependencies>
 </project>
