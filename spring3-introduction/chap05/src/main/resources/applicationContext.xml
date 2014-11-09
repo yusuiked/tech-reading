@@ -22,19 +22,22 @@
     <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg type="javax.sql.DataSource" ref="dataSource"/>
     </bean>
-    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="*"
-                       propagation="REQUIRED"
-                       isolation="READ_COMMITTED"
-                       timeout="10"
-                       read-only="false"
-                       rollback-for="sample.biz.exception.BusinessException"/>
-        </tx:attributes>
-    </tx:advice>
-    <aop:config>
-        <aop:advisor advice-ref="transactionAdvice" pointcut="execution(* sample.biz.service.*Service.*(..))"/>
-    </aop:config>
+    <!-- @Transactional を有効にする -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- @Transactional アノテーションで代替できる -->
+    <!--<tx:advice id="transactionAdvice" transaction-manager="transactionManager">-->
+    <!--<tx:attributes>-->
+    <!--<tx:method name="*"-->
+    <!--propagation="REQUIRED"-->
+    <!--isolation="READ_COMMITTED"-->
+    <!--timeout="10"-->
+    <!--read-only="false"-->
+    <!--rollback-for="sample.biz.exception.BusinessException"/>-->
+    <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+    <!--<aop:config>-->
+    <!--<aop:advisor advice-ref="transactionAdvice" pointcut="execution(* sample.biz.service.*Service.*(..))"/>-->
+    <!--</aop:config>-->
     <context:annotation-config/>
     <context:component-scan base-package="sample.*"/>
 </beans>
