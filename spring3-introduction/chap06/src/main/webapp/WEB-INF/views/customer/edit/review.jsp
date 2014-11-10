@@ -24,7 +24,7 @@
         </dd>
     </dl>
     <button type="submit" name="_event_confirmed">更新</button>
-    <button type="submit" name="_evnet_revise">再入力</button>
+    <button type="submit" name="_event_revise">再入力</button>
 </form>
 </body>
 </html>
