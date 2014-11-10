@@ -5,8 +5,10 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.AssertFalse;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
+@XmlRootElement
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = -7109425715764938159L;

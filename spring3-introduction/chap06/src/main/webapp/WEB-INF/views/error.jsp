@@ -10,10 +10,7 @@
 <h1>例外発生（デバッグ用）</h1>
 <dl>
     <dt>例外クラス</dt>
-    <dd>${exception.class.name}</dd>
     <dt>メッセージ</dt>
-    <dd>${exception.message}</dd>
 </dl>
-
 </body>
 </html>
