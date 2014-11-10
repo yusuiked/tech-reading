@@ -1,5 +1,10 @@
 package com.customer.biz.domain;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.AssertFalse;
 import java.io.Serializable;
 
 public class Customer implements Serializable {
@@ -8,10 +13,16 @@ public class Customer implements Serializable {
 
     private int id;
 
+    @NotBlank
+    @Length(max = 20)
     private String name;
 
+    @NotBlank
+    @Length(max = 100)
     private String address;
 
+    @NotBlank
+    @Email
     private String emailAddress;
 
     public Customer(String name, String address, String emailAddress) {
@@ -20,6 +31,7 @@ public class Customer implements Serializable {
         this.emailAddress = emailAddress;
     }
 
+    @AssertFalse(message = "{errors.ngemail")
     public boolean isNgEmail() {
         return emailAddress.matches(".*@ng.foo.baz$");
     }
