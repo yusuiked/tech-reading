@@ -12,6 +12,7 @@
     <groupId>org.yukung.sandbox</groupId>
     <artifactId>spring3-introduction-chap06</artifactId>
     <version>0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
