@@ -7,7 +7,7 @@
         </layout>
     </appender>
 
-    <category name="sample">
+    <category name="com.customer">
         <priority value="trace"/>
     </category>
 
