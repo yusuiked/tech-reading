@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import sample.di.business.valueobject.Product;
-import sample.di.dataaccess.ProductDaoImpl;
+import sample.di.business.dataaccess.ProductDaoImpl;
 
 @Component
 public class ProductServiceImpl implements ProductService {
