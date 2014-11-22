@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd" start-state="enter">
+
+    <input name="customerId" value="flashScope.customerId" required="true"/>
+
+    <on-start>
+        <evaluate expression="customerService.findById(flashScope.customerId)" result="flowScope.customer"/>
+    </on-start>
+
+	<view-state id="enter" view="editCustomer/enter" model="customer">
+	   <transition on="proceed" to="review"/>
+	   <transition on="cancel" to="canceled" validate="false"/>
+	</view-state>
+
+	<view-state id="review" view="editCustomer/review" model="customer">
+	   <transition on="confirmed" to="edit"/>
+	   <transition on="revise" to="enter" validate="false"/>
+	   <transition on="cancel" to="canceled" validate="false"/>
+	</view-state>
+
+	<action-state id="edit">
+	   <evaluate expression="customerService.update(flowScope.customer)"/>
+	   <transition on="*" to="edited"/>
+	</action-state>
+
+	<end-state id="edited" view="editCustomer/registered">
+	   <output name="edited" value="flowScope.customer"/>
+	</end-state>
+
+	<end-state id="canceled" view="flowRedirect:listCustomer"/>
+</flow>

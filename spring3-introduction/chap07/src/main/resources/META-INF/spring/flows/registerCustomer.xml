@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd" start-state="enter">
+
+    <var name="customer" class="sample.customer.biz.domain.Customer"/>
+    <!-- 入力値の明示をしたい場合 -->
+<!--     <input name="id" value="flashScope.id" required="true"/> -->
+    <!-- フローの先頭で flowScope に使うオブジェクトを作成するロジックを実行したい場合 -->
+<!--     <on-start>
+        <evaluate expression="customerService.findById(requestParameters.id)" result="flowScope.customer"/>
+    </on-start> -->
+
+	<view-state id="enter" view="registerCustomer/enter" model="customer">
+	   <transition on="proceed" to="review"/>
+	   <transition on="cancel" to="canceled" validate="false"/>
+	</view-state>
+
+    <view-state id="review" view="registerCustomer/review" model="customer">
+        <transition on="confirmed" to="register"/>
+        <transition on="revise" to="enter" validate="false"/>
+        <transition on="cancel" to="canceled" validate="false"/>
+    </view-state>
+
+    <action-state id="register">
+        <evaluate expression="customerService.register(flowScope.customer)"/>
+        <transition on="*" to="registered"/>
+        <!-- 複数の evaluate を行いたい場合は、transition 時の on に指定する名前空間を attribute でそれぞれ指定する -->
+        <!-- 上から順に実行するため、前の evaluate で条件を満たした場合はそれ以降の evaluate は評価されないことに注意 -->
+<!--         <evaluate expression="fooService.foo()">
+            <attribute name="name" value="before"/>
+        </evaluate>
+        <evaluate expression="fooService.bar()">
+            <attribute name="name" value="after"/>
+        </evaluate>
+        <transition on="before.NG" to="failedBefore"/>
+        <transition on="after.NG" to="failedAfter"/>
+        <transition on="after.OK" to="success"/> -->
+    </action-state>
+
+    <end-state id="registered" view="registerCustomer/registered"/>
+    <end-state id="canceled" view="flowRedirect:registerCustomer"/>
+</flow>

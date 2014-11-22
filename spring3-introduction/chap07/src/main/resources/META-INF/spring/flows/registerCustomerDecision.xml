@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd" start-state="enter">
+
+	<var name="customer" class="sample.customer.biz.domain.Customer" />
+
+	<view-state id="enter" view="registerCustomer/enter" model="customer">
+		<transition on="proceed" to="decideWarning" />
+		<transition on="cancel" to="canceled" validate="false" />
+	</view-state>
+
+	<decision-state id="decideWarning">
+	   <!-- customer オブジェクトの状態で切り分けも可能 -->
+		<!-- <if test="flowScope.customer.freeEmail" -->
+		<if test="customerService.isFreeEmailCustomer(flowScope.customer)"
+			then="warningFreeEmail" else="review" />
+	</decision-state>
+
+	<view-state id="warningFreeEmail" view="registerCustomer/warnFreeEmail">
+		<transition on="accept" to="review" />
+		<transition on="reject" to="enter" />
+	</view-state>
+
+	<view-state id="review" view="registerCustomer/review">
+		<transition on="confirmed" to="register" />
+		<transition on="revise" to="enter" />
+		<transition on="cancel" to="canceled" />
+	</view-state>
+
+	<action-state id="register">
+		<evaluate expression="customerService.register(flowScope.customer)" />
+		<transition on="*" to="registered" />
+	</action-state>
+
+	<end-state id="registered" view="registerCustomer/registered" />
+
+	<end-state id="canceled" view="flowRedirect:registerCustomer" />
+
+
+</flow>
