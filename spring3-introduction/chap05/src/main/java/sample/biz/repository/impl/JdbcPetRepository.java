@@ -7,14 +7,16 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import sample.biz.domain.Pet;
 import sample.biz.repository.PetRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+//import java.time.LocalDateTime;
+//import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -99,7 +101,10 @@ public class JdbcPetRepository implements PetRepository {
 
     @Override
     public int update() {
-        Date birthDate = Date.from(LocalDateTime.of(1999, 10, 10, 0, 0).toInstant(ZoneOffset.ofHours(9)));
+    	Calendar calendar = Calendar.getInstance();
+    	calendar.set(1999, 9, 10);
+    	Date birthDate = calendar.getTime();
+//        Date birthDate = Date.from(LocalDateTime.of(1999, 10, 10, 0, 0).toInstant(ZoneOffset.ofHours(9)));
         return jdbcTemplate.update("UPDATE PET SET PET_NAME=?, PRICE=?, BIRTH_DATE=? WHERE PET_ID=?"
         , "Pochi", 100, birthDate, 1L);
     }
@@ -121,7 +126,11 @@ public class JdbcPetRepository implements PetRepository {
         pet.setPetName("小太郎");
         pet.setOwnerName("Galford");
         pet.setPrice(25000);
-        pet.setBirthDate(Date.from(LocalDateTime.of(2013, 6, 6, 0, 0).toInstant(ZoneOffset.ofHours(9))));
+    	Calendar calendar = Calendar.getInstance();
+    	calendar.set(1999, 9, 10);
+    	Date birthDate = calendar.getTime();
+    	pet.setBirthDate(birthDate);
+//        pet.setBirthDate(Date.from(LocalDateTime.of(2013, 6, 6, 0, 0).toInstant(ZoneOffset.ofHours(9))));
         return namedParameterJdbcTemplate.update("INSERT INTO PET (PET_NAME, OWNER_NAME, PRICE, BIRTH_DATE) VALUES (:petName, :ownerName, :price, :birthDate)",
                 new BeanPropertySqlParameterSource(pet));
     }
