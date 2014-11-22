@@ -1,0 +1,48 @@
+第7章 プレゼンテーション層の設計と実装 Spring Web Flow 編を読了。
+
+- Spring Web Flow の構成要素、独自のスコープ概念
+    - Flow は大きく以下の2要素で構成される
+        - State
+        - Transition
+    - 複数の Flow でアプリケーションを表現する
+    - Scope の種類
+        - Request
+            - HttpServletRequest と同様。
+        - Flash
+            - ある View State から、次の View State まで有効なスコープ。redirect 挟んでも生き続ける。
+        - Flow
+            - 1つの Flow の中で有効なスコープ。他の Flow （サブフローも含む）からは触れない
+        - Conversation
+            - 1つの Flow の中で有効なのは Flow スコープと同じだが、サブフローからもアクセスできる
+        - view
+            - その view 内でのみ生き続ける。validation で戻った後に値を残しておくとか
+- State の種類
+    - View State
+        - 指定した view を表示する State
+    - Action State
+        - EL を使って DI コンテナ上のサービスクラスからビジネスロジックを実行する。evaluate タグを使って実行する
+    - End State
+        - State を終了する。Flow スコープのオブジェクトが破棄される。
+    - Decision State
+        - スコープのオブジェクトの状態やロジックの実行結果などから、処理を分岐する。EL の if test を使って条件評価して transition を決定。
+    - Subflow State
+        - ある Flow からサブフローへ値を受け渡してフローを実行できる。結果ももらうことができる。input と output タグを使う
+        - requestParameters というオブジェクトが暗黙的にDIされ、ELから触れる。リクエストパラメータを受け渡しに使いたいときなどに使える
+- URL は flow 定義ファイルの名前がバインドされる。変えたい場合は flow-registry に登録する時に id(URLになる) と path （flow定義ファイルのパス）をひもづける
+- 実装
+    - Spring Webflow の config を web.xml の contextConfigLocation をキーにして init-param で読み込ませる
+    - config の構成要素
+        - flow-registry に flow-builder-services と flow-location-pattern を指定
+        - flow-builder-services は view-factory-creator(org.springframework.webflow.mvc.builder.MvcViewFactoryCreatorなどを指定、必要なプロパティは Spring MVC の viewResolver)と必要なら validator を指定。development 属性を true にすると、flow 定義ファイルをホットリロードしてくれる
+        - 以下の2つはリクエストハンドラのマッピング解決に必要
+            - org.springframework.webflow.mvc.servlet.FlowHandlerMapping
+            - org.springframework.webflow.mvc.servlet.FlowHandlerAdaptor
+        - flow-location-pattern は flow 定義ファイルのパスを指定
+        - flow-executor に flow-registry を指定すると基本設定が完了
+    - 1フローに付き 1 flow 定義ファイル
+        - state と transition を定義していく
+        - var でその flow スコープで用いるオブジェクトを登録できる
+    - JSP 側で State が次の transition へ遷移するためのイベントを送りつける。方法は2つ
+        - キーが `_eventId_{イベント名}` のリクエストパラメータを送る（値はなんでも良い）
+        - キーが `_eventId`, 値が `{イベント名}` のリクエストパラメータを送る
+    - JSP で flow のイベントを受け付ける URL を知る場合は、pageContext に自動的に設定されているので、`{flowExecutionUrl}` で EL でアクセスできる。
