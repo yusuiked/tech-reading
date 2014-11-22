@@ -18,7 +18,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>3.1.1.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.webflow</groupId>
@@ -30,12 +29,12 @@
             <artifactId>javax.servlet.jsp.jstl</artifactId>
             <version>1.2.3</version>
             <scope>runtime</scope>
-            <exclusions>
+<!--             <exclusions>
                 <exclusion>
                     <groupId>javax.servlet</groupId>
                     <artifactId>servlet-api</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions> -->
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
