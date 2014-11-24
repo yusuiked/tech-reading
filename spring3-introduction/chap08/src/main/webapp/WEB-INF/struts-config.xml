@@ -30,8 +30,9 @@
 	<!-- <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
 	   <set-property property="contextConfigLocation" value="/WEB-INF/applicationContext.struts.xml" />
 	</plug-in> -->
-<!-- 	<controller>
+	<!-- AutowiringRequestProcessor を使う場合は以下を指定 -->
+	<controller>
 		<set-property property="processorClass"
 			value="org.springframework.web.struts.AutowiringRequestProcessor" />
-	</controller> -->
+	</controller>
 </struts-config>
