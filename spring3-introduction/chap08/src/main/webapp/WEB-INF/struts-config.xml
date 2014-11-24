@@ -26,9 +26,10 @@
 			<forward name="success" path="/sample3.jsp" />
 		</action>
 	</action-mappings>
-	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+	<!-- Servlet コンテナではなく、Struts 側で Spring の Bean 定義ファイルをロードする場合はプラグインを使う -->
+	<!-- <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
 	   <set-property property="contextConfigLocation" value="/WEB-INF/applicationContext.struts.xml" />
-	</plug-in>
+	</plug-in> -->
 <!-- 	<controller>
 		<set-property property="processorClass"
 			value="org.springframework.web.struts.AutowiringRequestProcessor" />
