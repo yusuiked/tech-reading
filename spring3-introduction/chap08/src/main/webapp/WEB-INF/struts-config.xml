@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+      "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+      "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="sampleForm" type="sample.web.SampleForm" />
+	</form-beans>
+
+	<action-mappings>
+		<action path="/menu" forward="/menu.jsp" />
+		<action path="/form1" forward="/sample1.jsp" />
+		<action path="/sample1"
+			type="org.springframework.web.struts.DelegatingActionProxy" name="sampleForm"
+			scope="request" validate="false">
+			<forward name="success" path="/sample1.jsp" />
+		</action>
+		<action path="/form2" forward="/sample2.jsp" />
+		<action path="/sample2" type="sample.web.SampleAction2" name="sampleForm"
+			scope="request" validate="false">
+			<forward name="success" path="/sample2.jsp" />
+		</action>
+		<action path="/form3" forward="/sample3.jsp" />
+		<action path="/sample3" type="sample.web.SampleAction3" name="sampleForm"
+			scope="request" validate="false">
+			<forward name="success" path="/sample3.jsp" />
+		</action>
+	</action-mappings>
+	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+	   <set-property property="contextConfigLocation" value="/WEB-INF/applicationContext.struts.xml" />
+	</plug-in>
+<!-- 	<controller>
+		<set-property property="processorClass"
+			value="org.springframework.web.struts.AutowiringRequestProcessor" />
+	</controller> -->
+</struts-config>
