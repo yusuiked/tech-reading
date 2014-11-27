@@ -3,7 +3,13 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
+    <!-- 以下は filter の init-param としても定義できる -->
+    <!-- <constant name="struts.devMode" value="true"/> -->
+
     <package name="sample" namespace="/" extends="struts-default">
+        <interceptors>
+            <interceptor name="fooInterceptor" class="org.yukung.sandbox.sample.interceptor.FooInterceptor"/>
+        </interceptors>
         <action name="menu">
             <result name="success">/WEB-INF/jsp/menu.jsp</result>
         </action>
@@ -21,6 +27,12 @@
         </action>
         <action name="aware" class="org.yukung.sandbox.sample.actions.AwareSampleAction">
             <result name="success">/WEB-INF/jsp/aware.jsp</result>
+        </action>
+        <action name="interceptor" class="org.yukung.sandbox.sample.actions.InterceptorSampleAction">
+            <interceptor-ref name="fooInterceptor" />
+            <!-- インターセプターを定義した時は暗黙的に設定されているデフォルトインターセプターは提議されないので自分で定義 -->
+            <interceptor-ref name="defaultStack" />
+            <result name="success">/WEB-INF/jsp/foo.jsp</result>
         </action>
     </package>
 </struts>
