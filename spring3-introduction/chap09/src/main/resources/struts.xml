@@ -10,5 +10,17 @@
         <action name="hello" class="org.yukung.sandbox.sample.actions.HelloAction">
             <result name="success">/WEB-INF/jsp/hello.jsp</result>
         </action>
+        <action name="foo" class="org.yukung.sandbox.sample.actions.MultiAction" method="foo">
+            <result name="success">/WEB-INF/jsp/foo.jsp</result>
+        </action>
+        <action name="bar" class="org.yukung.sandbox.sample.actions.MultiAction" method="bar">
+            <result name="success">/WEB-INF/jsp/bar.jsp</result>
+        </action>
+        <action name="binding" class="org.yukung.sandbox.sample.actions.BindingSampleAction">
+            <result name="success">/WEB-INF/jsp/login.jsp</result>
+        </action>
+        <action name="aware" class="org.yukung.sandbox.sample.actions.AwareSampleAction">
+            <result name="success">/WEB-INF/jsp/aware.jsp</result>
+        </action>
     </package>
 </struts>
