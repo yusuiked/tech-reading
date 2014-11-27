@@ -34,5 +34,9 @@
             <interceptor-ref name="defaultStack" />
             <result name="success">/WEB-INF/jsp/foo.jsp</result>
         </action>
+        <action name="validation" class="org.yukung.sandbox.sample.actions.ValidationSampleAction">
+            <result name="input">/WEB-INF/jsp/validation.jsp</result>
+            <result name="success">/WEB-INF/jsp/validation.jsp</result>
+        </action>
     </package>
 </struts>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+    "-//OpenSymphony Group//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="userName">
+        <field-validator type="requiredstring">
+            <message>
+                ${getText("required", {"ユーザ名"})}
+            </message>
+        </field-validator>
+    </field>
+    <field name="password">
+        <field-validator type="requiredstring">
+            <message>
+                ${getText("required", {"パスワード"})}
+            </message>
+        </field-validator>
+    </field>
+</validators>
