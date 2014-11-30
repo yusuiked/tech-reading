@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yukung.sandbox.sample.biz.dao.PetMapper">
+	<resultMap id="petResultMap" type="Pet">
+		<id property="petId" column="PET_ID" />
+		<result property="petName" column="PET_NAME" />
+		<result property="ownerName" column="OWNER_NAME" />
+		<result property="price" column="PRICE" />
+		<result property="birthDate" column="BIRTH_DATE" />
+	</resultMap>
+	<resultMap id="ownerResultMap" type="Owner">
+		<id property="ownerName" column="OWNER_NAME" />
+		<collection property="pets" ofType="Pet">
+			<id property="petId" column="PET_ID" />
+			<result property="petName" column="PET_NAME" />
+			<result property="ownerName" column="OWNER_NAME" />
+			<result property="price" column="PRICE" />
+			<result property="birthDate" column="BIRTH_DATE" />
+		</collection>
+	</resultMap>
+
+	<select id="selectPet" parameterType="int" resultMap="petResultMap">
+		select * from PET where PET_ID = #{value}
+	</select>
+
+	<insert id="insertPet" parameterType="Pet" useGeneratedKeys="true"
+		keyProperty="petId">
+		insert into PET (PET_NAME, OWNER_NAME, PRICE, BIRTH_DATE)
+		values (#{petName}, #{ownerName}, #{price}, #{birthDate})
+	</insert>
+
+	<select id="selectPetByNames" parameterType="hashmap" resultMap="petResultMap">
+		select * from PET P inner join OWNER O ON P.OWNER_NAME = O.OWNER_NAME
+		where P.PET_NAME = #{pet.petName} and O.OWNER_NAME = #{owner.ownerName}
+	</select>
+
+	<select id="selectOwner" parameterType="string" resultMap="ownerResultMap">
+	   select * from OWNER O inner join PET P on O.OWNER_NAME = #{ownerName}
+	</select>
+
+	<select id="findPet" parameterType="Pet" resultMap="petResultMap">
+	   select * from PET
+	   <where>
+	       <if test="petName != null">
+	           PET_NAME = #{petName}
+	       </if>
+	       <if test="ownerName != null">
+	           AND OWNER_NAME = #{ownerName}
+	       </if>
+	       <if test="price != null">
+	           AND PRICE = #{price}
+	       </if>
+	   </where>
+	</select>
+
+	<delete id="deletePet" parameterType="string">
+	   delete from PET P where P.PET_NAME = #{petName}
+	</delete>
+</mapper>
