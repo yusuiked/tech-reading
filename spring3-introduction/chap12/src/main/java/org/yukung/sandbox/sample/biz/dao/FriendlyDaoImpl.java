@@ -1,52 +1,31 @@
 package org.yukung.sandbox.sample.biz.dao;
 
-import java.sql.SQLException;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ibatis.SqlMapClientTemplate;
+import org.springframework.stereotype.Repository;
 import org.yukung.sandbox.sample.biz.domain.Owner;
 
-import com.ibatis.sqlmap.client.SqlMapClient;
-
+@Repository
 public class FriendlyDaoImpl implements FriendlyDao {
+
+	@Autowired
+	private SqlMapClientTemplate sqlMapClientTemplate;
 
 	@Override
 	public Owner getOwnerDynamic(String id, String name) {
-		return null;
+		Owner owner = new Owner();
+		owner.setOwnerId(id);
+		owner.setOwnerName(name);
+		return (Owner) sqlMapClientTemplate.queryForObject("findOwnerDynamic", owner);
 	}
 
 	@Override
 	public void insertOwner(Owner owner) {
+		sqlMapClientTemplate.insert("insertOwner", owner);
 	}
 
 	@Override
 	public void deleteOwner(String id) {
-	}
-
-	public Owner getOwnerDynamic(SqlMapClient sqlMapClient, String id, String name) {
-		Owner condition = new Owner();
-		condition.setOwnerId(id);
-		condition.setOwnerName(name);
-		Owner result = null;
-		try {
-			result = (Owner) sqlMapClient.queryForObject("findOwnerDynamic", condition);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	public void insertOwner(SqlMapClient sqlMapClient, Owner owner) {
-		try {
-			sqlMapClient.insert("insertOwner", owner);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void deleteOwner(SqlMapClient sqlMapClient, String id) {
-		try {
-			sqlMapClient.delete("deleteOwner", id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		sqlMapClientTemplate.delete("deleteOwner", id);
 	}
 }
