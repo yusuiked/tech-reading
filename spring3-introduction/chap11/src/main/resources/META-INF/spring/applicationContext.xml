@@ -25,6 +25,22 @@
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<!-- persistence.xml と併用する場合 -->
+		<!-- <property name="persistenceUnitName" value="manager1" /> -->
+		<!-- persistence.xml を記述しない場合 -->
 		<property name="persistenceUnitName" value="manager1" />
+		<property name="persistenceProviderClass" value="org.hibernate.ejb.HibernatePersistence" />
+		<property name="packagesToScan" value="org.yukung.sandbox.sample.biz.domain" />
+		<property name="jpaProperties">
+		  <props>
+		      <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+		      <prop key="hibernate.show_sql">true</prop>
+		      <prop key="hibernate.format_sql">true</prop>
+		      <prop key="hibernate.hbm2ddl.auto">create</prop>
+		      <prop key="hibernate.hbm2ddl.import_files">/db/migration/init.sql</prop>
+		  </props>
+		</property>
 	</bean>
+	<!-- JNDI で EntityManagerFactory を取ってくる場合 -->
+	<!-- <jee:jndi-lookup id="entityManagerFactory" jndi-name="persistence/manager1" /> -->
 </beans>
