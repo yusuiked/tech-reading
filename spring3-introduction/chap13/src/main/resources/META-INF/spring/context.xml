@@ -10,7 +10,10 @@
 	">
 
 	<context:annotation-config />
-	<context:component-scan base-package="org.yukung.sandbox.sample" />
+	<!-- PetDaoImpl と PetDaoMapperImpl が PetDao に対して byType として Unique ではないので -->
+	<context:component-scan base-package="org.yukung.sandbox.sample" use-default-filters="false">
+	   <context:include-filter type="aspectj" expression="org..PetDaoMapperImpl" />
+	</context:component-scan>
 
 	<jdbc:embedded-database id="dataSource" type="H2">
 		<jdbc:script location="classpath:db/migration/schema.sql" />
@@ -34,5 +37,17 @@
 
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+
+    <!-- この指定方法は Mapper の数が増えてくると辛くなる -->
+	<!-- <bean id="petMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="org.yukung.sandbox.sample.biz.dao.PetMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean> -->
+    <!-- こうするとパッケージごとbean定義できる -->
+	<bean id="id" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="org.yukung.sandbox.sample.biz.dao" />
+		<!-- パッケージ内の全ての interface に対して scan してしまうため、Marker Annotation で Mapper のみ指定する -->
+		<property name="annotationClass" value="org.yukung.sandbox.sample.biz.dao.MyMapper" />
 	</bean>
 </beans>
