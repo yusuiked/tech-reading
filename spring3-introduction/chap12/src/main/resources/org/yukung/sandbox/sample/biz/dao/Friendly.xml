@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Friendly">
+
+    <typeAlias alias="Owner" type="org.yukung.sandbox.sample.biz.domain.Owner" />
+
+	<resultMap id="ownerResult" class="Owner">
+		<result property="ownerId" column="OWNER_ID" />
+		<result property="ownerName" column="OWNER_NAME" />
+	</resultMap>
+
+	<select id="findOwnerDynamic" parameterClass="Owner" resultMap="ownerResult">
+	   select OWNER_ID, OWNER_NAME from OWNER
+	   <dynamic prepend="where">
+	       <isNotNull prepend="and" property="ownerId">
+	           OWNER.OWNER_ID = #ownerId#
+	       </isNotNull>
+	       <isNotNull prepend="and" property="ownerName">
+	           OWNER.OWNER_NAME = #ownerName#
+	       </isNotNull>
+	   </dynamic>
+	</select>
+
+	<insert id="insertOwner" parameterClass="Owner">
+	   insert into OWNER (OWNER_NAME) values (#ownerName#)
+	   <selectKey resultClass="string" keyProperty="ownerId">
+	       call identity()
+	   </selectKey>
+	</insert>
+
+	<delete id="deleteOwner" parameterClass="java.lang.String">
+	   delete from OWNER where OWNER_ID = #value#
+	</delete>
+</sqlMap>
