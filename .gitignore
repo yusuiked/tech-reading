@@ -55,6 +55,9 @@ local.properties
 # # TeXlipse plugin
 .texlipse
 
+# # Spring Tool Suite
+.springBeans
+
 # NetBeans.gitignore
 
 nbproject/private/
