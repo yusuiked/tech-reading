@@ -17,7 +17,7 @@ public class AppConfig {
 
 	DataSource dataSource;
 
-	@Bean
+	@Bean(destroyMethod = "close")
 	DataSource realDataSource() {
 		DataSourceBuilder factory =
 				DataSourceBuilder
