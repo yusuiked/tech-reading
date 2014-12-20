@@ -14,8 +14,9 @@ public class App implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		String sql = "SELECT 1";
-		MapSqlParameterSource param = new MapSqlParameterSource();
+		String sql = "SELECT :a + :b";
+		MapSqlParameterSource param =
+				new MapSqlParameterSource().addValue("a", 100).addValue("b", 200);
 		Integer result = jdbcTemplate.queryForObject(sql, param, Integer.class);
 
 		System.out.println("result = " + result);
