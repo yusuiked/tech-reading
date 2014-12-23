@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +27,8 @@ public class CustomerRestController {
 	CustomerService customerService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	List<Customer> getCustomers() {
-		List<Customer> customers = customerService.findAll();
+	List<Customer> getCustomers(@PageableDefault Pageable pageable) {
+		List<Customer> customers = customerService.findAll(pageable);
 		return customers;
 	}
 
