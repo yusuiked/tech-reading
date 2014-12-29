@@ -29,8 +29,8 @@ public class StreamPractice {
 
     private boolean containsTextFile(Path dir) throws IOException {
         return Files.walk(dir)
-                .filter(path -> Files.isRegularFile(path))
-                .map(path -> path.toString())
+                .filter(Files::isRegularFile)
+                .map(Path::toString)
                 .anyMatch(name -> name.endsWith(".txt"));
     }
 
