@@ -38,7 +38,7 @@ public class StreamPractice {
 
     private Map<Dep, List<Emp>> empsByDep(List<Emp> emps) {
         return emps.stream()
-                .collect(Collectors.groupingBy(emp -> emp.getDep()));   // キーを取得するための Function インターフェースのインスタンス
+                .collect(Collectors.groupingByConcurrent(Emp::getDep)); // 並列で groupingBy() する時は groupingByConcurrent() を使う
     }
 
     private String toStringByName(Student[] students) {
