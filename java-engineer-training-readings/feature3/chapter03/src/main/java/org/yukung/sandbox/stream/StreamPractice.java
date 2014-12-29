@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalInt;
@@ -29,6 +28,16 @@ public class StreamPractice {
         printSeparator();
         List<Emp> emps = Arrays.asList(new Emp(500), new Emp(1000), new Emp(800));
         empsOfHighIncome(emps).forEach(System.out::println);
+        printSeparator();
+        Student[] students = new Student[]{new Student("山田太郎"), new Student("鈴木花子"), new Student("佐藤一郎")};
+        System.out.println(toStringByName(students));
+        printSeparator();
+    }
+
+    private String toStringByName(Student[] students) {
+        return Arrays.stream(students)
+                .map(Student::getName)
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 
     private List<Emp> empsOfHighIncome(List<Emp> emps) {
@@ -58,21 +67,6 @@ public class StreamPractice {
     }
 
     private void printStudentsName() {
-        class Student {
-            private String name;
-
-            public Student(String name) {
-                this.name = name;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-        }
         List<Student> students = Arrays.asList(new Student("Ichiro"), new Student("Jiro"), new Student("Saburo"));
         students.stream()
                 .map(Student::getName)
@@ -110,6 +104,22 @@ public class StreamPractice {
             return "Emp{" +
                     "income=" + income +
                     '}';
+        }
+    }
+
+    private static class Student {
+        private String name;
+
+        public Student(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
     }
 }
