@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalInt;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -33,9 +34,10 @@ public class StreamPractice {
     private List<Emp> empsOfHighIncome(List<Emp> emps) {
         return emps.stream()
                 .filter(emp -> emp.getIncome() >= 800)
-                .collect(ArrayList::new,
-                        ArrayList::add,
-                        ArrayList::addAll);
+//                .collect(ArrayList::new,
+//                        ArrayList::add,
+//                        ArrayList::addAll);
+                .collect(Collectors.toList());  // Collectors クラスは collect メソッドを使う際のユーティリティクラス
     }
 
     private boolean containsTextFile(Path dir) throws IOException {
