@@ -34,8 +34,8 @@ public class StreamPractice {
         }
         List<Student> students = Arrays.asList(new Student("Ichiro"), new Student("Jiro"), new Student("Saburo"));
         students.stream()
-                .map(s -> s.getName())
-                .forEach(n -> System.out.println(n));
+                .map(Student::getName)
+                .forEach(System.out::println);
     }
 
     private void printSeparator() {
