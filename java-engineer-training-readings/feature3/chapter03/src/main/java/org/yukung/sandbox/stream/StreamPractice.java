@@ -11,16 +11,27 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamPractice {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         new StreamPractice().run();
     }
 
-    private void run() {
+    private void run() throws Exception {
         printEven();
         printSeparator();
         printStudentsName();
         printSeparator();
         printMaxValue();
+        printSeparator();
+        Path path = Paths.get("./");
+        System.out.println(containsTextFile(path));
+        printSeparator();
+    }
+
+    private boolean containsTextFile(Path dir) throws IOException {
+        return Files.walk(dir)
+                .filter(path -> Files.isRegularFile(path))
+                .map(path -> path.toString())
+                .anyMatch(name -> name.endsWith(".txt"));
     }
 
     private void printMaxValue() {
