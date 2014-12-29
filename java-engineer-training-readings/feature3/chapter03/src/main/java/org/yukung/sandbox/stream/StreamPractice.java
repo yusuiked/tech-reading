@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalInt;
@@ -25,6 +26,16 @@ public class StreamPractice {
         Path path = Paths.get("./");
         System.out.println(containsTextFile(path));
         printSeparator();
+        List<Emp> emps = Arrays.asList(new Emp(500), new Emp(1000), new Emp(800));
+        empsOfHighIncome(emps).forEach(System.out::println);
+    }
+
+    private List<Emp> empsOfHighIncome(List<Emp> emps) {
+        return emps.stream()
+                .filter(emp -> emp.getIncome() >= 800)
+                .collect(() -> new ArrayList<>(),
+                        (list, emp) -> list.add(emp),
+                        (l1, l2) -> l1.addAll(l2));
     }
 
     private boolean containsTextFile(Path dir) throws IOException {
@@ -74,5 +85,29 @@ public class StreamPractice {
         IntStream.rangeClosed(1, 10)
                 .filter(n -> n % 2 == 0)
                 .forEach(System.out::println);
+    }
+
+    private static class Emp {
+        private int income;
+
+        public int getIncome() {
+            return income;
+        }
+
+        public void setIncome(int income) {
+            this.income = income;
+        }
+
+        public Emp(int income) {
+
+            this.income = income;
+        }
+
+        @Override
+        public String toString() {
+            return "Emp{" +
+                    "income=" + income +
+                    '}';
+        }
     }
 }
