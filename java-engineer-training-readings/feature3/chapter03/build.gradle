@@ -7,18 +7,23 @@ tasks.withType(AbstractCompile) each {
     it.options.encoding = 'UTF-8'
 }
 
-idea {
-    project {
-        jdkName = jdkVersion
-        languageLevel = jdkVersion
-    }
+configurations {
+    provided
+}
+
+sourceSets {
+    main.compileClasspath += configurations.provided
+    test.compileClasspath += configurations.provided
+    test.runtimeClasspath += configurations.provided
 }
 
 repositories {
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
+    provided 'org.projectlombok:lombok:1.14.8'
     testCompile "junit:junit:4.11"
 }
 
@@ -32,3 +37,16 @@ task initDirs {
         }
     }
 }
+
+idea {
+    project {
+        jdkName = jdkVersion
+        languageLevel = jdkVersion
+    }
+    module {
+        scopes.PROVIDED.plus += [configurations.provided]
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+

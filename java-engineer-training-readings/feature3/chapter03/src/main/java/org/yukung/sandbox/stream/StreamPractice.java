@@ -27,10 +27,17 @@ public class StreamPractice {
         Path path = Paths.get("./");
         System.out.println(containsTextFile(path));
         printSeparator();
-        List<Emp> emps = Arrays.asList(new Emp(500, new Dep("営業部")), new Emp(1000, new Dep("総務部")), new Emp(800, new Dep("営業部")));
+        List<Emp> emps = Arrays.asList(
+                new Emp(500, new Dep("営業部")),
+                new Emp(1000, new Dep("総務部")),
+                new Emp(800, new Dep("営業部")));
         empsOfHighIncome(emps).forEach(System.out::println);
         printSeparator();
-        Student[] students = new Student[]{new Student("山田太郎"), new Student("鈴木花子"), new Student("佐藤一郎")};
+        Student[] students = new Student[]{
+                new Student("山田太郎"),
+                new Student("鈴木花子"),
+                new Student("佐藤一郎")
+        };
         System.out.println(toStringByName(students));
         printSeparator();
         empsByDep(emps).forEach((k, v) -> System.out.printf("%s:%s%n", k, v));
@@ -90,76 +97,4 @@ public class StreamPractice {
                 .forEach(System.out::println);
     }
 
-    private static class Emp {
-        private int income;
-        private Dep dep;
-
-        public Emp(int income, Dep dep) {
-            this.income = income;
-            this.dep = dep;
-        }
-
-        public int getIncome() {
-            return income;
-        }
-
-        public void setIncome(int income) {
-            this.income = income;
-        }
-
-        public Dep getDep() {
-            return dep;
-        }
-
-        public void setDep(Dep dep) {
-            this.dep = dep;
-        }
-
-        @Override
-        public String toString() {
-            return "Emp{" +
-                    "income=" + income +
-                    '}';
-        }
-    }
-
-    private static class Dep {
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Dep(String name) {
-
-            this.name = name;
-        }
-
-        @Override
-        public String toString() {
-            return "Dep{" +
-                    "name='" + name + '\'' +
-                    '}';
-        }
-    }
-
-    private static class Student {
-        private String name;
-
-        public Student(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
 }
