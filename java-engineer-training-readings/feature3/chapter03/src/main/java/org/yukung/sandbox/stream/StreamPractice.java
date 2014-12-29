@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -25,9 +26,8 @@ public class StreamPractice {
     private void printMaxValue() {
         Path path = Paths.get("./data.txt");
         try (Stream<String> s = Files.lines(path)) {
-            int max = s.mapToInt(l -> Integer.parseInt(l))
-                    .reduce(Integer.MIN_VALUE, (n, m) -> Integer.max(n, m));
-            System.out.println(max);
+            OptionalInt maxOpt = s.mapToInt(Integer::parseInt).max();
+            maxOpt.ifPresent(System.out::println);
         } catch (IOException e) {
             e.printStackTrace();
         }
