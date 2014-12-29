@@ -33,9 +33,9 @@ public class StreamPractice {
     private List<Emp> empsOfHighIncome(List<Emp> emps) {
         return emps.stream()
                 .filter(emp -> emp.getIncome() >= 800)
-                .collect(() -> new ArrayList<>(),
-                        (list, emp) -> list.add(emp),
-                        (l1, l2) -> l1.addAll(l2));
+                .collect(ArrayList::new,
+                        ArrayList::add,
+                        ArrayList::addAll);
     }
 
     private boolean containsTextFile(Path dir) throws IOException {
