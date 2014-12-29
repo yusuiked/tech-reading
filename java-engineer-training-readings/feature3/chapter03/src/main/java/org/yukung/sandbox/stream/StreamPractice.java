@@ -14,6 +14,6 @@ public class StreamPractice {
     private void printEven() {
         IntStream.rangeClosed(1, 10)
                 .filter(n -> n % 2 == 0)
-                .forEach(n -> System.out.println(n));
+                .forEach(System.out::println);
     }
 }
