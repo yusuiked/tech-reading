@@ -1,7 +1,7 @@
 <link rel="import" href="/bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="/bower_components/paper-shadow/paper-shadow.html">
 
-<polymer-element name="task-list" attributes="items" noscript>
+<polymer-element name="task-list" attributes="items filter" noscript>
 	<template>
 		<style>
 			:host {
@@ -26,7 +26,7 @@
 
 		<div layout vertical center>
 			<template repeat="{{item in items}}">
-				<paper-shadow z="1" layout horizontal center>
+				<paper-shadow z="1" layout horizontal center hidden?="{{(filter == 'todo' && item.done) || (filter == 'done' && !item.done)}}">
 					<paper-checkbox checked="{{item.done}}">
 					</paper-checkbox>
 					<p>{{item.content}}</p>

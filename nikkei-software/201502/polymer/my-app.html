@@ -21,13 +21,13 @@
 
 		<core-header-panel>
 			<core-toolbar>
-				<paper-tabs selected="all" self-end>
+				<paper-tabs id="tabs" selected="all" self-end>
 					<paper-tab name="all">All</paper-tab>
 					<paper-tab name="todo">ToDo</paper-tab>
 					<paper-tab name="done">Done</paper-tab>
 				</paper>
 			</core-toolbar>
-			<task-list items="{{items}}"></task-list>
+			<task-list items="{{items}}" filter="{{$.tabs.selected}}"></task-list>
 		</core-header-panel>
 	</template>
 
