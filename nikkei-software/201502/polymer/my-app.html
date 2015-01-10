@@ -1,0 +1,35 @@
+<link rel="import" href="/bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="/bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="/bower_components/core-header-panel/core-header-panel.html">
+
+<polymer-element name="my-app">
+	<template>
+		<style>
+			core-header-panel {
+				height: 100%;
+				overflow: auto;
+			}
+			core-toolbar {
+				background: #03a9f4;
+				color: white;
+			}
+			paper-tabs {
+				width: 100%;
+			}
+		</style>
+
+		<core-header-panel>
+			<core-toolbar>
+				<paper-tabs selected="all" self-end>
+					<paper-tab name="all">All</paper-tab>
+					<paper-tab name="todo">ToDo</paper-tab>
+					<paper-tab name="done">Done</paper-tab>
+				</paper>
+			</core-toolbar>
+		</core-header-panel>
+	</template>
+
+	<script>
+		Polymer({});
+	</script>
+</polymer-element>
