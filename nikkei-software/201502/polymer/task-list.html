@@ -1,0 +1,37 @@
+<link rel="import" href="/bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="/bower_components/paper-shadow/paper-shadow.html">
+
+<polymer-element name="task-list" attributes="items" noscript>
+	<template>
+		<style>
+			:host {
+				width: 100%;
+			}
+			div {
+				padding-top: 30px;
+			}
+
+			paper-shadow {
+				width: 80%;
+				padding: 20px;
+				margin-bottom: 30px;
+				background-color: #ffffff;
+			}
+			p {
+				margin-left: 15px;
+				font-size: 1.2rem;
+				font-weight: 300;
+			}
+		</style>
+
+		<div layout vertical center>
+			<template repeat="{{item in items}}">
+				<paper-shadow z="1" layout horizontal center>
+					<paper-checkbox checked="{{item.done}}">
+					</paper-checkbox>
+					<p>{{item.content}}</p>
+				</paper-shadow>
+			</template>
+		</div>
+	</template>
+</polymer-element>

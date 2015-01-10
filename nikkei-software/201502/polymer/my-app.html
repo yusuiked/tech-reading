@@ -1,6 +1,7 @@
 <link rel="import" href="/bower_components/core-toolbar/core-toolbar.html">
 <link rel="import" href="/bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="/bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="task-list.html">
 
 <polymer-element name="my-app">
 	<template>
@@ -26,10 +27,26 @@
 					<paper-tab name="done">Done</paper-tab>
 				</paper>
 			</core-toolbar>
+			<task-list items="{{items}}"></task-list>
 		</core-header-panel>
 	</template>
 
 	<script>
-		Polymer({});
+		Polymer({
+			items: [
+				{
+					content: 'ひとつめのタスク',	// タスクの内容
+					done: false	// タスクの完了フラグ
+				},
+				{
+					content: 'ふたつめのタスク',
+					done: true
+				},
+				{
+					content: 'みっつめのタスク',
+					done: false
+				}
+			]
+		});
 	</script>
 </polymer-element>
