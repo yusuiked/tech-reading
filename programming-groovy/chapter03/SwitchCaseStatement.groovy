@@ -15,7 +15,7 @@ switch (x) {
         break
     case String:    // xがStringのインスタンスであるとき
         break
-    case a:         // aがユーザ定義型のインスタンスであるで，a.isCase(x)のとき
+    case a:         // aがユーザ定義型のインスタンスで，a.isCase(x)のとき
         break
     case {it % 2 == 0}: // xが偶数のとき
         break
