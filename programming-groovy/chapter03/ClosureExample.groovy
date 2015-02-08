@@ -9,7 +9,7 @@ my_if(true, clos)
 // ==> "expr=true"が表示される
 
 my_if(true, {println "expr=$it"})
-// ==> "exprtrue"が表示される
+// ==> "expr=true"が表示される
 
 my_if(true) {
     println "expr=$it" // ==> "expr=true"が表示される
