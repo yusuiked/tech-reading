@@ -1,5 +1,6 @@
 class MyClass {
+    // def toString() { "MyClass" } // エラーとなる
     String toString() { "MyClass" }
 }
 println new MyClass()
-// ==>MyClassが表示される
+// ==>MyClassが出力される
