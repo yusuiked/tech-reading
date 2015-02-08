@@ -5,8 +5,8 @@ class MyClass {
 }
 
 MyClass c = new MyClass()
-c.name = "池田裕介"             //セッターの呼び出し
-assert c.name == "[池田裕介]"   //ゲッターの呼び出し
+c.name = "yukung"             //セッターの呼び出し
+assert c.name == "[yukung]"   //ゲッターの呼び出し
 
 date = new Date()
 println date.time   // date.getTime()と等価
