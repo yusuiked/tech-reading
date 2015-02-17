@@ -29,4 +29,10 @@ public class CalculatorTest {
 		float actual = calc.divide(3, 2);
 		assertThat(actual, is(expected));
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void divideで5と0のときIllegalArgumentExceptionを送出する() {
+		Calculator calc = new Calculator();
+		calc.divide(5, 0);
+	}
 }
