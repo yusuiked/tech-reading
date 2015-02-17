@@ -26,7 +26,7 @@ public class CalculatorTest {
 	public void divideで3と2の除算結果が取得できる() {
 		Calculator calc = new Calculator();
 		float expected = 1.5f;
-		float actual = calc.devide(3, 2);
+		float actual = calc.divide(3, 2);
 		assertThat(actual, is(expected));
 	}
 }
