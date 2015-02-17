@@ -7,7 +7,7 @@ import org.junit.Test;
 public class CalculatorTest {
 	
 	@Test
-	public void test() {
+	public void multiplyで乗算結果が取得できる() {
 		fail("Not yet implemented");
 	}
 	
