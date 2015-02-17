@@ -15,10 +15,18 @@ public class CalculatorTest {
 	}
 	
 	@Test
-	public void multiplyで5と7の乗算結果が取得できる() throws Exception {
+	public void multiplyで5と7の乗算結果が取得できる() {
 		Calculator calc = new Calculator();
 		int expected = 35;
 		int actual = calc.multiply(5, 7);
+		assertThat(actual, is(expected));
+	}
+	
+	@Test
+	public void divideで3と2の除算結果が取得できる() {
+		Calculator calc = new Calculator();
+		float expected = 1.5f;
+		float actual = calc.devide(3, 2);
 		assertThat(actual, is(expected));
 	}
 }

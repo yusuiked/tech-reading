@@ -5,7 +5,7 @@ public class Calculator {
 		return x * y;
 	}
 	
-	public int devide(int x, int y) {
-		return x / y;
+	public float devide(int x, int y) {
+		return (float) x / (float) y;
 	}
 }
