@@ -1,5 +1,6 @@
 package junit.custom.matchers;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -32,7 +33,11 @@ public class IsDate extends BaseMatcher<Date> {
 	}
 
 	public void describeTo(Description desc) {
-
+		desc.appendValue(String.format("%d/%02d/%02d", yyyy, mm, dd));
+		if (actual != null) {
+			desc.appendText(" but actual is ");
+			desc.appendValue(new SimpleDateFormat("yyyy/MM/dd").format((Date) actual));
+		}
 	}
 
 	public static Matcher<Date> dateOf(int yyyy, int mm, int dd) {
