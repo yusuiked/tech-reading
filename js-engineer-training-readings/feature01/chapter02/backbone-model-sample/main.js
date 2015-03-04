@@ -23,5 +23,13 @@ console.log(JSON.stringify(contact2, null, 2));
 
 var contact3 = new Contact();
 contact3.set('firstName', 'Alice');
+contact3.set({
+    'lastName': 'Henderson',
+    'email': null
+});
 
 console.log(JSON.stringify(contact3, null, 2));
+
+console.log(contact3.get('firstName'));
+console.log(contact3.has('lastName'));
+console.log(contact3.has('email'));
