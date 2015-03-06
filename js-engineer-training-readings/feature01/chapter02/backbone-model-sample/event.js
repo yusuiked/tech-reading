@@ -19,4 +19,18 @@ var contact = new Contact({
 	lastName: 'Henderson',
 	email: 'alice@example.com'
 });
+console.log('before');
 contact.set('email', 'henderson@example.com');
+
+// イベント名を指定して監視を解除
+contact.off('change');
+
+console.log('after');
+contact.set('email', 'alice@example.com');
+
+// 全てのイベントを監視解除
+contact.off();
+
+console.log('last');
+contact.set('lastName', 'henderson');
+
