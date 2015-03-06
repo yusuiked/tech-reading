@@ -57,3 +57,9 @@ var ContactView = Backbone.View.extend({
 		});
 	}
 });
+
+// listenTo を使うと、view オブジェクトを破棄する際に remove メソッドを呼べば内部で
+// イベントの監視を解除する stopListening() メソッドも呼んでくれるため、参照が切れて
+// メモリリークを防いでくれる。
+// on() メソッドだとイベントの監視は個別に解除する必要がある。多くの場合、view より先に
+// model が削除されることはないはずなので、view で listenTo メソッドを使うのがよい。
