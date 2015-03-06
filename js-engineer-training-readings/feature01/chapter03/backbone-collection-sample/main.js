@@ -34,5 +34,11 @@ contactCollection.add(bob);
 
 console.log(JSON.stringify(contactCollection, null, 2));
 console.log(contactCollection.length);
-contactCollection.add(alice);
+
+contactCollection.add({
+	firstName: 'Chris',
+	lastName: 'Redfield',
+	email: 'chris@example.com'
+});
+console.log(JSON.stringify(contactCollection, null, 2));
 console.log(contactCollection.length);
