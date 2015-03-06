@@ -48,3 +48,12 @@ contact.set('email', 'alice@example.com');
 
 var contact2 = new Contact();
 contact.select();
+
+// listenTo メソッドは指定したインスタンスを監視する側が呼び出す主体となる
+var ContactView = Backbone.View.extend({
+	initialize: function() {
+		this.listenTo(this.model, 'change', function() {
+			console.log('モデルの属性が変更されました。');
+		});
+	}
+});
