@@ -31,10 +31,15 @@ contactCollection.add([{
 console.log(JSON.stringify(contactCollection, null, 2));
 console.log(contactCollection.length);
 
-contactCollection.add({
+var chris = new Contact({
 	firstName: 'Chris',
 	lastName: 'Redfield',
 	email: 'chris@example.com'
-});
+})
+contactCollection.add(chris);
+console.log(JSON.stringify(contactCollection, null, 2));
+console.log(contactCollection.length);
+
+contactCollection.remove(chris);
 console.log(JSON.stringify(contactCollection, null, 2));
 console.log(contactCollection.length);
