@@ -6,6 +6,19 @@ var Contact = Backbone.Model.extend({
         email: ''
     },
     initialize: function() {
+    	this.on('select', function(selected) {
+    		console.log('select イベントが発生しました。value : ' + selected);
+    	});
+    },
+    select: function() {
+    	// 選択中フラグを立てる。連絡先データではないので
+    	// 属性ではなく単なるプロパティとして扱う
+    	this.selected = true;
+
+    	// 独自イベントの select を発生させる
+    	// trigger() メソッドの第2引数以降の指定は
+    	// コールバック関数が受け取れるパラメータとなる
+    	this.trigger('select', this.selected);
     }
 });
 // コールバック関数を特定して解除
@@ -32,3 +45,6 @@ contact.off('change', onChange);
 console.log('after');
 // この属性値の変更に反応するのは onChangeEmail() メソッドのみとなる
 contact.set('email', 'alice@example.com');
+
+var contact2 = new Contact();
+contact.select();
