@@ -18,19 +18,15 @@ var ContactCollection = Backbone.Collection.extend({
 
 var contactCollection = new ContactCollection();
 
-var alice = new Contact({
+contactCollection.add([{
 	firstName: 'Alice',
 	lastName: 'Henderson',
 	email: 'alice@example.com'
-});
-var bob = new Contact({
+}, {
 	firstName: 'Bob',
 	lastName: 'Sanders',
 	email: 'bob@example.com'
-});
-
-contactCollection.add(alice);
-contactCollection.add(bob);
+}]);
 
 console.log(JSON.stringify(contactCollection, null, 2));
 console.log(contactCollection.length);
