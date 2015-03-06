@@ -18,6 +18,10 @@ var ContactCollection = Backbone.Collection.extend({
 
 var contactCollection = new ContactCollection();
 
+contactCollection.on('add', function(contact) {
+	// コールバック関数の引数から追加されたモデルを参照できる
+	console.log('モデルが追加されました。', contact.get('firstName'));
+})
 contactCollection.add([{
 	firstName: 'Alice',
 	lastName: 'Henderson',
