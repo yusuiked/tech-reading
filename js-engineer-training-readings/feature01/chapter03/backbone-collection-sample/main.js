@@ -33,3 +33,6 @@ contactCollection.add(alice);
 contactCollection.add(bob);
 
 console.log(JSON.stringify(contactCollection, null, 2));
+console.log(contactCollection.length);
+contactCollection.add(alice);
+console.log(contactCollection.length);
