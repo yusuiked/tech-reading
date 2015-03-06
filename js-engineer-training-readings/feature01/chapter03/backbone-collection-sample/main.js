@@ -43,3 +43,18 @@ console.log(contactCollection.length);
 contactCollection.remove(chris);
 console.log(JSON.stringify(contactCollection, null, 2));
 console.log(contactCollection.length);
+
+// モデルのリセット
+var john = new Contact({
+	firstName: 'John',
+	lastName: 'Doe',
+	email: 'john@example.com'
+});
+var jane = new Contact({
+	firstName: 'Jane',
+	lastName: 'Doe',
+	email: 'jane@example.com'
+});
+contactCollection.reset([john, jane]);
+
+console.log(JSON.stringify(contactCollection, null, 2));
