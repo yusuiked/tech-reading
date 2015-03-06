@@ -63,3 +63,20 @@ var ContactView = Backbone.View.extend({
 // メモリリークを防いでくれる。
 // on() メソッドだとイベントの監視は個別に解除する必要がある。多くの場合、view より先に
 // model が削除されることはないはずなので、view で listenTo メソッドを使うのがよい。
+
+// 独自処理の実装
+var ContactAlter = Backbone.Model.extend({
+    defaults: {
+        firstName: '',
+        lastName: '',
+        email: ''
+    },
+    fullName: function() {
+        return this.get('firstName') + ' ' + this.get('lastName');
+    }
+});
+var contactAlter = new ContactAlter({
+    firstName: 'Alice',
+    lastName: 'Henderson'
+});
+console.log('fullNameメソッド:' + contactAlter.fullName());
