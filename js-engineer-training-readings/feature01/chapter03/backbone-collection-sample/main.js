@@ -21,6 +21,7 @@ var contactCollection = new ContactCollection();
 contactCollection.on('add', function(contact) {
 	// コールバック関数の引数から追加されたモデルを参照できる
 	console.log('モデルが追加されました。', contact.get('firstName'));
+	// 他に、'remove' イベント、'reset' イベントがある
 })
 contactCollection.add([{
 	firstName: 'Alice',
@@ -62,3 +63,8 @@ var jane = new Contact({
 contactCollection.reset([john, jane]);
 
 console.log(JSON.stringify(contactCollection, null, 2));
+
+// Underscore.js のメソッドの呼び出し
+_.each(contactCollection.models, function(contact) {
+	console.log(contact.get('firstName'), contact.get('lastName'), contact.get('email'));
+});
