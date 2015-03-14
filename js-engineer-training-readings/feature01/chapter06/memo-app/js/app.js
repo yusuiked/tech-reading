@@ -35,6 +35,10 @@ $(function() {
 	App.mainContainer = new App.Container({
 		el: '#main-container'
 	});
+	// 初期化処理を追加する
+	App.headerContainer = new App.Container({
+		el: '#header-container'
+	});
 
 	// NoteCollection のデータを受信する
 	// (Backbone.LocalStorageを使用しているので
