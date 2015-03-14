@@ -6,6 +6,6 @@ App.Note = Backbone.Model.extend({
 });
 
 App.NoteCollection = Backbone.Collection.extend({
-	localStorage: new Backbone.LocalStorage('Notes');
+	localStorage: new Backbone.LocalStorage('Notes'),
 	model: App.Note
 });
