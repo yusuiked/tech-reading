@@ -12,14 +12,19 @@ var contact = new Contact({
 });
 
 var ContactView = Backbone.View.extend({
-	template: '<div>Name: <%= firstName %> <%= lastName %></div>' +
-              '<div>Email: <%= email %></div>',
     render: function() {
-    	var compiled = _.template(this.template);
-    	var html = compiled(this.model.toJSON());
+    	// テンプレートキャッシュがなければ作っておく
+    	if (ContactView.templateCache == null) {
+    		ContactView.templateCache = _.template($('#contact-template').html());
+    	}
+
+    	// テンプレートキャッシュを利用してHTMLを生成する
+    	var html = ContactView.templateCache(this.model.toJSON());
     	this.$el.html(html);
     	return this;
     }
+}, {
+	templateCache: null
 });
 
 var contactView = new ContactView({
