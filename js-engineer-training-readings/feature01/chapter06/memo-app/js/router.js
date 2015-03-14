@@ -2,6 +2,7 @@ App.Router = Backbone.Router.extend({
 	routes: {
 		'notes/:id': 'showNoteDetail',
 		'new': 'showNewNote',
+		'notes/:id/edit': 'showEditNote',
 		'*actions': 'defaultRoute'
 	},
 
@@ -65,5 +66,25 @@ App.Router = Backbone.Router.extend({
 		App.mainContainer.show(noteFormView);
 		// 新規追加ボタンはこの画面では必要ないのでビューを破棄しておく
 		App.headerContainer.empty();
+	},
+
+	// 編集画面のルーティング
+	showEditNote: function(id) {
+		var self = this;
+		// 既存の Note モデルを取得して NoteFormView に渡す
+		var note = App.noteCollection.get(id);
+		var noteFormView = new App.NoteFormView({
+			model: note
+		});
+		noteFormView.on('submit:form', function(attrs) {
+			// submit:form イベントで受け取ったフォームの入力値を Note モデルに保存する
+			note.save(attrs);
+
+			// モデル詳細画面を表示してルートも適切なものに書き換える
+			self.showNoteDetail(note.get('id'));
+			self.navigate('notes/' + note.get('id'));
+		});
+
+		App.mainContainer.show(noteFormView);
 	}
 });
