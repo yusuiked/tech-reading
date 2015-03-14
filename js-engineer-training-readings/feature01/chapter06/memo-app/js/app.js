@@ -46,7 +46,7 @@ $(function() {
 			var models = initializeNotes();
 			App.noteCollection.reset(models);
 		}
-	})
+	});
 
 	// コレクションを渡してメモ一覧の親ビューを初期化する
 	var noteListView = new App.NoteListView({
@@ -55,5 +55,9 @@ $(function() {
 	// 表示領域にメモ一覧を表示する
 	// App.Container の show() は受け取ったビューの render()
 	// を実行して DOM 要素を自身の el に挿入する
-	App.mainContainer.show(noteListView)
-})
+	App.mainContainer.show(noteListView);
+
+	// ルータの初期化と履歴管理の開始
+	App.router = new App.Router();
+	Backbone.history.start();
+});
