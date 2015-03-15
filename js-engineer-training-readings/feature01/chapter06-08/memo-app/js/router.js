@@ -3,6 +3,7 @@ App.Router = Backbone.Router.extend({
 		'notes/:id': 'showNoteDetail',
 		'new': 'showNewNote',
 		'notes/:id/edit': 'showEditNote',
+		'notes/search/:query': 'searchNote',
 		'*actions': 'defaultRoute'
 	},
 
@@ -26,22 +27,40 @@ App.Router = Backbone.Router.extend({
 		this.navigate('notes');
 	},
 
-	showNoteList: function() {
-		// コレクションを渡してメモ一覧の親ビューを初期化する
-		var noteListView = new App.NoteListView({
-			collection: App.noteCollection
-		});
-		// 表示領域にメモ一覧を表示する
-		// App.Container の show() は受け取ったビューの render()
-		// を実行して DOM 要素を自身の el に挿入する
-		App.mainContainer.show(noteListView);
-		// メモ一覧操作ビューを表示するメソッドの呼び出しを追加する
+	showNoteList: function(models) {
+		// 一覧表示用のコレクションを別途初期化する
+		if (!this.filteredCollection) {
+			this.filteredCollection = new App.NoteCollection();
+		}
+		// NoteListView のインスタンスが表示中でないときのみ
+		// これを初期化して表示する
+		if (!App.mainContainer.has(App.NoteListView)) {
+			// 初期化の際に一覧表示用のコレクションを渡しておく
+			var noteListView = new App.NoteListView({
+				collection: this.filteredCollection
+			});
+			App.mainContainer.show(noteListView);
+		}
+		// 検索されたモデルの配列が引数に渡されていればそちらを、
+		// そうでなければすべてのモデルを持つ App.noteCollection
+		// インスタンスのモデルの配列を使用する
+		models = models || App.noteCollection.models;
+
+		// 一覧表示用のコレクションの reset() メソッドに採用した方の
+		// モデルの配列を渡す
+		this.filteredCollection.reset(models);
 		this.showNoteControl();
 	},
 
 	// メモ一覧操作ビューを表示するメソッド
 	showNoteControl: function() {
 		var noteControlView = new App.NoteControlView();
+		// submit:form イベントの監視を追加する
+		noteControlView.on('submit:form', function(query) {
+			this.searchNote(query);
+			// 検索結果のパーマリンクを作成しておくことで履歴やブックマークに対応する
+			this.navigate('notes/search/' + query);
+		}, this);
 		App.headerContainer.show(noteControlView);
 	},
 
@@ -86,5 +105,15 @@ App.Router = Backbone.Router.extend({
 		});
 
 		App.mainContainer.show(noteFormView);
+	},
+
+	// メモ検索用のメソッド
+	searchNote: function(query) {
+		// Underscore.js の filter() メソッドは Backbone.Collection からは直接呼び出せる
+		// filtered はコレクションではなくただの配列であることに注意
+		var filtered = App.noteCollection.filter(function(note) {
+			return note.get('title').indexOf(query) !== -1;
+		});
+		this.showNoteList(filtered);
 	}
 });

@@ -3,10 +3,15 @@ App.NoteListView = Backbone.View.extend({
 	// Bootstrap の装飾を与えるために 'table' クラス属性値を指定する
 	className: 'table',
 	initialize: function(options) {
-		// Backbone.Collection インスタンスを受け取る
 		this.collection = options.collection;
+		// コレクションの reset イベントに応じて render() を呼び出す
+		this.listenTo(this.collection, 'reset', this.render);
 	},
 	render: function() {
+
+		// this.$el.html() が呼び出される前に古いビューを破棄しておく
+		this.removeItemViews();
+
 		// テンプレートから自身の DOM 構築を行う
 		var template = $('#noteListView-template').html();
 		this.$el.html(template);
@@ -17,13 +22,19 @@ App.NoteListView = Backbone.View.extend({
 	renderItemViews: function() {
 		// 子ビューを append() で挿入する地点を特定する
 		var $insertionPoint = this.$('.js-noteListItemView-container');
-		// コレクション内の全てのモデルを取り出して
-		// 個々のビューを生成し、親ビューの DOM ツリーに挿入する
-		this.collection.each(function(note) {
+
+		// あとで適切に破棄できるように子ビューの参照を保持しておく
+		this.itemViews = this.collection.map(function(note) {
 			var itemView = new App.NoteListItemView({
 				model: note
 			});
 			$insertionPoint.append(itemView.render().$el);
+			return itemView;
 		}, this);
+	},
+	// 全ての子ビューを破棄するメソッドを追加する
+	removeItemViews: function() {
+		// 保持している全てのビューの remove() を呼び出す
+		_.invoke(this.itemViews, 'remove');
 	}
 })
