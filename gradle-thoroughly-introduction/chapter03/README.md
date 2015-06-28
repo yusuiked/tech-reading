@@ -97,7 +97,7 @@ hello.leftShift(clos)
 
 `$ gradle build`
 
-#### プロキシ経由での実行
+### プロキシ経由での実行
 
 `gradle.properties` に以下のように記述し、プロジェクトのルートディレクトリ、または `<HOME>/.gradle` に配置する
 
@@ -108,3 +108,32 @@ systemProp.https.proxyHost=www.example.com
 systemProp.https.proxyPort=8080
 ```
 
+* Java プロジェクトのビルドとテスト
+* War プロジェクトのビルドと実行
+
+### Gradle の便利な機能
+
+#### Gradle デーモン
+
+起動に時間がかかる問題は、JVM を常駐起動させることで解消できる。Gradle にデーモンモードが有りこれを利用する。
+
+`$ gradle --daemon <タスク名>`
+
+と一度起動すると、2度目以降の起動は高速に実行される。
+
+Gradle デーモンはシステムプロパティ `org.gradle.daemon` を `true` に設定することでも有効化できる。環境変数 `GRADLE_OPTS` に以下のように
+
+`GRADLE_OPTS="-Dorg.gradle.daemon=true"`
+
+と設定しておくとデフォルトで有効になる。
+
+また、`gradle.properties` に `org.gradle.dameon=true` と設定しておき、プロジェクトのルートディレクトリまたは、`<HOME>/.gradle` に配置すると有効になる。
+
+#### Gradle ラッパー
+
+Gradle はインストールされていなくても、Gradle 自身をダウンロードして実行する仕組みが備わっている。
+
+1. バージョン管理システムのリポジトリからプロジェクトをチェックアウト
+2. `gradlew` コマンドを実行
+
+するだけで Gradle のバイナリが自動的にダウンロードされてそのまま実行できる。
