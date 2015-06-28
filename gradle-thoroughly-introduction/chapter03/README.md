@@ -87,3 +87,24 @@ hello.leftShift(clos)
 * `-b`, `--build-file`
     * ビルドスクリプトを指定する
 
+## プロジェクト自動生成とビルド
+
+### Java プロジェクト自動生成
+
+`$ gradle init --type java-library`
+
+### ビルド
+
+`$ gradle build`
+
+#### プロキシ経由での実行
+
+`gradle.properties` に以下のように記述し、プロジェクトのルートディレクトリ、または `<HOME>/.gradle` に配置する
+
+```
+systemProp.http.proxyHost=www.example.com
+systemProp.http.proxyPort=8080
+systemProp.https.proxyHost=www.example.com
+systemProp.https.proxyPort=8080
+```
+
