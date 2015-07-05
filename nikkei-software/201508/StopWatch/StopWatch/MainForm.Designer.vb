@@ -25,6 +25,9 @@ Partial Class MainForm
         Me.components = New System.ComponentModel.Container()
         Me.displayTimeTextBox = New System.Windows.Forms.TextBox()
         Me.timer = New System.Windows.Forms.Timer(Me.components)
+        Me.startButton = New System.Windows.Forms.Button()
+        Me.stopButton = New System.Windows.Forms.Button()
+        Me.resetButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'displayTimeTextBox
@@ -40,11 +43,41 @@ Partial Class MainForm
         'timer
         '
         '
+        'startButton
+        '
+        Me.startButton.Location = New System.Drawing.Point(12, 102)
+        Me.startButton.Name = "startButton"
+        Me.startButton.Size = New System.Drawing.Size(73, 25)
+        Me.startButton.TabIndex = 1
+        Me.startButton.Text = "スタート"
+        Me.startButton.UseVisualStyleBackColor = True
+        '
+        'stopButton
+        '
+        Me.stopButton.Location = New System.Drawing.Point(106, 102)
+        Me.stopButton.Name = "stopButton"
+        Me.stopButton.Size = New System.Drawing.Size(73, 25)
+        Me.stopButton.TabIndex = 2
+        Me.stopButton.Text = "ストップ"
+        Me.stopButton.UseVisualStyleBackColor = True
+        '
+        'resetButton
+        '
+        Me.resetButton.Location = New System.Drawing.Point(199, 102)
+        Me.resetButton.Name = "resetButton"
+        Me.resetButton.Size = New System.Drawing.Size(73, 25)
+        Me.resetButton.TabIndex = 3
+        Me.resetButton.Text = "リセット"
+        Me.resetButton.UseVisualStyleBackColor = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.resetButton)
+        Me.Controls.Add(Me.stopButton)
+        Me.Controls.Add(Me.startButton)
         Me.Controls.Add(Me.displayTimeTextBox)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "MainForm"
@@ -56,4 +89,7 @@ Partial Class MainForm
 
     Friend WithEvents displayTimeTextBox As TextBox
     Friend WithEvents timer As Timer
+    Friend WithEvents startButton As Button
+    Friend WithEvents stopButton As Button
+    Friend WithEvents resetButton As Button
 End Class

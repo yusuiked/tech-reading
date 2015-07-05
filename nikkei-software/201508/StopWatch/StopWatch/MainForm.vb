@@ -1,9 +1,37 @@
 ﻿Public Class MainForm
+
+    Private startTime As DateTime
+
+    Private lapseTime As TimeSpan = TimeSpan.Zero
+
+    Private Function GetDisplayTimeString() As String
+        Dim format As String = "mm\:ss\.f"
+        Return lapseTime.ToString(format)
+    End Function
+
+    Private Sub UpdateUI()
+        displayTimeTextBox.Text = GetDisplayTimeString()
+    End Sub
+
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        timer.Start()
+        UpdateUI()
     End Sub
 
     Private Sub timer_Tick(sender As Object, e As EventArgs) Handles timer.Tick
-        displayTimeTextBox.Text = DateTime.Now.ToLongTimeString()
+        lapseTime = DateTime.Now - startTime
+        UpdateUI()
+    End Sub
+
+    Private Sub startButton_Click(sender As Object, e As EventArgs) Handles startButton.Click
+        startTime = DateTime.Now
+        timer.Start()
+    End Sub
+
+    Private Sub stopButton_Click(sender As Object, e As EventArgs) Handles stopButton.Click
+
+    End Sub
+
+    Private Sub resetButton_Click(sender As Object, e As EventArgs) Handles resetButton.Click
+
     End Sub
 End Class
