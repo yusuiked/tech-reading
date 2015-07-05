@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyClock"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="500" Width="500" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <local:ClockViewModel x:Key="clockViewModel" />
+    </Window.Resources>
+    <Canvas DataContext="{Binding Source={StaticResource clockViewModel}}">
+        <TextBlock x:Name="textBlock" Height="33" Canvas.Left="300" TextWrapping="Wrap" Text="{Binding Path=DigitalDisplay}" Canvas.Top="400" Width="90" FontSize="30"/>
+    </Canvas>
 </Window>
