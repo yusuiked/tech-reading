@@ -28,10 +28,13 @@
     End Sub
 
     Private Sub stopButton_Click(sender As Object, e As EventArgs) Handles stopButton.Click
-
+        timer.Stop()
+        UpdateUI()
     End Sub
 
     Private Sub resetButton_Click(sender As Object, e As EventArgs) Handles resetButton.Click
-
+        lapseTime = TimeSpan.Zero
+        timer.Stop()
+        UpdateUI()
     End Sub
 End Class
