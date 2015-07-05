@@ -28,6 +28,9 @@ Partial Class MainForm
         Me.startButton = New System.Windows.Forms.Button()
         Me.stopButton = New System.Windows.Forms.Button()
         Me.resetButton = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.countDownTimeTextBox = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'displayTimeTextBox
@@ -70,11 +73,40 @@ Partial Class MainForm
         Me.resetButton.Text = "リセット"
         Me.resetButton.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(10, 79)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(91, 12)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "カウントダウン時間"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(234, 79)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(17, 12)
+        Me.Label2.TabIndex = 5
+        Me.Label2.Text = "分"
+        '
+        'countDownTimeTextBox
+        '
+        Me.countDownTimeTextBox.Location = New System.Drawing.Point(106, 76)
+        Me.countDownTimeTextBox.Name = "countDownTimeTextBox"
+        Me.countDownTimeTextBox.Size = New System.Drawing.Size(122, 19)
+        Me.countDownTimeTextBox.TabIndex = 6
+        Me.countDownTimeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.countDownTimeTextBox)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.resetButton)
         Me.Controls.Add(Me.stopButton)
         Me.Controls.Add(Me.startButton)
@@ -92,4 +124,7 @@ Partial Class MainForm
     Friend WithEvents startButton As Button
     Friend WithEvents stopButton As Button
     Friend WithEvents resetButton As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents countDownTimeTextBox As TextBox
 End Class

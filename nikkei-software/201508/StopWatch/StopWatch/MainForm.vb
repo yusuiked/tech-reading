@@ -22,9 +22,15 @@
         End If
     End Function
 
+    Private Sub UpdateCountDownTimeTextBox()
+        countDownTimeTextBox.Text = countDownTime.Minutes.ToString()
+        countDownTimeTextBox.ReadOnly = isTimerRunning
+    End Sub
+
     Private Sub UpdateUI()
         displayTimeTextBox.Text = GetDisplayTimeString()
         EnableButtons()
+        UpdateCountDownTimeTextBox()
     End Sub
 
     Private Sub StopTimer()
@@ -61,5 +67,13 @@
     Private Sub resetButton_Click(sender As Object, e As EventArgs) Handles resetButton.Click
         lapseTime = TimeSpan.Zero
         StopTimer()
+    End Sub
+
+    Private Sub countDownTimeTextBox_TextChanged(sender As Object, e As EventArgs) Handles countDownTimeTextBox.TextChanged
+        Dim countDownTimeMinites As Integer
+        If Integer.TryParse(countDownTimeTextBox.Text, countDownTimeMinites) Then
+            countDownTime = TimeSpan.FromMinutes(countDownTimeMinites)
+            UpdateUI()
+        End If
     End Sub
 End Class
