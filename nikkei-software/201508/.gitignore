@@ -198,6 +198,9 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 
+# and other...
+*obj/Debug/
+
 
 ### Windows ###
 # Windows image file caches
