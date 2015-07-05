@@ -4,11 +4,22 @@
 
     Private lapseTime As TimeSpan = TimeSpan.Zero
 
+    Private countDownTime As TimeSpan = TimeSpan.FromMinutes(5.0)
+
     Private isTimerRunning As Boolean = False
 
     Private Function GetDisplayTimeString() As String
         Dim format As String = "mm\:ss\.f"
-        Return lapseTime.ToString(format)
+        Return GetRemainingTime.ToString(format)
+    End Function
+
+    Private Function GetRemainingTime() As TimeSpan
+        Dim remainingTime As TimeSpan = countDownTime - lapseTime
+        If remainingTime < TimeSpan.Zero Then
+            Return TimeSpan.Zero
+        Else
+            Return remainingTime
+        End If
     End Function
 
     Private Sub UpdateUI()
