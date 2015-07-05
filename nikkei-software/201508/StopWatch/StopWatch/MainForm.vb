@@ -13,6 +13,11 @@
         displayTimeTextBox.Text = GetDisplayTimeString()
     End Sub
 
+    Private Sub StopTimer()
+        timer.Stop()
+        UpdateUI()
+    End Sub
+
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UpdateUI()
     End Sub
@@ -28,13 +33,11 @@
     End Sub
 
     Private Sub stopButton_Click(sender As Object, e As EventArgs) Handles stopButton.Click
-        timer.Stop()
-        UpdateUI()
+        StopTimer()
     End Sub
 
     Private Sub resetButton_Click(sender As Object, e As EventArgs) Handles resetButton.Click
         lapseTime = TimeSpan.Zero
-        timer.Stop()
-        UpdateUI()
+        StopTimer()
     End Sub
 End Class
