@@ -11,22 +11,35 @@
     </Window.Resources>
     <Canvas DataContext="{Binding Source={StaticResource clockViewModel}}">
         <TextBlock x:Name="textBlock" Height="33" Canvas.Left="300" TextWrapping="Wrap" Text="{Binding Path=DigitalDisplay}" Canvas.Top="400" Width="90" FontSize="30"/>
-        
+
         <Line X1="250" Y1="260" X2="250" Y2="100" StrokeThickness="20" Stroke="Red">
+            <Line.Effect>
+                <DropShadowEffect/>
+            </Line.Effect>
             <Line.RenderTransform>
-                <RotateTransform CenterX="250" CenterY="250" Angle="30"/>
+                <RotateTransform CenterX="250" CenterY="250" Angle="{Binding Path=HourHandAngle}"/>
             </Line.RenderTransform>
         </Line>
         <Line X1="250" Y1="280" X2="250" Y2="60" StrokeThickness="10" Stroke="Blue">
+            <Line.Effect>
+                <DropShadowEffect/>
+            </Line.Effect>
             <Line.RenderTransform>
-                <RotateTransform CenterX="250" CenterY="250" Angle="90"/>
+                <RotateTransform CenterX="250" CenterY="250" Angle="{Binding MinuteHandAngle}"/>
             </Line.RenderTransform>
         </Line>
         <Line X1="250" Y1="250" X2="250" Y2="50" StrokeThickness="5" Stroke="Gray">
+            <Line.Effect>
+                <DropShadowEffect/>
+            </Line.Effect>
             <Line.RenderTransform>
-                <RotateTransform CenterX="250" CenterY="250" Angle="180"/>
+                <RotateTransform CenterX="250" CenterY="250" Angle="{Binding Path=SecondHandAngle}"/>
             </Line.RenderTransform>
         </Line>
-        <Ellipse Canvas.Top="245" Canvas.Left="245" Width="10" Height="10" Fill="Black"/>
+        <Ellipse Canvas.Top="245" Canvas.Left="245" Width="10" Height="10" Fill="Black">
+            <Ellipse.Effect>
+                <DropShadowEffect/>
+            </Ellipse.Effect>
+        </Ellipse>
     </Canvas>
 </Window>
