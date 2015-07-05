@@ -45,6 +45,13 @@
         resetButton.Enabled = lapseTime <> TimeSpan.Zero
     End Sub
 
+    Private Sub CheckTime()
+        If GetRemainingTime() = TimeSpan.Zero Then
+            StopTimer()
+            Media.SystemSounds.Asterisk.Play()
+        End If
+    End Sub
+
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UpdateUI()
     End Sub
@@ -52,6 +59,7 @@
     Private Sub timer_Tick(sender As Object, e As EventArgs) Handles timer.Tick
         lapseTime = DateTime.Now - startTime
         UpdateUI()
+        CheckTime()
     End Sub
 
     Private Sub startButton_Click(sender As Object, e As EventArgs) Handles startButton.Click
