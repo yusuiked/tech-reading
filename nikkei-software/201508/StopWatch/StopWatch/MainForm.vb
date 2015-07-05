@@ -4,6 +4,8 @@
 
     Private lapseTime As TimeSpan = TimeSpan.Zero
 
+    Private isTimerRunning As Boolean = False
+
     Private Function GetDisplayTimeString() As String
         Dim format As String = "mm\:ss\.f"
         Return lapseTime.ToString(format)
@@ -11,11 +13,19 @@
 
     Private Sub UpdateUI()
         displayTimeTextBox.Text = GetDisplayTimeString()
+        EnableButtons()
     End Sub
 
     Private Sub StopTimer()
         timer.Stop()
+        isTimerRunning = False
         UpdateUI()
+    End Sub
+
+    Private Sub EnableButtons()
+        startButton.Enabled = Not isTimerRunning
+        stopButton.Enabled = isTimerRunning
+        resetButton.Enabled = lapseTime <> TimeSpan.Zero
     End Sub
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -29,6 +39,7 @@
 
     Private Sub startButton_Click(sender As Object, e As EventArgs) Handles startButton.Click
         startTime = DateTime.Now
+        isTimerRunning = True
         timer.Start()
     End Sub
 
