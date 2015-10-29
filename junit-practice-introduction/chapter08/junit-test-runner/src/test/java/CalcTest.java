@@ -18,7 +18,7 @@ public class CalcTest {
         JUnitCore.main(CalcTest.class.getName());
     }
 
-    private static class Calc {
+    public static class Calc {
         public int add(int x, int y) {
             return x + y;
         }
