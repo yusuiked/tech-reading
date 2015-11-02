@@ -5,20 +5,21 @@ import java.util.Map;
  * @author yukung
  */
 public class ItemStockImpl implements ItemStock {
-    private Map<String, Integer> stock = new HashMap<>();
+    private final Map<String, Integer> list = new HashMap<String, Integer>();
 
-    @Override
     public void add(String item, int num) {
-        stock.put(item, num);
+        int oldSize = size(item);
+        int newSize = oldSize + num;
+        list.put(item, newSize);
     }
 
-    @Override
     public int size(String item) {
-        return stock.size();
+        Integer size = list.get(item);
+        return (size != null) ? size : 0;
     }
 
-    @Override
     public boolean contains(String item) {
-        return stock.containsKey(item);
+        return 0 < size(item);
     }
+
 }
