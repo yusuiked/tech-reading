@@ -1,8 +1,8 @@
 package bookstore;
 
 public class Author {
-    private String firstName;
-    private String lastName;
+    String firstName;
+    String lastName;
 
     public String getFirstName() {
         return firstName;

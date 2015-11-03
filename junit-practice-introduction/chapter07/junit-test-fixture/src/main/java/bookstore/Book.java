@@ -1,9 +1,9 @@
 package bookstore;
 
 public class Book {
-    private String title;
-    private int price;
-    private Author author;
+    String title;
+    int price;
+    Author author;
 
     public String getTitle() {
         return title;
