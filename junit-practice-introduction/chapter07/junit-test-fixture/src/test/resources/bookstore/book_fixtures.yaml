@@ -1,0 +1,6 @@
+!!bookstore.Book
+title: Refactoring
+price: 4500
+author: !!bookstore.Author
+  firstName: Martin
+  lastName: Fowler
