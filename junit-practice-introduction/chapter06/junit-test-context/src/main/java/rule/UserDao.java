@@ -1,4 +1,4 @@
-package withoutrule;
+package rule;
 
 import java.util.List;
 

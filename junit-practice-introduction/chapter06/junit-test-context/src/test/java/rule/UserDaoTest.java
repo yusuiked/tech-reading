@@ -1,23 +1,18 @@
-package withoutrule;
+package rule;
 
-import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 public class UserDaoTest {
     private UserDao sut;
-    private InMemoryDB db;
+
+    @Rule
+    public InMemoryDBRule db = new InMemoryDBRule();
 
     @Before
     public void setUp() throws Exception {
-        db = new InMemoryDB();
-        db.start();
         sut = new UserDao();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        db.shutdownNow();
     }
 
     @Test

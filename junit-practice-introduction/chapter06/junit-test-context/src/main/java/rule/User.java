@@ -1,4 +1,4 @@
-package withoutrule;
+package rule;
 
 public class User {
     private String name = "nobody";

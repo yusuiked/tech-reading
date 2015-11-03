@@ -1,4 +1,4 @@
-package withoutrule;
+package rule;
 
 public class InMemoryDB {
     public void start() {
