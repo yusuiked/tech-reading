@@ -1,3 +1,6 @@
 [submodule "introduction-to-git/mysite/hocus"]
 	path = introduction-to-git/mysite/hocus
 	url = git://github.com/tswicegood/hocus.git
+[submodule "gradle-thoroughly-introduction"]
+	path = gradle-thoroughly-introduction
+	url = git@github.com:yukung/yokohamagroovy.git
