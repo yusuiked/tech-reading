@@ -133,21 +133,29 @@ ElasticSearch クラスタ入門
     * 全てのエイリアスを取得するには GET でリクエストを送る
 * エイリアスのフィルタリング
     * エイリアスは RDB のビューのようなこともできる。全てのクエリ DSL や件数の取得、検索、クエリによる削除などの操作の際に利用可能
-```json
+    * 以下のようにすると、 `clientId: 12345` で抽出されたビューのようなものを `client` という名前で参照できるようになる
+
+```console
 $ curl -XPOST 'http://localhost:9200/_aliases' -d '{
   "actions": [
     {
       "add": {
         "index": "data",
         "alias": "client",
-        "filter": { "term": { "clientId": "12345¯エリ DSL や件}
+        "filter": { "term": { "clientId": "12345" } }
+      }
+    }
   ]
 }
 ```
-    * こうすると、`clientId: 12345` で抽出されたビューのようなものを `client` という名前で参照できるようになる
+
 * エイリアスとルーティング（p.68）
     * フィルタリングを使ったエイリアスと同様に、ルーティングについてもエイリアスを追加できる
-```json
+    * 以下のようにすると、 `client` エイリアスを利用してデータをインデキシングすると、 `index_routing` によって指定されたルーティングの値が利用され、検索時は `search_routing` により指定された値が利用される
+    * `curl -XGET 'http://localhost:9200/client/_search?q=test&routing=99999,12345` というクエリを実行すると、ルーティングの値は、 `12345` になる
+        * `search_routing` とクエリパラメータの `routing` を両方採用するから
+
+```console
 $ curl -XPOST 'http://localhost:9200/_aliases' -d '{
   "actions": [
     {
@@ -161,6 +169,4 @@ $ curl -XPOST 'http://localhost:9200/_aliases' -d '{
   ]
 }
 ```
-    * こうすると、 `client` エイリアスを利用してデータをインデキシングすると、 `index_routing` によって指定されたルーティングの値が利用され、検索時は `search_routing` により指定された値が利用される
-    * `curl -XGET 'http://localhost:9200/client/_search?q=test&routing=99999,12345` というクエリを実行すると、ルーティングの値は、 `12345` になる
-        * `search_routing` とクエリパラメータの `routing` を両方採用するから
+
