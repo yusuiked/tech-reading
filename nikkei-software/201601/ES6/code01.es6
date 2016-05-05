@@ -9,5 +9,14 @@ class Animal {
   }
 }
 
+// 従来通りのプロトタイプベースの記法でもメソッドを生やせる
+Animal.prototype.show = function() {
+  console.log(this.toString());
+}
+
 var animal = new Animal('きら', 'メス');
 console.log(animal.toString());
+
+// 従来通り Animal クラスの実体は関数
+console.log(typeof Animal);
+// --> function
