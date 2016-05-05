@@ -9,3 +9,12 @@ console.log(x);
 (function() {
   var x = 1;
 }());
+
+var x = 100;
+var x = 200;
+
+// 同じスコープ内で宣言が重複できなくなった
+let y = 10;
+let y = 20;
+
+// --> Duplicate declaration "x"
