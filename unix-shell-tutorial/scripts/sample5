@@ -1,0 +1,12 @@
+#!/bin/sh
+if [ -z "$1" ]; then
+  echo 'Usage: sample5 directory'
+  exit 1
+fi
+
+if [ -d "$1" ]; then
+  ls $1
+else
+  echo "$1 はディレクトリではありません"
+  exit 1
+fi

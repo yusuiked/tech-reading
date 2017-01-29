@@ -1,0 +1,19 @@
+#!/bin/sh
+while getopts ali opt; do
+  case $opt in
+    a)
+      ARG1=-a
+      ;;
+    i)
+      ARG2=-i
+      ;;
+    l)
+      ARG3=-l
+      ;;
+  esac
+done
+shift $(( $OPTIND - 1 ))
+
+for file in $*; do
+    ls $ARG1 $ARG2 $ARG3
+done

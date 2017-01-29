@@ -1,0 +1,6 @@
+#!/bin/sh
+var1="$1は米国の通過です"
+var2='$1は米国の通過です'
+echo $var1
+echo $var2
+echo 現在の環境変数LANGの値は$LANGです

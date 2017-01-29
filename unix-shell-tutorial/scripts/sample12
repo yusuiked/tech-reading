@@ -1,0 +1,10 @@
+#!/bin/sh
+while [ "$1" != "" ]; do
+  echo $1
+  echo $2
+  echo $3
+  echo $4
+  echo $5
+  shift
+  echo "shift を実行します"
+done

@@ -1,0 +1,12 @@
+#!/bin/sh
+case $1 in
+  *.txt)
+    less $1
+    ;;
+  *.jpg|*.jpeg)
+    gimp $1
+    ;;
+  *.htm|*.html)
+    firefox $1
+    ;;
+esac
