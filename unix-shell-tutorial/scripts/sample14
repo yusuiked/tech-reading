@@ -1,0 +1,16 @@
+#!/bin/bash
+PS3='色を選んでください '
+select color in Red Green Blue; do
+case $color in
+  Red)
+    echo "赤（$REPLY 番）が選択されました"
+    ;;
+  Green)
+    echo "緑（$REPLY 番）が選択されました"
+    ;;
+  Blue)
+    echo "青（$REPLY 番）が選択されました"
+    ;;
+  esac
+  break
+done

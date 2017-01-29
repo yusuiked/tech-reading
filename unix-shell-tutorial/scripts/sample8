@@ -1,0 +1,4 @@
+#!/bin/sh
+for dir in $HOME; do
+  ls $dir
+done

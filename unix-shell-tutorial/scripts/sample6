@@ -1,0 +1,4 @@
+#!/bin/sh
+for color in red blue green; do
+  echo $color
+done

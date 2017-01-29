@@ -1,0 +1,5 @@
+#!/bin/sh
+filename1=samplescript
+filename2=sample
+echo "${#filename1}"
+echo "${#filename2}"
