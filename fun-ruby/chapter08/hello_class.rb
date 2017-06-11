@@ -3,6 +3,14 @@ class HelloWorld
     @name = myname
   end
 
+  def name
+    @name
+  end
+  
+  def name=(value)
+    @name = value
+  end
+
   def hello
     puts "Hello, world. I am #{@name}."
   end
