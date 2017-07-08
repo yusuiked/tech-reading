@@ -17,6 +17,19 @@ class Point
   def -(other)
     self.class.new(x - other.x, y - other.y)
   end
+
+  # 単項演算子は +, -, ~, ! の 4 つが定義でき、 +@, -@, ~@, !@ という名前のメソッドで定義できる
+  def +@
+    dup # 自分の複製を返す
+  end
+  
+  def -@
+    self.class.new(-x, -y)  # x, y のそれぞれの正負を逆にする
+  end
+  
+  def ~@
+    self.class.new(-y, x) # 90 度反転させた座標を返す
+  end
 end
 
 point0 = Point.new(3, 6)
@@ -26,3 +39,8 @@ p point0
 p point1
 p point0 + point1
 p point0 - point1
+
+point = Point.new(3, 6)
+p +point
+p -point
+p ~point
