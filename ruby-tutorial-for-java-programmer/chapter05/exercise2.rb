@@ -1,14 +1,14 @@
 class String
   def statistic
-    info = {}
-    self.each_char do |c|
-      if info[c]
-        info[c] += 1
+    r = Hash.new
+    each_char do |c|
+      unless r[c]
+        r[c] = 1
       else
-        info[c] = 1
+        r[c] += 1
       end
     end
-    info
+    r
   end
 end
 
