@@ -11,3 +11,6 @@ insert_final_newline = true
 [*.md]
 indent_size = 4
 trim_trailing-whitespace = false
+
+[*.java]
+indent_size = 4
