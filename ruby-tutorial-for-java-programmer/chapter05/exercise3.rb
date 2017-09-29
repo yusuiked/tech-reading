@@ -19,6 +19,18 @@ class Minus < Operator
   end
 end
 
+class Multiply < Operator
+  def operation
+    Proc.new {|val| @value * val}
+  end
+end
+
+class Divide < Operator
+  def operation
+    Proc.new {|val| @value / val}
+  end
+end
+
 class Equal < Operator
   attr_reader :value
   def input(s)
@@ -59,7 +71,7 @@ class SpaceEater
 end
 
 class AfterOperand < SpaceEater
-  OPERATORS = {'+' => Plus, '-' => Minus, '=' => Equal}
+  OPERATORS = {'+' => Plus, '-' => Minus, '*' => Multiply, '/' => Divide, '=' => Equal}
   def initialize(prior)
     @value = prior.value
   end
@@ -86,7 +98,9 @@ end
 [
   '12 + 3 - 5 =',
   '1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 =',
-  '12345+12345='
+  '12345+12345=',
+  '4 + 3 * 3 =',
+  '10-4/2='
 ].each do |ex|
   state = Operand.new
   ex.split('').each do |s|
