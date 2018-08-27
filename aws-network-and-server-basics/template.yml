@@ -10,3 +10,13 @@ Resources:
       Tags:
         - Key: 'Name'
           Value: 'VPC領域'
+  PublicSubnet:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      # AvailabilityZone 指定しないとデフォルトで AWS によってゾーンが選択される。docs では推奨。
+      CidrBlock: '10.0.1.0/24'
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: 'Name'
+          Value: 'パブリックサブネット'
+      VpcId: !Ref 'VPC'
