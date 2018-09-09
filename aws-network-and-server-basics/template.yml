@@ -45,3 +45,15 @@ Resources:
     Properties:
       RouteTableId: !Ref PublicRouteTable
       SubnetId: !Ref PublicSubnet
+  WebServerSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupName: 'WEB-SG'
+      GroupDescription: 'Security Group for web-server in public subnet'
+      SecurityGroupIngress:
+        - CidrIp: '0.0.0.0/0'
+          Description: 'Allow SSH'
+          FromPort: 22
+          IpProtocol: 'tcp'
+          ToPort: 22
+      VpcId: !Ref VPC
