@@ -57,3 +57,28 @@ Resources:
           IpProtocol: 'tcp'
           ToPort: 22
       VpcId: !Ref VPC
+  WebServerInstance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: 'ami-06cd52961ce9f0d85' # Amazon Linux AMI
+      InstanceType: 't3.nano'
+      CreditSpecification:
+        CPUCredits: 'standard'
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: '0'
+          SubnetId: !Ref PublicSubnet
+          PrivateIpAddress: '10.0.1.10'
+          DeleteOnTermination: true
+          GroupSet:
+            - !Ref WebServerSecurityGroup
+      BlockDeviceMappings:
+        - DeviceName: '/dev/xvda'
+          Ebs:
+            VolumeSize: '8'
+            VolumeType: 'standard'
+            DeleteOnTermination: true
+      Tags:
+        - Key: 'Name'
+          Value: 'Web Server'
+      KeyName: 'NetworkAndServerBasics'
