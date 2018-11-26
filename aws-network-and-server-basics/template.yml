@@ -20,6 +20,15 @@ Resources:
         - Key: 'Name'
           Value: 'パブリックサブネット'
       VpcId: !Ref 'VPC'
+  PrivateSubnet:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: '10.0.2.0/24'
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: 'Name'
+          Value: 'プライベートサブネット'
+      VpcId: !Ref 'VPC'
   InternetGateway:
     Type: 'AWS::EC2::InternetGateway'
   InternetGatewayAttachment:
