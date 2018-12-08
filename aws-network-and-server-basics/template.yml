@@ -96,3 +96,50 @@ Resources:
         - Key: 'Name'
           Value: 'Web Server'
       KeyName: 'NetworkAndServerBasics'
+  DBServerSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupName: 'DB-SG'
+      GroupDescription: 'Security Group for db-server in private subnet'
+      SecurityGroupIngress:
+        - CidrIp: '0.0.0.0/0'
+          Description: 'Allow SSH'
+          FromPort: 22
+          IpProtocol: 'tcp'
+          ToPort: 22
+        - CidrIp: '0.0.0.0/0'
+          Description: 'MySQL'
+          FromPort: 3306
+          IpProtocol: 'tcp'
+          ToPort: 3306
+        - CidrIp: '0.0.0.0/0'
+          Description: 'ICMP'
+          FromPort: -1
+          IpProtocol: 'icmp'
+          ToPort: -1
+      VpcId: !Ref VPC
+  DBServerInstance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: 'ami-06cd52961ce9f0d85'
+      InstanceType: 't3.nano'
+      CreditSpecification:
+        CPUCredits: 'standard'
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: false
+          DeviceIndex: '0'
+          SubnetId: !Ref PrivateSubnet
+          PrivateIpAddress: '10.0.2.10'
+          DeleteOnTermination: true
+          GroupSet:
+            - !Ref DBServerSecurityGroup
+      BlockDeviceMappings:
+        - DeviceName: '/dev/xvda'
+          Ebs:
+            VolumeSize: '8'
+            VolumeType: 'standard'
+            DeleteOnTermination: true
+      Tags:
+        - Key: 'Name'
+          Value: 'DB Server'
+      KeyName: 'NetworkAndServerBasics'
