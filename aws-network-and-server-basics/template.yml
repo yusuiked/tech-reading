@@ -36,6 +36,18 @@ Resources:
     Properties:
       InternetGatewayId: !Ref InternetGateway
       VpcId: !Ref VPC
+  EIPForNAT:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: "vpc"
+  NATGateway:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt EIPForNAT.AllocationId
+      SubnetId: !Ref PublicSubnet
+      Tags:
+        - Key: "Name"
+          Value: "NATGateway"
   PublicRouteTable:
     Type: 'AWS::EC2::RouteTable'
     Properties:
@@ -43,17 +55,35 @@ Resources:
       Tags:
         - Key: 'Name'
           Value: 'パブリックルートテーブル'
+  PrivateRouteTable:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: 'Name'
+          Value: 'プライベートルートテーブル'
   RouteToInternetGateway:
     Type: 'AWS::EC2::Route'
     Properties:
       DestinationCidrBlock: '0.0.0.0/0'
       GatewayId: !Ref InternetGateway
       RouteTableId: !Ref PublicRouteTable
+  RouteToNATGateway:
+    Type: "AWS::EC2::Route"
+    Properties:
+      DestinationCidrBlock: "0.0.0.0/0"
+      NatGatewayId: !Ref NATGateway
+      RouteTableId: !Ref PrivateRouteTable
   PublicSubnetRouteTableAssociation:
     Type: 'AWS::EC2::SubnetRouteTableAssociation'
     Properties:
       RouteTableId: !Ref PublicRouteTable
       SubnetId: !Ref PublicSubnet
+  PrivateSubnetRouteTableAssociation:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties:
+      SubnetId: !Ref PrivateSubnet
+      RouteTableId: !Ref PrivateRouteTable
   WebServerSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
