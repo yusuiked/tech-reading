@@ -75,7 +75,7 @@ Resources:
     Type: 'AWS::EC2::Instance'
     Properties:
       ImageId: 'ami-06cd52961ce9f0d85' # Amazon Linux AMI
-      InstanceType: 't3.nano'
+      InstanceType: 't2.nano'
       CreditSpecification:
         CPUCredits: 'standard'
       NetworkInterfaces:
@@ -122,7 +122,7 @@ Resources:
     Type: 'AWS::EC2::Instance'
     Properties:
       ImageId: 'ami-06cd52961ce9f0d85'
-      InstanceType: 't3.nano'
+      InstanceType: 't2.nano'
       CreditSpecification:
         CPUCredits: 'standard'
       NetworkInterfaces:
