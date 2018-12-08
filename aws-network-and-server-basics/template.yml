@@ -1,38 +1,38 @@
-AWSTemplateFormatVersion: '2010-09-09'
-Resources: 
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
   VPC:
-    Type: 'AWS::EC2::VPC'
+    Type: "AWS::EC2::VPC"
     Properties:
-      CidrBlock: '10.0.0.0/16'
+      CidrBlock: "10.0.0.0/16"
       EnableDnsSupport: true
       EnableDnsHostnames: true
-      InstanceTenancy: 'default'
+      InstanceTenancy: "default"
       Tags:
-        - Key: 'Name'
-          Value: 'VPC領域'
+        - Key: "Name"
+          Value: "VPC領域"
   PublicSubnet:
-    Type: 'AWS::EC2::Subnet'
+    Type: "AWS::EC2::Subnet"
     Properties:
       # AvailabilityZone 指定しないとデフォルトで AWS によってゾーンが選択される。docs では推奨。
-      CidrBlock: '10.0.1.0/24'
+      CidrBlock: "10.0.1.0/24"
       MapPublicIpOnLaunch: false
       Tags:
-        - Key: 'Name'
-          Value: 'パブリックサブネット'
-      VpcId: !Ref 'VPC'
+        - Key: "Name"
+          Value: "パブリックサブネット"
+      VpcId: !Ref "VPC"
   PrivateSubnet:
-    Type: 'AWS::EC2::Subnet'
+    Type: "AWS::EC2::Subnet"
     Properties:
-      CidrBlock: '10.0.2.0/24'
+      CidrBlock: "10.0.2.0/24"
       MapPublicIpOnLaunch: false
       Tags:
-        - Key: 'Name'
-          Value: 'プライベートサブネット'
-      VpcId: !Ref 'VPC'
+        - Key: "Name"
+          Value: "プライベートサブネット"
+      VpcId: !Ref "VPC"
   InternetGateway:
-    Type: 'AWS::EC2::InternetGateway'
+    Type: "AWS::EC2::InternetGateway"
   InternetGatewayAttachment:
-    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Type: "AWS::EC2::VPCGatewayAttachment"
     Properties:
       InternetGatewayId: !Ref InternetGateway
       VpcId: !Ref VPC
@@ -49,23 +49,23 @@ Resources:
         - Key: "Name"
           Value: "NATGateway"
   PublicRouteTable:
-    Type: 'AWS::EC2::RouteTable'
+    Type: "AWS::EC2::RouteTable"
     Properties:
       VpcId: !Ref VPC
       Tags:
-        - Key: 'Name'
-          Value: 'パブリックルートテーブル'
+        - Key: "Name"
+          Value: "パブリックルートテーブル"
   PrivateRouteTable:
-    Type: 'AWS::EC2::RouteTable'
+    Type: "AWS::EC2::RouteTable"
     Properties:
       VpcId: !Ref VPC
       Tags:
-        - Key: 'Name'
-          Value: 'プライベートルートテーブル'
+        - Key: "Name"
+          Value: "プライベートルートテーブル"
   RouteToInternetGateway:
-    Type: 'AWS::EC2::Route'
+    Type: "AWS::EC2::Route"
     Properties:
-      DestinationCidrBlock: '0.0.0.0/0'
+      DestinationCidrBlock: "0.0.0.0/0"
       GatewayId: !Ref InternetGateway
       RouteTableId: !Ref PublicRouteTable
   RouteToNATGateway:
@@ -75,7 +75,7 @@ Resources:
       NatGatewayId: !Ref NATGateway
       RouteTableId: !Ref PrivateRouteTable
   PublicSubnetRouteTableAssociation:
-    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
     Properties:
       RouteTableId: !Ref PublicRouteTable
       SubnetId: !Ref PublicSubnet
@@ -85,96 +85,96 @@ Resources:
       SubnetId: !Ref PrivateSubnet
       RouteTableId: !Ref PrivateRouteTable
   WebServerSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
+    Type: "AWS::EC2::SecurityGroup"
     Properties:
-      GroupName: 'WEB-SG'
-      GroupDescription: 'Security Group for web-server in public subnet'
+      GroupName: "WEB-SG"
+      GroupDescription: "Security Group for web-server in public subnet"
       SecurityGroupIngress:
-        - CidrIp: '0.0.0.0/0'
-          Description: 'Allow SSH'
+        - CidrIp: "0.0.0.0/0"
+          Description: "Allow SSH"
           FromPort: 22
-          IpProtocol: 'tcp'
+          IpProtocol: "tcp"
           ToPort: 22
-        - CidrIp: '0.0.0.0/0'
-          Description: 'HTTP'
+        - CidrIp: "0.0.0.0/0"
+          Description: "HTTP"
           FromPort: 80
-          IpProtocol: 'tcp'
+          IpProtocol: "tcp"
           ToPort: 80
-        - CidrIp: '0.0.0.0/0'
-          Description: 'ICMP'
+        - CidrIp: "0.0.0.0/0"
+          Description: "ICMP"
           FromPort: -1
-          IpProtocol: 'icmp'
+          IpProtocol: "icmp"
           ToPort: -1
       VpcId: !Ref VPC
   WebServerInstance:
-    Type: 'AWS::EC2::Instance'
+    Type: "AWS::EC2::Instance"
     Properties:
-      ImageId: 'ami-06cd52961ce9f0d85' # Amazon Linux AMI
-      InstanceType: 't2.nano'
+      ImageId: "ami-06cd52961ce9f0d85" # Amazon Linux AMI
+      InstanceType: "t2.nano"
       CreditSpecification:
-        CPUCredits: 'standard'
+        CPUCredits: "standard"
       NetworkInterfaces:
         - AssociatePublicIpAddress: true
-          DeviceIndex: '0'
+          DeviceIndex: "0"
           SubnetId: !Ref PublicSubnet
-          PrivateIpAddress: '10.0.1.10'
+          PrivateIpAddress: "10.0.1.10"
           DeleteOnTermination: true
           GroupSet:
             - !Ref WebServerSecurityGroup
       BlockDeviceMappings:
-        - DeviceName: '/dev/xvda'
+        - DeviceName: "/dev/xvda"
           Ebs:
-            VolumeSize: '8'
-            VolumeType: 'standard'
+            VolumeSize: "8"
+            VolumeType: "standard"
             DeleteOnTermination: true
       Tags:
-        - Key: 'Name'
-          Value: 'Web Server'
-      KeyName: 'NetworkAndServerBasics'
+        - Key: "Name"
+          Value: "Web Server"
+      KeyName: "NetworkAndServerBasics"
   DBServerSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
+    Type: "AWS::EC2::SecurityGroup"
     Properties:
-      GroupName: 'DB-SG'
-      GroupDescription: 'Security Group for db-server in private subnet'
+      GroupName: "DB-SG"
+      GroupDescription: "Security Group for db-server in private subnet"
       SecurityGroupIngress:
-        - CidrIp: '0.0.0.0/0'
-          Description: 'Allow SSH'
+        - CidrIp: "0.0.0.0/0"
+          Description: "Allow SSH"
           FromPort: 22
-          IpProtocol: 'tcp'
+          IpProtocol: "tcp"
           ToPort: 22
-        - CidrIp: '0.0.0.0/0'
-          Description: 'MySQL'
+        - CidrIp: "0.0.0.0/0"
+          Description: "MySQL"
           FromPort: 3306
-          IpProtocol: 'tcp'
+          IpProtocol: "tcp"
           ToPort: 3306
-        - CidrIp: '0.0.0.0/0'
-          Description: 'ICMP'
+        - CidrIp: "0.0.0.0/0"
+          Description: "ICMP"
           FromPort: -1
-          IpProtocol: 'icmp'
+          IpProtocol: "icmp"
           ToPort: -1
       VpcId: !Ref VPC
   DBServerInstance:
-    Type: 'AWS::EC2::Instance'
+    Type: "AWS::EC2::Instance"
     Properties:
-      ImageId: 'ami-06cd52961ce9f0d85'
-      InstanceType: 't2.nano'
+      ImageId: "ami-06cd52961ce9f0d85"
+      InstanceType: "t2.nano"
       CreditSpecification:
-        CPUCredits: 'standard'
+        CPUCredits: "standard"
       NetworkInterfaces:
         - AssociatePublicIpAddress: false
-          DeviceIndex: '0'
+          DeviceIndex: "0"
           SubnetId: !Ref PrivateSubnet
-          PrivateIpAddress: '10.0.2.10'
+          PrivateIpAddress: "10.0.2.10"
           DeleteOnTermination: true
           GroupSet:
             - !Ref DBServerSecurityGroup
       BlockDeviceMappings:
-        - DeviceName: '/dev/xvda'
+        - DeviceName: "/dev/xvda"
           Ebs:
-            VolumeSize: '8'
-            VolumeType: 'standard'
+            VolumeSize: "8"
+            VolumeType: "standard"
             DeleteOnTermination: true
       Tags:
-        - Key: 'Name'
-          Value: 'DB Server'
-      KeyName: 'NetworkAndServerBasics'
+        - Key: "Name"
+          Value: "DB Server"
+      KeyName: "NetworkAndServerBasics"
